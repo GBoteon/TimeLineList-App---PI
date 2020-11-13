@@ -13,10 +13,10 @@
         <activity android:name=".PerfilActivity" />
         <activity android:name=".DetalheActivity" />
         <activity android:name=".PesquisaActivity" />
-        <activity android:name=".ListaActivity" />
+        <activity android:name=".LoadingActivity" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".LoadingActivity">
+        <activity android:name=".ListaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
