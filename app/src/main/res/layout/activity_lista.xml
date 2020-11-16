@@ -7,6 +7,7 @@
     tools:context=".ListaActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -15,10 +16,12 @@
 
         <ImageButton
             android:id="@+id/toolbar_button_left"
-            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
+            android:backgroundTint="@color/colorTransparent"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:scaleType="center"
             android:src="@drawable/logo"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -30,9 +33,11 @@
             android:layout_width="0dp"
             android:layout_height="65dp"
             android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:contentDescription="LIMELINELIST"
             android:scaleType="fitCenter"
-            android:src="@drawable/nome_claro"
+            android:src="?attr/logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/toolbar_button_right"
             app:layout_constraintStart_toEndOf="@+id/toolbar_button_left"
@@ -40,14 +45,24 @@
 
         <ImageButton
             android:id="@+id/toolbar_button_right"
-            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:backgroundTint="@color/colorTransparent"
             android:src="@drawable/logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
@@ -57,6 +72,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
         app:layout_constraintVertical_bias="1.0"></FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
