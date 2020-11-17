@@ -6,27 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".ListaActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+    <LinearLayout
+        android:id="@+id/linearlayout_toolbar"
         android:layout_width="match_parent"
         android:layout_height="65dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/toolbar_button_left"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
+            android:layout_weight=".20"
             android:backgroundTint="@color/colorTransparent"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:scaleType="center"
-            android:src="@drawable/logo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@drawable/logo" />
 
         <ImageView
             android:id="@+id/image_logo"
@@ -35,43 +33,56 @@
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_weight=".60"
             android:contentDescription="LIMELINELIST"
             android:scaleType="fitCenter"
-            android:src="?attr/logo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/toolbar_button_right"
-            app:layout_constraintStart_toEndOf="@+id/toolbar_button_left"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="?attr/logo" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/toolbar_button_right"
-            android:layout_width="wrap_content"
+            android:clickable="true"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:backgroundTint="@color/colorTransparent"
-            android:src="@drawable/logo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_weight=".20"
+            android:background="@color/colorTransparent"
+            android:padding="5dp"
+            android:src="@mipmap/ic_avatar_round" />
+    </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout_tabs"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/colorRed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+        app:layout_constraintTop_toBottomOf="@+id/linearlayout_toolbar" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <SearchView
+        android:id="@+id/searchview_pesquisa"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/custom_searchview"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="Search"
+        app:layout_constraintCircleRadius="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tablayout_tabs"
+        app:theme="@style/SearchView" />
 
-    <FrameLayout
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager_filmes_series"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        app:layout_constraintVertical_bias="1.0"></FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/searchview_pesquisa" />
 </androidx.constraintlayout.widget.ConstraintLayout>

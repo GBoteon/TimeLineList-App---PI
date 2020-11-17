@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorBlack</item>
+        <item name="colorPrimaryDark">@color/colorTransparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorWhite</item>
+        <item name="android:navigationBarColor">#00000000</item>
+        <item name="logo">@drawable/nome_claro</item>
+        <item name="tabStyle">@style/AppThemeDay.TabLayout</item>
+    </style>
+    <style name="SearchView" parent="Widget.AppCompat.SearchView" >
+        <item name="android:textColorPrimary">#BDBDBD</item>
+        <item name="android:editTextColor">#BDBDBD</item>
+        <item name="android:textColorHint">#BDBDBD</item>
+        <item name="android:tint">#BDBDBD</item>
+    </style>
+    <style name="AppThemeDay.TabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabSelectedTextColor">@color/colorRed</item>
+        <item name="tabTextColor">@color/colorBlack</item>
+        <item name="singleLine">true</item>
+    </style>
+</resources>
