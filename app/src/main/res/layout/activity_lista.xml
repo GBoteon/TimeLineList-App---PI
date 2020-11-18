@@ -59,30 +59,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearlayout_toolbar" />
 
-    <SearchView
-        android:id="@+id/searchview_pesquisa"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:background="@drawable/custom_searchview"
-        android:iconifiedByDefault="false"
-        android:queryBackground="@android:color/transparent"
-        android:queryHint="Search"
-        app:layout_constraintCircleRadius="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tablayout_tabs"
-        app:theme="@style/SearchView" />
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_filmes_series"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchview_pesquisa" />
+        app:layout_constraintTop_toBottomOf="@+id/tablayout_tabs" />
 </androidx.constraintlayout.widget.ConstraintLayout>

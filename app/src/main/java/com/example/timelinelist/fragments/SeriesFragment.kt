@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.timelinelist.R
 import com.example.timelinelist.adapters.ListaSeriesAdapter
 import com.example.timelinelist.models.SeriesFragmentViewModel
+import kotlinx.android.synthetic.main.fragment_filmes.view.*
 import kotlinx.android.synthetic.main.fragment_series.view.*
 
 class SeriesFragment : Fragment() {
@@ -24,7 +25,17 @@ class SeriesFragment : Fragment() {
         view.recyclerview_series.adapter = adapter
         view.recyclerview_series.layoutManager = LinearLayoutManager(context)
         view.recyclerview_series.setHasFixedSize(true)
+        view.searchview_pesquisa_series.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
 
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+
+        })
         return view
     }
 }

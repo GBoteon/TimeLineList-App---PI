@@ -10,7 +10,6 @@ import com.example.timelinelist.R
 import com.example.timelinelist.models.FilmesFragmentViewModel
 import androidx.fragment.app.viewModels
 import com.example.timelinelist.adapters.ListaFilmesAdapter
-import kotlinx.android.synthetic.main.fragment_filmes.*
 import kotlinx.android.synthetic.main.fragment_filmes.view.*
 
 
@@ -26,6 +25,19 @@ class FilmesFragment : Fragment() {
         view.recyclerview_filmes.adapter = adapter
         view.recyclerview_filmes.layoutManager = LinearLayoutManager(context)
         view.recyclerview_filmes.setHasFixedSize(true)
+
+        view.searchview_pesquisa_filmes.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+
+        })
+
         return view
 
     }

@@ -24,7 +24,7 @@ class PerfilActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
-        var message = ""
+        var message:String
         switchcompat_tema.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 var editor: SharedPreferences.Editor = getSharedPreferences("save", Context.MODE_PRIVATE).edit()
