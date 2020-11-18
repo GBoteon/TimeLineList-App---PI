@@ -1,4 +1,4 @@
-package com.example.timelinelist
+package com.example.timelinelist.activities
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.timelinelist.R
 import kotlinx.android.synthetic.main.activity_perfil.*
 
 class PerfilActivity : AppCompatActivity() {
@@ -15,6 +16,13 @@ class PerfilActivity : AppCompatActivity() {
 
         var sharedPref = getSharedPreferences("save", Context.MODE_PRIVATE)
         switchcompat_tema.setChecked(sharedPref.getBoolean("value",false))
+
+        var switchcompatValue= switchcompat_tema.isChecked()
+        if (switchcompatValue == true) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
 
         var message = ""
         switchcompat_tema.setOnCheckedChangeListener { _, isChecked ->

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PerfilActivity">
+    tools:context=".activities.PerfilActivity">
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchcompat_tema"

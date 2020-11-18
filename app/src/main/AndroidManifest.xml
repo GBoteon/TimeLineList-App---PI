@@ -9,14 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EstatisticasActivity"></activity>
-        <activity android:name=".PerfilActivity" />
-        <activity android:name=".DetalheActivity" />
-        <activity android:name=".PesquisaActivity" />
-        <activity android:name=".LoadingActivity" />
-        <activity android:name=".CadastroActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".ListaActivity">
+        <activity android:name=".activities.CadastroActivity"></activity>
+        <activity android:name=".activities.EstatisticasActivity" />
+        <activity android:name=".activities.PerfilActivity" />
+        <activity android:name=".activities.DetalheActivity" />
+        <activity android:name=".activities.PesquisaActivity" />
+        <activity android:name=".activities.LoadingActivity" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.ListaActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

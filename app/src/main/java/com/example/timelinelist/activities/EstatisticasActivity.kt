@@ -1,7 +1,8 @@
-package com.example.timelinelist
+package com.example.timelinelist.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.timelinelist.R
 
 class EstatisticasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,16 +1,17 @@
-package com.example.timelinelist
+package com.example.timelinelist.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewpager.widget.ViewPager
+import com.example.timelinelist.R
+import com.example.timelinelist.adapters.ViewPagerAdapter
+import com.example.timelinelist.fragments.FilmesFragment
+import com.example.timelinelist.fragments.SeriesFragment
 import kotlinx.android.synthetic.main.activity_lista.*
 
 class ListaActivity : AppCompatActivity() {
-
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

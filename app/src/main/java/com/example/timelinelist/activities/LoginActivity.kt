@@ -1,11 +1,12 @@
-package com.example.timelinelist
+package com.example.timelinelist.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.timelinelist.R
 
-class PesquisaActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pesquisa)
+        setContentView(R.layout.activity_login)
     }
 }

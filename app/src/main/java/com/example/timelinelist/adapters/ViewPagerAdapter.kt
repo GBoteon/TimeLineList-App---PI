@@ -1,4 +1,4 @@
-package com.example.timelinelist
+package com.example.timelinelist.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
