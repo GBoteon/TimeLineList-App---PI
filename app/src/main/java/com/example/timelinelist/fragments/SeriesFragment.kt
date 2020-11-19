@@ -17,7 +17,7 @@ class SeriesFragment : Fragment() {
     private val viewModel: SeriesFragmentViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater!!.inflate(R.layout.fragment_series, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_series, container, false)
 
         var listaSeries = viewModel.getSeries()
         var adapter =  ListaSeriesAdapter(listaSeries)

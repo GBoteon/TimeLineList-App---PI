@@ -12,7 +12,11 @@
         <item name="logo">@drawable/nome_claro</item>
         <item name="tabStyle">@style/AppThemeDay.TabLayout</item>
         <item name="cardViewStyle">@style/AppThemeDay.CardView</item>
-
+    </style>
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="SearchView" parent="Widget.AppCompat.SearchView" >

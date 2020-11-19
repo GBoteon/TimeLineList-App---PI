@@ -17,7 +17,7 @@ class FilmesFragment : Fragment() {
     private val viewModel: FilmesFragmentViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater!!.inflate(R.layout.fragment_filmes, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_filmes, container, false)
 
         var listaFilmes = viewModel.getFilmes()
         var adapter =  ListaFilmesAdapter(listaFilmes)
