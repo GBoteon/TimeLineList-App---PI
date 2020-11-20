@@ -20,7 +20,7 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener:
     override fun getItemCount() = filmesFilterList.size
 
     override fun onBindViewHolder(holder: ListaFilmeViewHolder, position: Int) {
-        var filme = filmesFilterList.get(position)
+        var filme = filmesFilterList[position]
         holder.nome_filme.text = filme.nome
     }
     inner class ListaFilmeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
