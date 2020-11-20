@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorBlack</item>
         <item name="android:navigationBarColor">#00000000</item>
+        <item name="android:statusBarColor">@color/colorTransparent</item>
         <item name="logo">@drawable/nome_escuro</item>
         <item name="tabStyle">@style/AppThemeNight.TabLayout</item>
         <item name="cardViewStyle">@style/AppThemeNight.CardView</item>
@@ -18,6 +19,8 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowBackground">@color/colorBlack</item>
+
     </style>
     <style name="SearchView" parent="Widget.AppCompat.SearchView" >
         <item name="android:textColorPrimary">#BDBDBD</item>
@@ -40,6 +43,15 @@
     <style name="LinearLayoutStyle">
         <item name="android:background">@drawable/custom_cardview_night</item>
     </style>
+
+    <style name="LinearLayoutDetalhesStyle">
+        <item name="android:background">@drawable/custom_view_detalhe_night</item>
+    </style>
+    <style name="DetalheTextView" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:buttonTint">@color/colorWhite</item>
+    </style>
+
     <style name="ImgCardViewStyle">
         <item name="android:background">@drawable/custom_right_img_night</item>
     </style>
