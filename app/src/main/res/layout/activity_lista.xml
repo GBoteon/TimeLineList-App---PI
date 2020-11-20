@@ -4,6 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListaActivity">
+    tools:context=".activities.ListaActivity">
 
+    <LinearLayout
+        android:id="@+id/linearlayout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/toolbar_button_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".20"
+            android:backgroundTint="@color/colorTransparent"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:scaleType="center"
+            android:src="@drawable/logo" />
+
+        <ImageView
+            android:id="@+id/image_logo"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight=".60"
+            android:contentDescription="LIMELINELIST"
+            android:scaleType="fitCenter"
+            android:src="?attr/logo" />
+
+        <ImageView
+            android:id="@+id/toolbar_button_right"
+            android:clickable="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight=".20"
+            android:background="@color/colorTransparent"
+            android:padding="5dp"
+            android:src="@mipmap/ic_avatar_round" />
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/colorRed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearlayout_toolbar" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager_filmes_series"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tablayout_tabs" />
 </androidx.constraintlayout.widget.ConstraintLayout>
