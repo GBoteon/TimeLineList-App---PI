@@ -42,7 +42,6 @@ class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {
     }
     override fun serieClick(position: Int) {
         println(position)
-        Toast.makeText(context, "serie", Toast.LENGTH_SHORT).show()
         startActivity(Intent(context, DetalheSerieActivity::class.java))
     }
 }

@@ -21,7 +21,7 @@ class ListaSeriesAdapter(private val listSerie: ArrayList<Serie>, val listener: 
     override fun getItemCount() = seriesFilterList.size
 
     override fun onBindViewHolder(holder: ListaSeriesViewHolder, position: Int) {
-        var serie = seriesFilterList.get(position)
+        var serie = seriesFilterList[position]
         holder.nome_serie.text = serie.nome
     }
     inner class ListaSeriesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {

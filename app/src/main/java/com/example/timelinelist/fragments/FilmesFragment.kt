@@ -47,7 +47,6 @@ class FilmesFragment : Fragment(), ListaFilmesAdapter.OnFilmeClickListener {
     }
     override fun filmeClick(position: Int) {
         println(position)
-        Toast.makeText(context, "filme", Toast.LENGTH_SHORT).show()
         startActivity(Intent(context, DetalheFilmeActivity::class.java))
     }
 }
