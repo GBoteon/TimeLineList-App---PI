@@ -8,9 +8,10 @@ import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timelinelist.R
+import com.example.timelinelist.fragments.FilmesFragment
 import com.example.timelinelist.helpers.Filme
 
-class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>): RecyclerView.Adapter<ListaFilmesAdapter.ListaFilmeViewHolder>(), Filterable {
+class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener: OnFilmeClickListener): RecyclerView.Adapter<ListaFilmesAdapter.ListaFilmeViewHolder>(), Filterable {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaFilmeViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.filme_item, parent, false)
         return ListaFilmeViewHolder(itemView)
@@ -22,8 +23,20 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>): RecyclerView
         var filme = filmesFilterList.get(position)
         holder.nome_filme.text = filme.nome
     }
-    class ListaFilmeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class ListaFilmeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val nome_filme: TextView = itemView.findViewById(R.id.nome_filme)
+        init {
+            itemView.setOnClickListener(this)
+        }
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (RecyclerView.NO_POSITION != position) {
+                listener.filmeClick(position)
+            }
+        }
+    }
+    interface OnFilmeClickListener {
+        fun filmeClick(position: Int)
     }
 
     var filmesFilterList = ArrayList<Filme>()

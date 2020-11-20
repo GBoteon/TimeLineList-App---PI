@@ -11,5 +11,15 @@ class DetalheFilmeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalhefilme)
         imageview_voltar_filmetolista.setOnClickListener { startActivity(Intent(this, ListaActivity::class.java)) }
+        imageview_compartilhar.setOnClickListener {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, textview_nomefilme.text)
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
+
     }
 }

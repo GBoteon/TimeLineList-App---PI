@@ -8,10 +8,11 @@ import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timelinelist.R
+import com.example.timelinelist.fragments.SeriesFragment
 import com.example.timelinelist.helpers.Filme
 import com.example.timelinelist.helpers.Serie
 
-class ListaSeriesAdapter(private val listSerie: ArrayList<Serie>): RecyclerView.Adapter<ListaSeriesAdapter.ListaSeriesViewHolder>(), Filterable {
+class ListaSeriesAdapter(private val listSerie: ArrayList<Serie>, val listener: OnSerieClickListener): RecyclerView.Adapter<ListaSeriesAdapter.ListaSeriesViewHolder>(), Filterable {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaSeriesViewHolder {
         var itemView = LayoutInflater.from(parent.context).inflate(R.layout.serie_item, parent, false)
         return ListaSeriesViewHolder(itemView)
@@ -23,10 +24,21 @@ class ListaSeriesAdapter(private val listSerie: ArrayList<Serie>): RecyclerView.
         var serie = seriesFilterList.get(position)
         holder.nome_serie.text = serie.nome
     }
-    class ListaSeriesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class ListaSeriesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val nome_serie: TextView = itemView.findViewById(R.id.nome_serie)
+        init {
+            itemView.setOnClickListener(this)
+        }
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (RecyclerView.NO_POSITION != position) {
+                listener.serieClick(position)
+            }
+        }
     }
-
+    interface OnSerieClickListener {
+        fun serieClick(position: Int)
+    }
 
     var seriesFilterList = ArrayList<Serie>()
 

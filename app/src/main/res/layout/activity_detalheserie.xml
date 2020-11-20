@@ -56,6 +56,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/textview_nomeserie"
                 android:maxLines="1"
                 style="@style/DetalheTextView"
                 android:ellipsize="end"

@@ -1,26 +1,28 @@
 package com.example.timelinelist.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.timelinelist.R
+import com.example.timelinelist.activities.DetalheSerieActivity
 import com.example.timelinelist.adapters.ListaSeriesAdapter
 import com.example.timelinelist.models.SeriesFragmentViewModel
-import kotlinx.android.synthetic.main.fragment_filmes.view.*
 import kotlinx.android.synthetic.main.fragment_series.view.*
 
-class SeriesFragment : Fragment() {
+class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {
     private val viewModel: SeriesFragmentViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_series, container, false)
 
         var listaSeries = viewModel.getSeries()
-        var adapter =  ListaSeriesAdapter(listaSeries)
+        var adapter =  ListaSeriesAdapter(listaSeries, this)
 
         view.recyclerview_series.adapter = adapter
         view.recyclerview_series.layoutManager = LinearLayoutManager(context)
@@ -37,5 +39,10 @@ class SeriesFragment : Fragment() {
 
         })
         return view
+    }
+    override fun serieClick(position: Int) {
+        println(position)
+        Toast.makeText(context, "serie", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(context, DetalheSerieActivity::class.java))
     }
 }
