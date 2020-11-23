@@ -126,5 +126,4 @@
             app:srcCompat="@drawable/icon_google" />
     </LinearLayout>
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

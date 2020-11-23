@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activities.CadastroActivity">
 
-
     <ImageView
         android:id="@+id/imageLogo"
         android:layout_width="0dp"
@@ -155,6 +154,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

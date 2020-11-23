@@ -12,6 +12,7 @@ import com.example.timelinelist.fragments.FilmesFragment
 import com.example.timelinelist.helpers.Filme
 
 class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener: OnFilmeClickListener): RecyclerView.Adapter<ListaFilmesAdapter.ListaFilmeViewHolder>(), Filterable {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaFilmeViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.filme_item, parent, false)
         return ListaFilmeViewHolder(itemView)
@@ -20,6 +21,7 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener:
     override fun getItemCount() = filmesFilterList.size
 
     override fun onBindViewHolder(holder: ListaFilmeViewHolder, position: Int) {
+
         var filme = filmesFilterList[position]
         holder.nome_filme.text = filme.nome
     }
@@ -37,6 +39,7 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener:
     }
     interface OnFilmeClickListener {
         fun filmeClick(position: Int)
+
     }
 
     var filmesFilterList = ArrayList<Filme>()

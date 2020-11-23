@@ -16,8 +16,8 @@ import com.example.timelinelist.activities.ListaActivity
 import com.example.timelinelist.adapters.ListaFilmesAdapter
 import kotlinx.android.synthetic.main.fragment_filmes.view.*
 
-
 class FilmesFragment : Fragment(), ListaFilmesAdapter.OnFilmeClickListener {
+
     private val viewModel: FilmesFragmentViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

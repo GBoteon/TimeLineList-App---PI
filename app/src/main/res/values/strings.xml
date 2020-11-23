@@ -7,4 +7,9 @@
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="name">Nome</string>
+    <string name="second_name">Sobrenome</string>
+    <string name="email">E-mail</string>
+    <string name="statistics">Estatisticas</string>
+    <string name="save">SALVAR</string>
 </resources>

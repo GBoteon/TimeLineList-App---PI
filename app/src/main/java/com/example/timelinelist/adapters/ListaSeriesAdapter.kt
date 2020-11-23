@@ -13,6 +13,7 @@ import com.example.timelinelist.helpers.Filme
 import com.example.timelinelist.helpers.Serie
 
 class ListaSeriesAdapter(private val listSerie: ArrayList<Serie>, val listener: OnSerieClickListener): RecyclerView.Adapter<ListaSeriesAdapter.ListaSeriesViewHolder>(), Filterable {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaSeriesViewHolder {
         var itemView = LayoutInflater.from(parent.context).inflate(R.layout.serie_item, parent, false)
         return ListaSeriesViewHolder(itemView)

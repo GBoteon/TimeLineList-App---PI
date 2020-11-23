@@ -12,6 +12,7 @@ class DetalheSerieActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalheserie)
         imageview_voltar_serietolista.setOnClickListener { startActivity(Intent(this, ListaActivity::class.java)) }
+
         imageview_compartilhar.setOnClickListener {
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND

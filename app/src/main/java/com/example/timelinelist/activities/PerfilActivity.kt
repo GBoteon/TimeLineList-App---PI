@@ -1,6 +1,7 @@
 package com.example.timelinelist.activities
 
 import android.content.Context
+
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +14,12 @@ class PerfilActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
+
+        imageview_voltar_pefiltolista.setOnClickListener { startActivity(Intent(this, ListaActivity::class.java)) }
+        imageview_editperfil.setOnClickListener { startActivity(Intent(this, EditPerfilActivity::class.java)) }
+
+        btnStatistics.setOnClickListener { startActivity(Intent(this, EstatisticasActivity::class.java)) }
+
 
         var sharedPref = getSharedPreferences("save", Context.MODE_PRIVATE)
         switchcompat_tema.setChecked(sharedPref.getBoolean("value",false))

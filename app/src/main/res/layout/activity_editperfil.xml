@@ -7,27 +7,13 @@
     tools:context=".activities.PerfilActivity">
 
     <ImageView
-        android:id="@+id/imageview_voltar_pefiltolista"
+        android:id="@+id/imageview_voltar_editpefiltoperfil"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
         android:src="@drawable/ic_arrow_back_black_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageview_editperfil"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="right"
-        android:layout_marginTop="24dp"
-        android:background="@color/colorTransparent"
-        android:clickable="true"
-        android:src="@drawable/ic_edit_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,13 +29,16 @@
         app:layout_constraintVertical_bias="0.148"
         app:srcCompat="@mipmap/ic_avatar_round" />
 
-    <TextView
+    <EditText
         android:id="@+id/inputNome"
         android:layout_width="185dp"
         android:layout_height="44dp"
+        android:background="@drawable/round_border"
         android:drawableStart="@drawable/ic_person_24"
         android:drawablePadding="16dp"
         android:ems="10"
+        android:hint="Nome"
+        android:inputType="text"
         android:padding="8dp"
         android:text="@string/name"
         android:textColorHint="@color/colorBlack"
@@ -61,13 +50,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.143" />
 
-    <TextView
+    <EditText
         android:id="@+id/inputSobrenome"
         android:layout_width="185dp"
         android:layout_height="44dp"
+        android:background="@drawable/round_border"
         android:drawableStart="@drawable/ic_person_24"
         android:drawablePadding="16dp"
         android:ems="10"
+        android:hint="Sobrenome"
+        android:inputType="text"
         android:padding="8dp"
         android:text="@string/second_name"
         android:textColorHint="@color/colorBlack"
@@ -79,58 +71,39 @@
         app:layout_constraintTop_toBottomOf="@+id/inputNome"
         app:layout_constraintVertical_bias="0.055" />
 
-    <TextView
+    <EditText
         android:id="@+id/inputEmailCadastro"
         android:layout_width="354dp"
         android:layout_height="44dp"
+        android:background="@drawable/round_border"
         android:drawableStart="@drawable/ic_person_24"
         android:drawablePadding="16dp"
         android:ems="10"
+        android:hint="E-mail"
+        android:inputType="text"
         android:padding="8dp"
         android:text="@string/email"
         android:textColorHint="@color/colorBlack"
         android:textColorLink="#8C8C8C"
-        app:layout_constraintBottom_toTopOf="@+id/switchcompat_tema"
+        app:layout_constraintBottom_toTopOf="@+id/btnSave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputSobrenome"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.099" />
 
     <Button
-        android:id="@+id/btnStatistics"
+        android:id="@+id/btnSave"
         android:layout_width="257dp"
         android:layout_height="wrap_content"
         android:background="@drawable/round_bg"
-        android:drawableTop="@drawable/ic_donut_large_24"
-        android:text="@string/statistics"
+        android:text="@string/save"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchcompat_tema"
-        app:layout_constraintVertical_bias="0.78" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchcompat_tema"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tema Escuro"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.601" />
+        app:layout_constraintVertical_bias="0.934" />
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchcompat_tema"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tema Escuro"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

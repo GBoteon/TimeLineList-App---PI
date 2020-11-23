@@ -1,5 +1,6 @@
 package com.example.timelinelist.fragments
 
+
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ import com.example.timelinelist.models.SeriesFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_series.view.*
 
 class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {
+
     private val viewModel: SeriesFragmentViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

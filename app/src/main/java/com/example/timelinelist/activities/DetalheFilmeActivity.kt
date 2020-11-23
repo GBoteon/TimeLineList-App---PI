@@ -20,6 +20,5 @@ class DetalheFilmeActivity : AppCompatActivity() {
             val shareIntent = Intent.createChooser(sendIntent, null)
             startActivity(shareIntent)
         }
-
     }
 }

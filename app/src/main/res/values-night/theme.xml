@@ -20,7 +20,6 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowBackground">@color/colorBlack</item>
-
     </style>
     <style name="SearchView" parent="Widget.AppCompat.SearchView" >
         <item name="android:textColorPrimary">#BDBDBD</item>
@@ -47,11 +46,12 @@
     <style name="LinearLayoutDetalhesStyle">
         <item name="android:background">@drawable/custom_view_detalhe_night</item>
     </style>
+  
     <style name="DetalheTextView" parent="@android:style/TextAppearance.Small">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:buttonTint">@color/colorWhite</item>
     </style>
-
+  
     <style name="ImgCardViewStyle">
         <item name="android:background">@drawable/custom_right_img_night</item>
     </style>
