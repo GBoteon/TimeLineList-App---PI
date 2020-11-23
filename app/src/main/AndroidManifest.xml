@@ -18,7 +18,12 @@
         <activity android:name=".activities.PerfilActivity" />
         <activity android:name=".activities.ListaActivity" />
         <activity android:name=".activities.PesquisaActivity" />
-        <activity android:name=".activities.LoadingActivity" />
+        <activity android:name=".activities.LoadingActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activities.LoginActivity" />
         <activity
             android:name=".activities.DetalheSerieActivity"
@@ -26,11 +31,6 @@
         <activity
             android:name=".activities.DetalheFilmeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
