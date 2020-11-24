@@ -34,11 +34,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
         android:src="@drawable/ic_share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toEndOf="@+id/imageview_voltar_lista"
+        app:layout_constraintStart_toEndOf="@+id/imageview_voltar_filmetolista"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout

@@ -8,102 +8,98 @@
 
     <ImageView
         android:id="@+id/imageview_voltar_editpefiltoperfil"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/ic_arrow_back_black_24"
+        style="@style/NavIcone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_arrow_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.148"
-        app:srcCompat="@mipmap/ic_avatar_round" />
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_editpefiltoperfil">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="140dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="0.5"
+            app:srcCompat="@mipmap/ic_avatar_round" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edittext_nome"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/custom_cardview_day"
+                android:drawableStart="@drawable/ic_person"
+                android:drawablePadding="16dp"
+                android:padding="8dp"
+                android:hint="Nome"
+                android:textSize="8pt" />
+
+            <EditText
+                android:id="@+id/edittext_sobrenome"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/custom_cardview_day"
+                android:drawableStart="@drawable/ic_person"
+                android:drawablePadding="16dp"
+                android:padding="8dp"
+                android:hint="@string/second_name"
+                android:textSize="8pt" />
+        </LinearLayout>
+    </LinearLayout>
 
     <EditText
-        android:id="@+id/inputNome"
-        android:layout_width="185dp"
-        android:layout_height="44dp"
-        android:background="@drawable/round_border"
-        android:drawableStart="@drawable/ic_person_24"
+        android:id="@+id/edittext_email"
+        style="@style/EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/custom_cardview_day"
+        android:drawableStart="@drawable/ic_person"
         android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="Nome"
-        android:inputType="text"
         android:padding="8dp"
-        android:text="@string/name"
-        android:textColorHint="@color/colorBlack"
-        android:textColorLink="#8C8C8C"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:hint="Email"
+        android:textSize="8pt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
-
-    <EditText
-        android:id="@+id/inputSobrenome"
-        android:layout_width="185dp"
-        android:layout_height="44dp"
-        android:background="@drawable/round_border"
-        android:drawableStart="@drawable/ic_person_24"
-        android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="Sobrenome"
-        android:inputType="text"
-        android:padding="8dp"
-        android:text="@string/second_name"
-        android:textColorHint="@color/colorBlack"
-        android:textColorLink="#8C8C8C"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.911"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputNome"
-        app:layout_constraintVertical_bias="0.055" />
-
-    <EditText
-        android:id="@+id/inputEmailCadastro"
-        android:layout_width="354dp"
-        android:layout_height="44dp"
-        android:background="@drawable/round_border"
-        android:drawableStart="@drawable/ic_person_24"
-        android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="E-mail"
-        android:inputType="text"
-        android:padding="8dp"
-        android:text="@string/email"
-        android:textColorHint="@color/colorBlack"
-        android:textColorLink="#8C8C8C"
-        app:layout_constraintBottom_toTopOf="@+id/btnSave"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputSobrenome"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
     <Button
-        android:id="@+id/btnSave"
-        android:layout_width="257dp"
+        android:id="@+id/button_save"
+        style="@style/Button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:background="@drawable/round_bg"
         android:text="@string/save"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"
+        android:textSize="8pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.934" />
+        app:layout_constraintTop_toBottomOf="@+id/edittext_email"
+        app:layout_constraintVertical_bias="0.819" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

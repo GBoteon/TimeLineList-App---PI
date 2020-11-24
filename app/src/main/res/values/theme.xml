@@ -13,6 +13,7 @@
         <item name="logo">@drawable/nome_claro</item>
         <item name="tabStyle">@style/AppThemeDay.TabLayout</item>
         <item name="cardViewStyle">@style/AppThemeDay.CardView</item>
+
     </style>
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="android:statusBarColor">@android:color/transparent</item>
@@ -58,5 +59,23 @@
     <style name="ImgCardViewStyle">
         <item name="android:background">@drawable/custom_right_img_day</item>
     </style>
+    <style name="EditText">
+        <item name="android:background">@drawable/custom_edittext_day</item>
+        <item name="android:textColorHint">@color/colorBlack</item>
+        <item name="android:drawableTint">@color/colorBlack</item>
+    </style>
+    <style name="Button">
+        <item name="android:backgroundTint">@color/colorBlack</item>
+        <item name="android:drawableTint">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+    <style name="TextView">
+        <item name="android:drawableTint">@color/colorBlack</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+    <style name="NavIcone">
+        <item name="android:tint">@color/colorBlack</item>
+    </style>
+
 
 </resources>

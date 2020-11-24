@@ -19,14 +19,14 @@ class PerfilActivity : AppCompatActivity() {
         imageview_voltar_pefiltolista.setOnClickListener { startActivity(Intent(this, ListaActivity::class.java)) }
         imageview_editperfil.setOnClickListener { startActivity(Intent(this, EditPerfilActivity::class.java)) }
 
-        btnStatistics.setOnClickListener { startActivity(Intent(this, EstatisticasActivity::class.java)) }
+        button_estatisticas.setOnClickListener { startActivity(Intent(this, EstatisticasActivity::class.java)) }
 
 
         var sharedPref = getSharedPreferences("save", Context.MODE_PRIVATE)
         switchcompat_tema.setChecked(sharedPref.getBoolean("value",false))
 
         var switchcompatValue= switchcompat_tema.isChecked()
-        if (switchcompatValue == true) {
+        if (switchcompatValue) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

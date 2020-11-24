@@ -35,6 +35,7 @@
     <style name="AppThemeNight.CardView" parent="CardView">
         <item name="cardBackgroundColor">@color/colorBlack</item>
     </style>
+
     <style name="CardTextView" parent="@android:style/TextAppearance.Small">
         <item name="android:textColor">@color/colorWhite</item>
     </style>
@@ -55,5 +56,23 @@
     <style name="ImgCardViewStyle">
         <item name="android:background">@drawable/custom_right_img_night</item>
     </style>
+    <style name="EditText">
+        <item name="android:background">@drawable/custom_edittext_night</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="android:drawableTint">@color/colorWhite</item>
+    </style>
+    <style name="Button">
+        <item name="android:backgroundTint">@color/colorWhite</item>
+        <item name="android:drawableTint">@color/colorBlack</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+    <style name="TextView">
+        <item name="android:drawableTint">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+    <style name="NavIcone">
+        <item name="android:tint">@color/colorWhite</item>
+    </style>
+
 
 </resources>

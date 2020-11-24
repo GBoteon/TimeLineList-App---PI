@@ -37,7 +37,7 @@
         android:src="@drawable/ic_share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toEndOf="@+id/imageview_voltar_lista"
+        app:layout_constraintStart_toEndOf="@+id/imageview_voltar_serietolista"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout

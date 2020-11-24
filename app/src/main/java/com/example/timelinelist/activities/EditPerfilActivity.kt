@@ -18,7 +18,7 @@ class EditPerfilActivity : AppCompatActivity() {
         setContentView(R.layout.activity_editperfil)
 
         imageview_voltar_editpefiltoperfil.setOnClickListener { startActivity(Intent(this, PerfilActivity::class.java)) }
-        btnSave.setOnClickListener { startActivity(Intent(this, PerfilActivity::class.java)) }
+        button_save.setOnClickListener { startActivity(Intent(this, PerfilActivity::class.java)) }
 
     }
 }
