@@ -20,6 +20,7 @@ class ListaActivity : AppCompatActivity() {
         tablayout_tabs.setupWithViewPager(viewpager_filmes_series)
 
         toolbar_button_right.setOnClickListener { startActivity(Intent(this, PerfilActivity::class.java)) }
+        floatingactionbutton.setOnClickListener { startActivity(Intent(this, PesquisaActivity::class.java)) }
 
     }
 

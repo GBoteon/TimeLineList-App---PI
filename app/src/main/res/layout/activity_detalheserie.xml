@@ -97,6 +97,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.05"
                 android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="10dp"
                 android:text="⬤"/>
             <TextView
                 style="@style/DetalheTextView"
@@ -113,6 +115,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.05"
                 android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="10dp"
                 android:text="⬤"/>
             <TextView
                 style="@style/DetalheTextView"
@@ -129,6 +133,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.05"
                 android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="10dp"
                 android:text="⬤"/>
             <TextView
                 style="@style/DetalheTextView"

@@ -29,7 +29,7 @@ class LoadingActivity : AppCompatActivity() {
 
         var intent = Intent(this, LoginActivity::class.java)
         scope.launch {
-            delay(3000)
+            delay(1000)
             startActivity(intent)
             finish()
         }
