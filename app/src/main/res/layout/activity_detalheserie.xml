@@ -10,10 +10,11 @@
     <ImageView
         android:id="@+id/imageview_serie"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:scrollY="-110dp"
+        android:scrollY="10dp"
         android:src="@drawable/poster"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +48,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        android:translationY="-20dp"
         android:orientation="vertical"
         style="@style/LinearLayoutDetalhesStyle">
 

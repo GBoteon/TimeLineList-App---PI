@@ -10,10 +10,11 @@
     <ImageView
         android:id="@+id/imageview_filme"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:scrollY="-110dp"
+        android:scrollY="10dp"
         android:src="@drawable/poster"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,17 +41,8 @@
         app:layout_constraintStart_toEndOf="@+id/imageview_voltar_filmetolista"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        style="@style/LinearLayoutDetalhesStyle">
 
-    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,7 +51,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        android:translationY="-20dp"
         android:orientation="vertical"
         style="@style/LinearLayoutDetalhesStyle">
 

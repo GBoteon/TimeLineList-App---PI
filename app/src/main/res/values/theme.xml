@@ -40,10 +40,12 @@
         <item name="android:background">@drawable/custom_cardview_day</item>
     </style>
 
+
     <style name="LinearLayoutDetalhesStyle">
         <item name="android:background">@drawable/custom_view_detalhe_day</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
+
     <style name="DetalheTextView" parent="@android:style/TextAppearance.Small">
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:buttonTint">@color/colorBlack</item>

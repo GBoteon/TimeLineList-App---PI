@@ -42,7 +42,9 @@
     <style name="LinearLayoutDetalhesStyle">
         <item name="android:background">@drawable/custom_view_detalhe_night</item>
     </style>
-  
+    <style name="LinearLayoutDetalhesStyle2">
+        <item name="android:background">@color/colorBlack</item>
+    </style>
     <style name="DetalheTextView" parent="@android:style/TextAppearance.Small">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:buttonTint">@color/colorWhite</item>
