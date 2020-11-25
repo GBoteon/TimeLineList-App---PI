@@ -6,146 +6,48 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activities.PesquisaActivity">
-
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-        tools:ignore="MissingConstraints" />
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/custom_searchview"
-        android:contextClickable="true"
-        app:theme="@style/SearchView"
-        android:queryHint="Search"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="94dp"
-        tools:ignore="MissingConstraints">
-
-    </androidx.appcompat.widget.SearchView>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
-
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            style="@style/LinearLayoutStyle"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:orientation="horizontal"
-            tools:ignore="MissingConstraints">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="180dp"
-                android:src="@drawable/sample_img_card"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="178dp" />
-
-        </LinearLayout>
-
-
-
-    </ScrollView>
-
+  
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageview_voltar_pesquisatolista"
+        style="@style/NavIcone"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+  
+    <EditText
+        android:id="@+id/edittext_busca"
+        style="@style/EditTextBusca"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:textSize="20dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="5dp"
+        android:hint="Buscar"
+        android:inputType="text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="200dp"
-        android:src="@drawable/sample_img_card"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-16dp" />
-
-    <TextView
-        android:id="@+id/textview_nomefilme"
-        style="@style/DetalheTextView"
-        android:layout_width="174dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.9"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="Nome Filme"
-        android:textColor="@color/colorWhite"
-        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="380dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_pesquisatolista" />
 
-    <TextView
-        android:id="@+id/textview_duracaogenero"
-        style="@style/DetalheTextView"
-        android:layout_width="174dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.9"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="Duração • Gênero"
-        android:textColor="@color/colorWhite"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="407dp" />
-
-    <ImageView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_obras"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="200dp"
-        android:src="@drawable/sample_img_card"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
-
-    <TextView
-        android:id="@+id/textview_nomeserie"
-        style="@style/DetalheTextView"
-        android:layout_width="174dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.9"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="Nome Série"
-        android:textColor="@color/colorWhite"
-        android:textSize="20sp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="380dp"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textview_tempgenero"
-        style="@style/DetalheTextView"
-        android:layout_width="174dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.9"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="Temporadas • Gênero"
-        android:textColor="@color/colorWhite"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="407dp" />
-
+        app:layout_constraintTop_toBottomOf="@+id/edittext_busca"
+        tools:listitem="@layout/obra_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,12 +21,7 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowBackground">@color/colorBlack</item>
     </style>
-    <style name="SearchView" parent="Widget.AppCompat.SearchView" >
-        <item name="android:textColorPrimary">#BDBDBD</item>
-        <item name="android:editTextColor">#BDBDBD</item>
-        <item name="android:textColorHint">#BDBDBD</item>
-        <item name="android:tint">#BDBDBD</item>
-    </style>
+
     <style name="AppThemeNight.TabLayout" parent="Widget.Design.TabLayout">
         <item name="tabSelectedTextColor">@color/colorRed</item>
         <item name="tabTextColor">@color/colorWhite</item>
@@ -47,7 +42,9 @@
     <style name="LinearLayoutDetalhesStyle">
         <item name="android:background">@drawable/custom_view_detalhe_night</item>
     </style>
-  
+    <style name="LinearLayoutDetalhesStyle2">
+        <item name="android:background">@color/colorBlack</item>
+    </style>
     <style name="DetalheTextView" parent="@android:style/TextAppearance.Small">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:buttonTint">@color/colorWhite</item>
@@ -73,6 +70,15 @@
     <style name="NavIcone">
         <item name="android:tint">@color/colorWhite</item>
     </style>
+    <style name="ActionButton">
+        <item name="android:backgroundTint">@color/colorWhite</item>
+        <item name="android:tint">@color/colorBlack</item>
+    </style>
+    <style name="EditTextBusca">
+        <item name="android:background">@drawable/custom_edittext_night</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="android:drawableTint">@color/colorWhite</item>
 
+    </style>
 
 </resources>

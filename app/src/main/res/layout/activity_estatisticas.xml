@@ -7,159 +7,119 @@
     android:orientation="vertical"
     tools:context=".activities.EstatisticasActivity">
 
+    <ImageView
+        android:id="@+id/imageview_voltar_estatisticastoperfil"
+        style="@style/NavIcone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_estatisticastoperfil">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="73dp"
-            android:gravity="bottom"
-            android:orientation="horizontal"
-            android:padding="25dp">
-
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="54dp"
-                android:layout_height="34dp"
-                app:buttonGravity="bottom"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-                tools:ignore="MissingConstraints" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/textview_horasfilmes"
+            style="@style/TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="20dp">
+            android:text="Horas Assistindo Filmes"
+            android:textSize="10pt" />
 
-            <TextView
-                android:id="@+id/textview_hrsF"
-                style="@style/DetalheTextView"
-                android:layout_width="174dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="Horas Assistidas Filmes"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/textview_horasseries"
+            style="@style/TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="20dp">
+            android:text="Horas Assistindo Séries"
+            android:textSize="10pt" />
 
-<!--            Horas Assistidas Total-->
-
-            <TextView
-                android:id="@+id/textview_hrsS"
-                style="@style/DetalheTextView"
-                android:layout_width="174dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="Horas Assistidas Séries"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/textview_horastotal"
+            style="@style/TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="20dp">
+            android:text="Horas Assistindo Total"
+            android:textSize="10pt" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/textview_hrsT"
-                style="@style/DetalheTextView"
-                android:layout_width="174dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="Horas Assistidas Total"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        android:fillViewport="true">
 
-        </LinearLayout>
-
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="20dp">
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
 
             <TextView
-                android:id="@+id/textview_generos"
-                style="@style/DetalheTextView"
-                android:layout_width="174dp"
+                style="@style/TextView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                android:ellipsize="end"
-                android:maxLines="1"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:text="Gêneros"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
-
-
-        </LinearLayout>
-
-
-        <ImageView
-            android:id="@+id/ivgenero"
-            android:layout_width="match_parent"
-            android:layout_height="84dp"
-            android:adjustViewBounds="false"
-            android:gravity="center"
-            app:srcCompat="@drawable/img1" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="20dp">
-
+                android:textSize="10pt" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/ic_chart" />
             <TextView
-                android:id="@+id/textview_dormiu"
-                style="@style/DetalheTextView"
-                android:layout_width="wrap_content"
+                style="@style/TextView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                android:ellipsize="end"
-                android:maxLines="1"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:text="Dormiu"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
+                android:textSize="10pt" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/ic_chart"/>
+            <TextView
+                style="@style/TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Cinema"
+                android:textSize="10pt" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/ic_chart"/>
 
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/ivdormiu"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:adjustViewBounds="false"
-            android:gravity="center"
-            app:srcCompat="@drawable/img2" />
-
-    </LinearLayout></ScrollView>
-
+        </TableLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
