@@ -79,7 +79,9 @@
         <item name="android:background">@drawable/custom_edittext_day</item>
         <item name="android:textColorHint">@color/colorBlack</item>
         <item name="android:drawableTint">@color/colorBlack</item>
-
+    </style>
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorRed</item>
     </style>
 
 

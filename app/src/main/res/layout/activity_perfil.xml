@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.PerfilActivity">
+
     <ImageView
         android:id="@+id/imageview_voltar_pefiltolista"
         style="@style/NavIcone"
@@ -17,66 +18,72 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
         android:id="@+id/imageview_editperfil"
         style="@style/NavIcone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:clickable="true"
         android:src="@drawable/ic_edit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.933"
         app:layout_constraintStart_toEndOf="@+id/imageview_voltar_pefiltolista"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/circularImageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/avatar"
+        app:civ_border="true"
+        app:civ_border_color="@color/colorBlack"
+        app:civ_border_color_direction="top_to_bottom"
+        app:civ_border_width="2dp"
+        app:civ_shadow="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_pefiltolista" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/circularImageView"
         app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_pefiltolista">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="0dp"
-            android:layout_height="140dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="0.5"
-            app:srcCompat="@mipmap/ic_avatar_round" />
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.5"
-            android:layout_gravity="start"
+        <TextView
+            android:id="@+id/textview_nome"
+            style="@style/TextView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/textview_nome"
-                style="@style/TextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:drawableStart="@drawable/ic_person"
-                android:drawablePadding="16dp"
-                android:textSize="8pt"
-                android:layout_marginBottom="40dp"
-                android:padding="8dp"
-                android:text="Nome"
-                android:textColorHint="@color/colorBlack" />
-            <TextView
-                android:id="@+id/textview_sobrenome"
-                style="@style/TextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_person"
-                android:drawablePadding="16dp"
-                android:textSize="8pt"
-                android:padding="8dp"
-                android:text="@string/second_name"
-                android:textColorHint="@color/colorBlack" />
-        </LinearLayout>
+            android:layout_marginBottom="40dp"
+            android:drawableStart="@drawable/ic_person"
+            android:drawablePadding="16dp"
+            android:padding="8dp"
+            android:text="Nome"
+            android:textColorHint="@color/colorBlack"
+            android:textSize="8pt" />
+
+        <TextView
+            android:id="@+id/textview_sobrenome"
+            style="@style/TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_person"
+            android:drawablePadding="16dp"
+            android:padding="8dp"
+            android:text="@string/second_name"
+            android:textColorHint="@color/colorBlack"
+            android:textSize="8pt" />
     </LinearLayout>
 
     <TextView
@@ -84,30 +91,31 @@
         style="@style/TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
         android:drawableStart="@drawable/ic_person"
         android:drawablePadding="16dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
         android:padding="8dp"
-        android:textSize="8pt"
         android:text="Email"
         android:textColorHint="@color/colorBlack"
+        android:textSize="8pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/circularImageView" />
+
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchcompat_tema"
         style="@style/TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="40dp"
-        android:layout_marginRight="40dp"
-        android:text="Tema Escuro"
+        android:layout_marginRight="20dp"
         android:drawableStart="@drawable/ic_lamp"
-        android:padding="8dp"
         android:drawablePadding="16dp"
+        android:padding="8dp"
+        android:text="Tema Escuro"
         android:textSize="8pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,9 +125,9 @@
         android:id="@+id/button_estatisticas"
         style="@style/Button"
         android:layout_width="match_parent"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:background="@drawable/round_bg"
         android:drawableTop="@drawable/ic_donut_large_24"
         android:drawablePadding="5dp"

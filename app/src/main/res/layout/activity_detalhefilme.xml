@@ -72,7 +72,7 @@
 
             <ImageView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="0.1"
                 android:gravity="center"
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:text="Duração"/>
             <TextView
                 style="@style/DetalheTextView"
@@ -101,7 +101,8 @@
                 android:layout_weight="0.05"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:textSize="10dp"
+                android:textSize="10sp"
+                android:textColor="@color/colorRed"
                 android:text="⬤"/>
             <TextView
                 style="@style/DetalheTextView"
@@ -110,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:text="Gêneros"/>
             <TextView
                 style="@style/DetalheTextView"
@@ -119,7 +120,8 @@
                 android:layout_weight="0.05"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:textSize="10dp"
+                android:textSize="10sp"
+                android:textColor="@color/colorRed"
                 android:text="⬤"/>
             <TextView
                 style="@style/DetalheTextView"
@@ -128,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:text="Lançamento"/>
             <TextView
                 style="@style/DetalheTextView"
@@ -137,7 +139,8 @@
                 android:layout_weight="0.05"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:textSize="10dp"
+                android:textSize="10sp"
+                android:textColor="@color/colorRed"
                 android:text="⬤"/>
             <TextView
                 style="@style/DetalheTextView"
@@ -146,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:text="x,x/5"/>
         </LinearLayout>
         <LinearLayout
@@ -164,7 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:text="Sinopse"/>
             <TextView
                 style="@style/DetalheTextView"
@@ -195,11 +198,12 @@
                     android:layout_weight="0.9"
                     android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:text="Assistido no Cinema?"/>
                 <CheckBox
                     style="@style/DetalheTextView"
                     android:id="@+id/checkBox1"
+                    android:buttonTint="@color/colorRed"
                     android:layout_width="0dp"
                     android:layout_weight="0.1"
                     android:layout_height="wrap_content"
@@ -216,11 +220,12 @@
                     android:layout_weight="0.9"
                     android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:text="Dormiu?"/>
                 <CheckBox
                     style="@style/DetalheTextView"
                     android:id="@+id/checkBox2"
+                    android:buttonTint="@color/colorRed"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.1"
@@ -239,11 +244,12 @@
                     android:layout_weight="0.9"
                     android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:text="Favorito?"/>
                 <CheckBox
                     style="@style/DetalheTextView"
                     android:id="@+id/checkBox3"
+                    android:buttonTint="@color/colorRed"
                     android:layout_width="0dp"
                     android:layout_weight="0.1"
                     android:layout_height="wrap_content"
@@ -262,19 +268,20 @@
                 android:layout_marginLeft="10dp"
                 android:layout_height="wrap_content"
                 android:text="Data: "
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:gravity="center"
                 android:layout_gravity="center"/>
 
             <EditText
-                android:id="@+id/editTextDate"
+                android:id="@+id/edittext_data"
                 style="@style/DetalheTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.9"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:backgroundTint="@color/colorTransparent"
-                android:inputType="date" />
+                android:inputType="date"
+                android:focusable="false" />
         </LinearLayout>
 
         <Button
