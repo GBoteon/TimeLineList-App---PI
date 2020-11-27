@@ -24,8 +24,8 @@
             android:backgroundTint="@color/colorTransparent"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:scaleType="center"
-            android:src="@drawable/logo" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/icone" />
 
         <ImageView
             android:id="@+id/image_logo"

@@ -9,7 +9,7 @@
         <item name="android:windowBackground">@color/colorBlack</item>
         <item name="android:navigationBarColor">#00000000</item>
         <item name="android:statusBarColor">@color/colorTransparent</item>
-        <item name="logo">@drawable/nome_escuro</item>
+        <item name="logo">@drawable/nome_nigth</item>
         <item name="tabStyle">@style/AppThemeNight.TabLayout</item>
         <item name="cardViewStyle">@style/AppThemeNight.CardView</item>
         <item name="android:autofilledHighlight">@color/colorTransparent</item>
