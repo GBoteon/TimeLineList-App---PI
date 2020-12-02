@@ -23,7 +23,7 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener:
     override fun onBindViewHolder(holder: ListaFilmeViewHolder, position: Int) {
 
         var filme = filmesFilterList[position]
-        holder.nome_filme.text = filme.nome
+        holder.nome_filme.text = filme.title
     }
     inner class ListaFilmeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val nome_filme: TextView = itemView.findViewById(R.id.nome_filme)
@@ -56,7 +56,7 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener:
                 } else {
                     val resultList = ArrayList<Filme>()
                     for (row in listFilmes) {
-                        if (row.nome.toLowerCase().contains(charSearch.toLowerCase())) {
+                        if (row.title.toLowerCase().contains(charSearch.toLowerCase())) {
                             resultList.add(row)
                         }
                     }

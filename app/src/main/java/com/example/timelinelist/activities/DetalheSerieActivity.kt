@@ -7,6 +7,7 @@ import com.example.timelinelist.R
 import kotlinx.android.synthetic.main.activity_detalheserie.*
 import kotlinx.android.synthetic.main.activity_detalheserie.imageview_compartilhar
 
+
 class DetalheSerieActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

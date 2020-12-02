@@ -1,29 +1,46 @@
 package com.example.timelinelist.models
 
 import android.app.Application
+import android.app.DownloadManager
 import androidx.lifecycle.AndroidViewModel
-import com.example.timelinelist.helpers.Filme
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.example.timelinelist.Constants.API_KEY
+import com.example.timelinelist.Constants.LANG
+import com.example.timelinelist.helpers.BaseFilme
 import com.example.timelinelist.helpers.Obra
+import com.example.timelinelist.repository
+import kotlinx.coroutines.launch
 
 class PesquisaViewModel(application: Application): AndroidViewModel(application) {
     private val context = getApplication<Application>().applicationContext
+    var listaObra = MutableLiveData<ArrayList<Obra>>()
+    var listaObraFromApi = MutableLiveData<BaseFilme>()
 
-    fun getObras(): ArrayList<Obra> {
-        return arrayListOf( Obra("Mama mia"),
-            Obra("Os Estranhos - Caçada Noturna"),
-            Obra("A Wrinkle in Time"),
-            Obra("Love, Simon"),
-            Obra("John Wick 2"),
-            Obra("Burnt"),
-            Obra("Todo Dia"),
-            Obra("Jogador Numero Um"),
-            Obra("Continue Assistindo"),
-            Obra("Slender"),
-            Obra("Koe no Katashi"),
-            Obra("Truth or Dare"),
-            Obra("Próxima Parada: Apocalípse"),
-            Obra("Operação Red Sparrow"),
-            Obra("A Vida é Uma Festa"))
+    fun getObras() {
+        viewModelScope.launch {
+            listaObra.value =  arrayListOf( Obra("Weastworld"),
+                Obra("Station 19"),
+                Obra("The Handmaid's Tale"),
+                Obra("Siren"),
+                Obra("Mr. Robot"),
+                Obra("The Resident"),
+                Obra("Big Little Lies"),
+                Obra("La Casa de Papel"),
+                Obra("Punisher"),
+                Obra("Ozark"),
+                Obra("O Atirador"),
+                Obra("This is Us"),
+                Obra("The Mist"),
+                Obra("Unabomber"),
+                Obra("Batalha de Confeiteiros 2018")
+            )
+        }
+    }
+    fun getObrasFromApi(query: String) {
+        viewModelScope.launch {
+            listaObraFromApi.value = repository.getFilmes(API_KEY,LANG,query)
+        }
     }
 
 }

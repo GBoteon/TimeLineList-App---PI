@@ -23,7 +23,7 @@ class ListaSeriesAdapter(private val listSerie: ArrayList<Serie>, val listener: 
 
     override fun onBindViewHolder(holder: ListaSeriesViewHolder, position: Int) {
         var serie = seriesFilterList[position]
-        holder.nome_serie.text = serie.nome
+        holder.nome_serie.text = serie.title
     }
     inner class ListaSeriesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val nome_serie: TextView = itemView.findViewById(R.id.nome_serie)
@@ -55,7 +55,7 @@ class ListaSeriesAdapter(private val listSerie: ArrayList<Serie>, val listener: 
                 } else {
                     val resultList = ArrayList<Serie>()
                     for (row in listSerie) {
-                        if (row.nome.toLowerCase().contains(charSearch.toLowerCase())) {
+                        if (row.title.toLowerCase().contains(charSearch.toLowerCase())) {
                             resultList.add(row)
                         }
                     }

@@ -1,4 +1,4 @@
 package com.example.timelinelist.helpers
 
-class Filme(val nome: String) {
+data class Filme(val title: String) {
 }

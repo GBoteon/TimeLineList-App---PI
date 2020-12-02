@@ -2,13 +2,15 @@ package com.example.timelinelist.models
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import com.example.timelinelist.helpers.Filme
 import com.example.timelinelist.helpers.Serie
 
 class SeriesFragmentViewModel(application: Application): AndroidViewModel(application) {
     private val context = getApplication<Application>().applicationContext
-    fun getSeries(): ArrayList<Serie> {
-        return arrayListOf( Serie("Weastworld"),
+    var listaSerie = MutableLiveData<ArrayList<Serie>>()
+    fun getSeries() {
+        listaSerie.value =  arrayListOf( Serie("Weastworld"),
                             Serie("Station 19"),
                             Serie("The Handmaid's Tale"),
                             Serie("Siren"),

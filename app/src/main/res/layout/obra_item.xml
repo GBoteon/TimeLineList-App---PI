@@ -7,22 +7,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
+        android:id="@+id/imageview_backdropobra"
         android:layout_width="match_parent"
         android:layout_marginRight="-1dp"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/sample_img_card"/>
     <TextView
-        android:id="@+id/nome_obra"
+        android:id="@+id/textview_nomeobra"
         android:maxLines="1"
         android:ellipsize="end"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="1.6"
         android:layout_marginTop="20dp"
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="42dp"
         android:text="Nome"
         android:textSize="20dp"
         android:textColor="@color/colorWhite"
@@ -34,9 +39,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="10dp">
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp">
         <TextView
+            android:shadowColor="#000000"
+            android:shadowDx="1.5"
+            android:shadowDy="1.3"
+            android:shadowRadius="1.6"
             android:maxLines="1"
             android:ellipsize="end"
             android:layout_width="wrap_content"
@@ -47,6 +56,10 @@
             android:textColor="@color/colorWhite"
             android:text="Duração"/>
         <TextView
+            android:shadowColor="#000000"
+            android:shadowDx="1.5"
+            android:shadowDy="1.3"
+            android:shadowRadius="1.6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.05"
@@ -58,6 +71,10 @@
             android:textSize="10dp"
             android:text="⬤"/>
         <TextView
+            android:shadowColor="#000000"
+            android:shadowDx="1.5"
+            android:shadowDy="1.3"
+            android:shadowRadius="1.6"
             android:maxLines="1"
             android:ellipsize="end"
             android:layout_width="wrap_content"
@@ -67,6 +84,10 @@
             android:textColor="@color/colorWhite"
             android:text="Gêneros"/>
         <TextView
+            android:shadowColor="#000000"
+            android:shadowDx="1.5"
+            android:shadowDy="1.3"
+            android:shadowRadius="1.6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.05"
@@ -78,6 +99,10 @@
             android:textSize="10dp"
             android:text="⬤"/>
         <TextView
+            android:shadowColor="#000000"
+            android:shadowDx="1.5"
+            android:shadowDy="1.3"
+            android:shadowRadius="1.6"
             android:maxLines="1"
             android:ellipsize="end"
             android:layout_width="wrap_content"

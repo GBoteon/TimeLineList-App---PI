@@ -9,11 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.timelinelist.R
 import com.example.timelinelist.activities.DetalheSerieActivity
+import com.example.timelinelist.adapters.ListaFilmesAdapter
 import com.example.timelinelist.adapters.ListaSeriesAdapter
 import com.example.timelinelist.models.SeriesFragmentViewModel
+import kotlinx.android.synthetic.main.fragment_filmes.view.*
 import kotlinx.android.synthetic.main.fragment_series.view.*
 
 class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {
@@ -23,23 +26,24 @@ class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_series, container, false)
 
-        var listaSeries = viewModel.getSeries()
-        var adapter =  ListaSeriesAdapter(listaSeries, this)
+        viewModel.getSeries()
+        viewModel.listaSerie.observe(viewLifecycleOwner) {
+            var adapter =  ListaSeriesAdapter(it, this)
+            view.recyclerview_series.adapter = adapter
+            view.recyclerview_series.layoutManager = LinearLayoutManager(context)
+            view.recyclerview_series.setHasFixedSize(true)
+            view.searchview_pesquisa_series.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    adapter.filter.filter(newText)
+                    return false
+                }
+            })
+        }
 
-        view.recyclerview_series.adapter = adapter
-        view.recyclerview_series.layoutManager = LinearLayoutManager(context)
-        view.recyclerview_series.setHasFixedSize(true)
-        view.searchview_pesquisa_series.setOnQueryTextListener(object: androidx.appcompat.widget.SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                adapter.filter.filter(newText)
-                return false
-            }
-
-        })
         return view
     }
     override fun serieClick(position: Int) {
