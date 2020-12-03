@@ -16,8 +16,20 @@ interface MovieAPI {
         @Query("language") language: String
     ): BaseFilme
 
-    @GET("serie")
+    @GET("tv")
     suspend fun getSerieById(
+        @Query("api_key") api: String,
+        @Query("language") language: String
+    ): BaseSerie
+
+    @GET("movie/popular")
+    suspend fun getPopularFilmes(
+        @Query("api_key") api: String,
+        @Query("language") language: String
+    ): BaseFilme
+
+    @GET("tv/popular")
+    suspend fun getPopularSeries(
         @Query("api_key") api: String,
         @Query("language") language: String
     ): BaseSerie
@@ -28,12 +40,14 @@ interface MovieAPI {
         @Query("language") language: String,
         @Query("query") query: String
     ): BaseFilme
-    @GET("search/serie")
+
+    @GET("search/tv")
     suspend fun getSeries(
         @Query("api_key") api: String,
         @Query("language") language: String,
         @Query("query") query: String
     ): BaseSerie
+
 }
 
 

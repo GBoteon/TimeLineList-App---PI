@@ -9,11 +9,11 @@ data class ResultsSerie (
 	val first_air_date : String,
 	val backdrop_path : String,
 	val vote_average : Double,
-	val genre_ids : List<Int>,
+	val genre_ids : ArrayList<Int>,
 	val overview : String,
 	val original_language : String,
 	val vote_count : Int,
 	val poster_path : String,
-	val origin_country : List<String>
+	val origin_country : ArrayList<String>
 
 )

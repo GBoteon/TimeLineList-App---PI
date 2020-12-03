@@ -26,7 +26,8 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener:
         holder.nome_filme.text = filme.title
     }
     inner class ListaFilmeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val nome_filme: TextView = itemView.findViewById(R.id.nome_filme)
+        val nome_filme: TextView = itemView.findViewById(R.id.textview_nome_filme)
+
         init {
             itemView.setOnClickListener(this)
         }

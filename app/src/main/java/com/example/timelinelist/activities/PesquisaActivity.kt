@@ -12,10 +12,17 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager.widget.ViewPager
 import com.example.timelinelist.R
 import com.example.timelinelist.adapters.ListaObrasAdapter
+import com.example.timelinelist.adapters.ViewPagerAdapter
+import com.example.timelinelist.fragments.FilmesFragment
+import com.example.timelinelist.fragments.PesquisaFilmesFragment
+import com.example.timelinelist.fragments.PesquisaSeriesFragment
+import com.example.timelinelist.fragments.SeriesFragment
 import com.example.timelinelist.models.PesquisaViewModel
 import kotlinx.android.synthetic.main.activity_estatisticas.*
+import kotlinx.android.synthetic.main.activity_lista.*
 import kotlinx.android.synthetic.main.activity_pesquisa.*
 import kotlinx.android.synthetic.main.fragment_filmes.view.*
 
@@ -26,12 +33,11 @@ class PesquisaActivity : AppCompatActivity(), ListaObrasAdapter.OnObraClickListe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesquisa)
-        imageview_voltar_pesquisatolista.setOnClickListener{ startActivity(
-            Intent(
-                this,
-                ListaActivity::class.java
-            )
-        ) }
+
+        setupViewPager(viewpager_filmes_series_pesquisa)
+        tablayout_tabs_pesquisa.setupWithViewPager(viewpager_filmes_series_pesquisa)
+
+        imageview_voltar_pesquisatolista.setOnClickListener{ startActivity(Intent(this, ListaActivity::class.java)) }
 
         edittext_busca.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -44,13 +50,13 @@ class PesquisaActivity : AppCompatActivity(), ListaObrasAdapter.OnObraClickListe
         })
 
 
-        viewModel.listaObraFromApi.observe(this) {
+/*        viewModel.listaObraFromApi.observe(this) {
             var adapter =  ListaObrasAdapter(it, this)
-            recyclerview_obras.adapter = adapter
+            recyclerview_obras_pesquisa.adapter = adapter
             recyclerview_obras.layoutManager = LinearLayoutManager(this)
             recyclerview_obras.setHasFixedSize(true)
             progressbar_loading.visibility = View.INVISIBLE
-        }
+        }*/
 
 
     }
@@ -68,5 +74,12 @@ class PesquisaActivity : AppCompatActivity(), ListaObrasAdapter.OnObraClickListe
             activity.currentFocus!!.windowToken, 0
         )
     }
+    private fun setupViewPager(viewpager: ViewPager) {
+        var adapter = ViewPagerAdapter(supportFragmentManager)
 
+        adapter.addFragment(PesquisaFilmesFragment(), "Filmes")
+        adapter.addFragment(PesquisaSeriesFragment(), "Séries")
+
+        viewpager.setAdapter(adapter)
+    }
 }

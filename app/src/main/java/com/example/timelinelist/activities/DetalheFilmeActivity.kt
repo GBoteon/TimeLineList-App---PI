@@ -18,6 +18,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalhefilme)
+        textview_nomefilme.isSelected = true
         imageview_voltar_filmetolista.setOnClickListener { startActivity(Intent(this, ListaActivity::class.java)) }
         imageview_compartilhar.setOnClickListener {
             val sendIntent: Intent = Intent().apply {

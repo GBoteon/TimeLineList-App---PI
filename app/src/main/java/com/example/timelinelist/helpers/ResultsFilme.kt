@@ -8,7 +8,7 @@ data class ResultsFilme (
 	val adult : Boolean,
 	val backdrop_path : String,
 	val title : String,
-	val genre_ids : List<Int>,
+	val genre_ids : ArrayList<Int>,
 	val original_language : String,
 	val original_title : String,
 	val poster_path : String,

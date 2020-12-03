@@ -11,10 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timelinelist.Constants.BASE_IMAGE_URL
 import com.example.timelinelist.R
-import com.example.timelinelist.helpers.BaseFilme
-import com.example.timelinelist.helpers.Filme
-import com.example.timelinelist.helpers.Obra
-import com.example.timelinelist.helpers.ResultsFilme
+import com.example.timelinelist.helpers.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.obra_item.view.*
 
@@ -29,9 +26,9 @@ class ListaObrasAdapter(private val listObra: BaseFilme, val listener: OnObraCli
 
     override fun onBindViewHolder(holder: ListaObraViewHolder, position: Int) {
 
-        var filme = obraFilterList[position]
-        holder.textview_nomeobra.text = filme.title
-        Picasso.get().load(Uri.parse("$BASE_IMAGE_URL${filme.backdrop_path}")).into(holder.imageview_backdropobra)
+        var obra = obraFilterList[position]
+        holder.textview_nomeobra.text = obra.title
+        Picasso.get().load(Uri.parse("$BASE_IMAGE_URL${obra.backdrop_path}")).into(holder.imageview_backdropobra)
 
     }
     inner class ListaObraViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {

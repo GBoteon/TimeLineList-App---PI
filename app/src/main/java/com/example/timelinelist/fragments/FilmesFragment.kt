@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.timelinelist.R
@@ -15,6 +16,7 @@ import androidx.lifecycle.observe
 import com.example.timelinelist.activities.DetalheFilmeActivity
 import com.example.timelinelist.activities.ListaActivity
 import com.example.timelinelist.adapters.ListaFilmesAdapter
+import kotlinx.android.synthetic.main.filme_item.view.*
 import kotlinx.android.synthetic.main.fragment_filmes.view.*
 
 class FilmesFragment : Fragment(), ListaFilmesAdapter.OnFilmeClickListener {
@@ -25,6 +27,7 @@ class FilmesFragment : Fragment(), ListaFilmesAdapter.OnFilmeClickListener {
         val view: View = inflater.inflate(R.layout.fragment_filmes, container, false)
 
         viewModel.getFilmes()
+
 
         viewModel.listaFilme.observe(viewLifecycleOwner) {
             var adapter =  ListaFilmesAdapter(it, this)

@@ -60,12 +60,12 @@
             <TextView
                 android:id="@+id/textview_nomeserie"
                 style="@style/DetalheTextView"
+                android:ellipsize="marquee"
+                android:singleLine="true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.9"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="Nome Serie"
+                android:text="Nome SerieNome SerieNome SerieNome SerieNome Serie"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 

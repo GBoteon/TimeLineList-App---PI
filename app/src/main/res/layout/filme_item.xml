@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/nome_filme"
+                android:id="@+id/textview_nome_filme"
                 style="@style/CardTextView"
                 android:maxLines="1"
                 android:ellipsize="end"
