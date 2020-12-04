@@ -52,4 +52,5 @@ class FilmesFragment : Fragment(), ListaFilmesAdapter.OnFilmeClickListener {
         println(position)
         startActivity(Intent(context, DetalheFilmeActivity::class.java))
     }
+
 }

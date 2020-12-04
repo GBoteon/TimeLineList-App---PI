@@ -8,4 +8,9 @@ object Constants {
     const val APP_KEY = "APP"
     const val UIID_KEY = "UIID"
     const val EMPTY_STRING = ""
+    const val PREFS_NAME = "theme_prefs"
+    const val KEY_THEME = "prefs.theme"
+    const val THEME_UNDEFINED = -1
+    const val THEME_LIGHT = 0
+    const val THEME_DARK = 1
 }

@@ -1,5 +1,7 @@
 package com.example.timelinelist.helpers
 
+import java.io.Serializable
+
 data class ResultsFilme (
 	val id : Int,
 	val popularity : Double,
@@ -15,4 +17,4 @@ data class ResultsFilme (
 	val overview : String,
 	val video : Boolean,
 	val vote_average : Double
-)
+): Serializable

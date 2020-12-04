@@ -66,6 +66,7 @@
         android:id="@+id/tablayout_tabs_pesquisa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabInlineLabel="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
@@ -79,6 +80,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tablayout_tabs_pesquisa">
-
     </androidx.viewpager.widget.ViewPager>
 </androidx.constraintlayout.widget.ConstraintLayout>

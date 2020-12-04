@@ -83,6 +83,9 @@
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/colorRed</item>
     </style>
+    <style name="SecondaryText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
 
 
 </resources>

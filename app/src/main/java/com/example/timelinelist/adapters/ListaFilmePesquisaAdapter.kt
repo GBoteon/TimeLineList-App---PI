@@ -1,11 +1,10 @@
 package com.example.timelinelist.adapters
 
+import android.R.attr.data
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -15,10 +14,16 @@ import com.example.timelinelist.helpers.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.obra_item.view.*
 
-class ListaFilmePesquisaAdapter(private val listObra: BaseFilme, val listener: OnObraFilmeClickListener): RecyclerView.Adapter<ListaFilmePesquisaAdapter.ListaFilmePesquisaViewHolder>() {
+
+class ListaFilmePesquisaAdapter(
+    private val listObra: BaseFilme,
+    val listener: OnObraFilmeClickListener
+): RecyclerView.Adapter<ListaFilmePesquisaAdapter.ListaFilmePesquisaViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaFilmePesquisaViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.obra_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.obra_item,
+            parent,
+            false)
         return ListaFilmePesquisaViewHolder(itemView)
     }
 
@@ -47,7 +52,6 @@ class ListaFilmePesquisaAdapter(private val listObra: BaseFilme, val listener: O
     }
     interface OnObraFilmeClickListener {
         fun obraFilmeClick(position: Int)
-
     }
 
 }

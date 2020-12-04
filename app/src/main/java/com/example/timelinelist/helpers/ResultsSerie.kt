@@ -1,7 +1,8 @@
 package com.example.timelinelist.helpers
 
-data class ResultsSerie (
+import java.io.Serializable
 
+data class ResultsSerie (
 	val id : Int,
 	val popularity : Double,
 	val name : String,
@@ -15,5 +16,4 @@ data class ResultsSerie (
 	val vote_count : Int,
 	val poster_path : String,
 	val origin_country : ArrayList<String>
-
-)
+): Serializable

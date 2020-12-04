@@ -103,23 +103,50 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/circularImageView" />
-
-    <androidx.appcompat.widget.SwitchCompat
+    <TextView
         android:id="@+id/switchcompat_tema"
         style="@style/TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:drawableStart="@drawable/ic_lamp"
         android:drawablePadding="16dp"
         android:padding="8dp"
-        android:text="Tema Escuro"
+        android:text="Temas"
         android:textSize="8pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputEmailCadastro" />
+
+    <RadioGroup
+        android:id="@+id/themeGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchcompat_tema">
+
+        <RadioButton
+            android:id="@+id/themeDark"
+            style="@style/SecondaryText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorRed"
+            android:text="Escuro" />
+
+        <RadioButton
+            android:id="@+id/themeLight"
+            style="@style/SecondaryText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorRed"
+            android:text="Claro" />
+
+    </RadioGroup>
+
 
     <Button
         android:id="@+id/button_estatisticas"
@@ -132,7 +159,6 @@
         android:drawableTop="@drawable/ic_donut_large_24"
         android:drawablePadding="5dp"
         android:paddingLeft="30dp"
-        android:paddingTop="10dp"
         android:paddingRight="30dp"
         android:paddingBottom="10dp"
         android:text="Estatistícas"
@@ -140,7 +166,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchcompat_tema"
+        app:layout_constraintTop_toBottomOf="@+id/themeGroup"
         app:layout_constraintVertical_bias="0.78" />
 
 

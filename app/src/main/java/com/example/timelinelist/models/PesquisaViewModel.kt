@@ -15,9 +15,8 @@ import kotlinx.coroutines.launch
 class PesquisaViewModel(application: Application): AndroidViewModel(application) {
     private val context = getApplication<Application>().applicationContext
     var listaObra = MutableLiveData<ArrayList<Obra>>()
-    var listaObraFromApi = MutableLiveData<BaseFilme>()
-    var listaPopularFilmes = MutableLiveData<BaseFilme>()
-    var listaPopularSeries = MutableLiveData<BaseSerie>()
+    var listaFilmes = MutableLiveData<BaseFilme>()
+    var listaSeries = MutableLiveData<BaseSerie>()
 
     fun getObras() {
         viewModelScope.launch {
@@ -39,19 +38,26 @@ class PesquisaViewModel(application: Application): AndroidViewModel(application)
             )
         }
     }
-    fun getObrasFromApi(query: String) {
+    fun getSeriesFromApi(query: String): BaseSerie? {
         viewModelScope.launch {
-            listaObraFromApi.value = repository.getFilmes(API_KEY,LANG,query)
+            listaSeries.setValue(repository.getSeries(API_KEY,LANG,query))
         }
+        return listaSeries.value
+    }
+    fun getFilmesFromApi(query: String): BaseFilme? {
+        viewModelScope.launch {
+            listaFilmes.setValue(repository.getFilmes(API_KEY,LANG,query))
+        }
+        return listaFilmes.value
     }
     fun getPopularFilmes() {
         viewModelScope.launch {
-            listaPopularFilmes.value = repository.getPopularFilmes(API_KEY,LANG)
+            listaFilmes.setValue(repository.getPopularFilmes(API_KEY,LANG))
         }
     }
     fun getPopularSeries() {
         viewModelScope.launch {
-            listaPopularSeries.value = repository.getPopularSeries(API_KEY,LANG)
+            listaSeries.setValue(repository.getPopularSeries(API_KEY,LANG))
         }
     }
 
