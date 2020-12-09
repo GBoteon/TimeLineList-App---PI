@@ -11,13 +11,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.timelinelist.R
-import com.example.timelinelist.activities.DetalheFilmeActivity
 import com.example.timelinelist.activities.DetalheSerieActivity
-import com.example.timelinelist.adapters.ListaFilmePesquisaAdapter
 import com.example.timelinelist.adapters.ListaSeriePesquisaAdapter
-import com.example.timelinelist.helpers.BaseSerie
+import com.example.timelinelist.helpers.BaseSerieBusca
+import com.example.timelinelist.helpers.BaseSerieDetalhe
 import com.example.timelinelist.models.PesquisaViewModel
-import kotlinx.android.synthetic.main.activity_pesquisa.*
+import kotlinx.android.synthetic.main.activity_pesquisa.view.*
 import kotlinx.android.synthetic.main.fragment_pesquisafilmes.view.*
 import kotlinx.android.synthetic.main.fragment_pesquisaseries.view.*
 
@@ -38,17 +37,22 @@ class PesquisaSeriesFragment : Fragment(), ListaSeriePesquisaAdapter.OnObraSerie
             var adapter =  ListaSeriePesquisaAdapter(it, this)
             view.recyclerview_series_pesquisa.adapter = adapter
             adapter.notifyDataSetChanged()
+            view.progressbar_loading_series.visibility = View.INVISIBLE
         }
         return view
     }
     override fun obraSerieClick(position: Int) {
-        var serieClick = viewModel.listaSeries.value?.results?.get(position)
-        val intent = Intent(context, DetalheSerieActivity::class.java)
-        intent.putExtra("serieClick", serieClick)
-        startActivity(intent)
+        var idClick = viewModel.listaSeries.value?.results?.get(position)?.id as Int
+        viewModel.getSeriesFromId(idClick)
+        viewModel.listaSeriesDetalhe.observe(viewLifecycleOwner) {
+            val intent = Intent(context, DetalheSerieActivity::class.java)
+            intent.putExtra("serieClick", it)
+            startActivity(intent)
+        }
+
     }
     internal fun atualizaListaSeries(text:String) {
-        var listaSerieNova = viewModel.getSeriesFromApi(text) as BaseSerie
+        var listaSerieNova = viewModel.getSeriesFromApi(text) as BaseSerieBusca
         var adapter =  ListaSeriePesquisaAdapter(listaSerieNova, this)
         view?.recyclerview_filmes_pesquisa?.adapter = adapter
         adapter.notifyDataSetChanged()

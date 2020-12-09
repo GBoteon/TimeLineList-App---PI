@@ -13,4 +13,6 @@ object Constants {
     const val THEME_UNDEFINED = -1
     const val THEME_LIGHT = 0
     const val THEME_DARK = 1
+    val GENEROS_FILME = mapOf(28 to "Ação", 12 to "Aventura", 16 to "Animação", 35 to "Comédia", 80 to "Crime", 99 to "Documentário", 18 to "Drama", 10751 to "Família", 14 to "Fantasia", 36 to "História", 27 to "Terror", 10402 to "Música", 9648 to "Mistério", 10749 to "Romance", 878 to "Ficção científica", 10770 to "Cinema TV", 53 to "Thriller", 10752 to "Guerra", 37 to "Faroeste")
+    val GENEROS_SERIE = mapOf(10759 to "Action & Adventure", 16 to "Animação", 35 to "Comédia", 80 to "Crime", 99 to "Documentário", 18 to "Drama", 10751 to "Família", 10762 to "Kids", 9648 to "Mistério", 10763 to "News", 10764 to "Reality", 10765 to "Sci-Fi & Fantasy", 10766 to "Soap", 10767 to "Talk", 10768 to "War & Politics", 37 to "Faroeste")
 }

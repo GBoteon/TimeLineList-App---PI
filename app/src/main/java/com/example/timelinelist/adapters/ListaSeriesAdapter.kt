@@ -8,8 +8,6 @@ import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timelinelist.R
-import com.example.timelinelist.fragments.SeriesFragment
-import com.example.timelinelist.helpers.Filme
 import com.example.timelinelist.helpers.Serie
 
 class ListaSeriesAdapter(private val listSerie: ArrayList<Serie>, val listener: OnSerieClickListener): RecyclerView.Adapter<ListaSeriesAdapter.ListaSeriesViewHolder>(), Filterable {

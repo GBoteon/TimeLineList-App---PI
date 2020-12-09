@@ -1,56 +1,63 @@
 package com.example.timelinelist
 
 import com.example.timelinelist.Constants.API_URL
-import com.example.timelinelist.helpers.BaseFilme
-import com.example.timelinelist.helpers.BaseSerie
+import com.example.timelinelist.helpers.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieAPI {
 
-    @GET("movie")
+    @GET("movie/{id}")
     suspend fun getFilmeById(
+        @Path("id") id: Int,
         @Query("api_key") api: String,
         @Query("language") language: String
-    ): BaseFilme
+    ): BaseFilmeDetalhe
 
-    @GET("tv")
+    @GET("tv/{id}")
     suspend fun getSerieById(
+        @Path("id") id: Int,
         @Query("api_key") api: String,
         @Query("language") language: String
-    ): BaseSerie
+    ): BaseSerieDetalhe
 
     @GET("movie/popular")
     suspend fun getPopularFilmes(
         @Query("api_key") api: String,
         @Query("language") language: String
-    ): BaseFilme
+    ): BaseFilmeBusca
 
     @GET("tv/popular")
     suspend fun getPopularSeries(
         @Query("api_key") api: String,
         @Query("language") language: String
-    ): BaseSerie
+    ): BaseSerieBusca
 
     @GET("search/movie")
     suspend fun getFilmes(
         @Query("api_key") api: String,
         @Query("language") language: String,
         @Query("query") query: String
-    ): BaseFilme
+    ): BaseFilmeBusca
 
     @GET("search/tv")
     suspend fun getSeries(
         @Query("api_key") api: String,
         @Query("language") language: String,
         @Query("query") query: String
-    ): BaseSerie
+    ): BaseSerieBusca
+
+    @GET("genre/{tipo}/list")
+    suspend fun getGenero(
+        @Path("tipo") tipo: String,
+        @Query("api_key") api: String,
+        @Query("language") language: String
+    ): BaseGenres
 
 }
-
-
 val retrofit = Retrofit.Builder()
     .baseUrl(API_URL)
     .addConverterFactory(GsonConverterFactory.create())

@@ -1,32 +1,18 @@
 package com.example.timelinelist.activities
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.res.Configuration
 import android.os.Bundle
-import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView.OnEditorActionListener
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.observe
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager.widget.ViewPager
 import com.example.timelinelist.R
-import com.example.timelinelist.adapters.ListaFilmePesquisaAdapter
-import com.example.timelinelist.adapters.ListaObrasAdapter
-import com.example.timelinelist.adapters.ListaSeriePesquisaAdapter
 import com.example.timelinelist.adapters.ViewPagerAdapter
-import com.example.timelinelist.fragments.FilmesFragment
 import com.example.timelinelist.fragments.PesquisaFilmesFragment
 import com.example.timelinelist.fragments.PesquisaSeriesFragment
-import com.example.timelinelist.fragments.SeriesFragment
-import com.example.timelinelist.helpers.BaseFilme
-import com.example.timelinelist.models.PesquisaViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_estatisticas.*
 import kotlinx.android.synthetic.main.activity_lista.*
@@ -35,17 +21,15 @@ import kotlinx.android.synthetic.main.fragment_filmes.view.*
 import kotlinx.android.synthetic.main.fragment_pesquisafilmes.*
 import kotlinx.android.synthetic.main.fragment_pesquisafilmes.view.*
 import kotlinx.android.synthetic.main.fragment_pesquisaseries.*
-import javax.xml.datatype.DatatypeFactory.newInstance
-import javax.xml.parsers.DocumentBuilderFactory.newInstance
+import kotlinx.android.synthetic.main.obra_item.*
 
 
 class PesquisaActivity : AppCompatActivity() {
-    private val viewModel: PesquisaViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesquisa)
-
+        requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
         var adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(PesquisaFilmesFragment(), "Filmes")
         adapter.addFragment(PesquisaSeriesFragment(), "Séries")

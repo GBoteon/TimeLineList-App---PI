@@ -2,6 +2,7 @@ package com.example.timelinelist.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
@@ -19,6 +20,7 @@ class LoadingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loading)
+        requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
 
         when (getSavedTheme()) {
             0 -> setTema(AppCompatDelegate.MODE_NIGHT_NO)

@@ -6,6 +6,12 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorRed">#DA2B29</color>
+    <color name="colorRed2">#084d6e</color>
+    <color name="colorRed3">#831010</color>
+    <color name="colorRed4">#612F74</color>
+    <color name="colorRed5">#3b5998</color>
+    <color name="colorRed6">#eead2d</color>
+    <color name="colorRed7">#fa4454</color>
     <color name="colorTest">#00FFD8</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>

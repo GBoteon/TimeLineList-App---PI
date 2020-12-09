@@ -15,7 +15,7 @@ import com.example.timelinelist.helpers.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.obra_item.view.*
 
-class ListaObrasAdapter(private val listObra: BaseFilme, val listener: OnObraClickListener): RecyclerView.Adapter<ListaObrasAdapter.ListaObraViewHolder>(), Filterable {
+class ListaObrasAdapter(private val listObra: BaseFilmeBusca, val listener: OnObraClickListener): RecyclerView.Adapter<ListaObrasAdapter.ListaObraViewHolder>(), Filterable {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaObraViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.obra_item, parent, false)
@@ -28,7 +28,7 @@ class ListaObrasAdapter(private val listObra: BaseFilme, val listener: OnObraCli
 
         var obra = obraFilterList[position]
         holder.textview_nomeobra.text = obra.title
-        Picasso.get().load(Uri.parse("$BASE_IMAGE_URL${obra.backdrop_path}")).into(holder.imageview_backdropobra)
+        Picasso.get().load(Uri.parse("$BASE_IMAGE_URL${obra.backdropPath}")).into(holder.imageview_backdropobra)
 
     }
     inner class ListaObraViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
@@ -50,7 +50,7 @@ class ListaObrasAdapter(private val listObra: BaseFilme, val listener: OnObraCli
 
     }
 
-    var obraFilterList = ArrayList<ResultsFilme>()
+    var obraFilterList = ArrayList<BaseFilmeBusca.Result>()
 
     init {
         obraFilterList = listObra.results
@@ -62,7 +62,7 @@ class ListaObrasAdapter(private val listObra: BaseFilme, val listener: OnObraCli
                 if (charSearch.isEmpty()) {
                     obraFilterList = listObra.results
                 } else {
-                    val resultList = ArrayList<ResultsFilme>()
+                    val resultList = ArrayList<BaseFilmeBusca.Result>()
                     for (row in listObra.results) {
                         if (row.title.toLowerCase().contains(charSearch.toLowerCase())) {
                             resultList.add(row)
@@ -77,7 +77,7 @@ class ListaObrasAdapter(private val listObra: BaseFilme, val listener: OnObraCli
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                obraFilterList = results?.values as ArrayList<ResultsFilme>
+                obraFilterList = results?.values as ArrayList<BaseFilmeBusca.Result>
                 notifyDataSetChanged()
             }
 

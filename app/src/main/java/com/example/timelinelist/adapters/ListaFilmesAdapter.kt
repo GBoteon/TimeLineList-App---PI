@@ -8,7 +8,6 @@ import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timelinelist.R
-import com.example.timelinelist.fragments.FilmesFragment
 import com.example.timelinelist.helpers.Filme
 
 class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener: OnFilmeClickListener): RecyclerView.Adapter<ListaFilmesAdapter.ListaFilmeViewHolder>(), Filterable {
@@ -24,6 +23,7 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener:
 
         var filme = filmesFilterList[position]
         holder.nome_filme.text = filme.title
+        holder
     }
     inner class ListaFilmeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val nome_filme: TextView = itemView.findViewById(R.id.textview_nome_filme)

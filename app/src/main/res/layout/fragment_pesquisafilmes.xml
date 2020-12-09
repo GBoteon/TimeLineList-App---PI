@@ -14,5 +14,13 @@
         android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/obra_item" />
-
+    <ProgressBar
+        android:id="@+id/progressbar_loading_filmes"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorRed"
+        android:indeterminateTintMode="src_atop"
+        android:visibility="visible"
+        android:layout_gravity="center"/>
 </FrameLayout>

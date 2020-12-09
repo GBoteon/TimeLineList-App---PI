@@ -3,6 +3,8 @@ package com.example.timelinelist.activities
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.ActivityInfo
+import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -16,6 +18,7 @@ class EditPerfilActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editperfil)
+        requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
 
         imageview_voltar_editpefiltoperfil.setOnClickListener { startActivity(Intent(this, PerfilActivity::class.java)) }
         button_save.setOnClickListener { startActivity(Intent(this, PerfilActivity::class.java)) }

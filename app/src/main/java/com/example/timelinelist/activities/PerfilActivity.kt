@@ -2,13 +2,11 @@ package com.example.timelinelist.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.res.Configuration
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.example.timelinelist.Constants
 import com.example.timelinelist.Constants.KEY_THEME
 import com.example.timelinelist.Constants.PREFS_NAME
 import com.example.timelinelist.Constants.THEME_DARK
@@ -16,6 +14,8 @@ import com.example.timelinelist.Constants.THEME_LIGHT
 import com.example.timelinelist.Constants.THEME_UNDEFINED
 import com.example.timelinelist.R
 import kotlinx.android.synthetic.main.activity_perfil.*
+import kotlin.math.absoluteValue
+
 
 class PerfilActivity : AppCompatActivity() {
 
@@ -24,13 +24,17 @@ class PerfilActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
+        requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
+
         initThemeListener()
         initTheme()
-        imageview_voltar_pefiltolista.setOnClickListener { startActivity(Intent(this, ListaActivity::class.java)) }
-        imageview_editperfil.setOnClickListener { startActivity(Intent(this, EditPerfilActivity::class.java)) }
+        imageview_voltar_pefiltolista.setOnClickListener { startActivity(Intent(this,
+            ListaActivity::class.java)) }
+        imageview_editperfil.setOnClickListener { startActivity(Intent(this,
+            EditPerfilActivity::class.java)) }
 
-        button_estatisticas.setOnClickListener { startActivity(Intent(this, EstatisticasActivity::class.java)) }
-
+        button_estatisticas.setOnClickListener { startActivity(Intent(this,
+            EstatisticasActivity::class.java)) }
     }
 
     private fun initThemeListener(){
@@ -63,4 +67,5 @@ class PerfilActivity : AppCompatActivity() {
 
     private fun saveTheme(theme: Int) = sharedPrefs.edit().putInt(KEY_THEME, theme).apply()
     private fun getSavedTheme() = sharedPrefs.getInt(KEY_THEME, THEME_UNDEFINED)
+
 }

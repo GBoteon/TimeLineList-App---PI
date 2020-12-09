@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:screenOrientation="portrait"
     tools:context=".activities.CadastroActivity">
     <ImageView
         android:id="@+id/imageIcone"
@@ -16,7 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/icone" />
+        android:src="@drawable/icone"
+        app:tint="@color/colorRed" />
 
     <ImageView
         android:id="@+id/imageLogo"
@@ -138,6 +140,7 @@
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/colorRed"
             android:text="@string/termosDeUso" />
     </LinearLayout>
 

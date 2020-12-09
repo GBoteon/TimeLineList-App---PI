@@ -4,21 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:screenOrientation="portrait"
     tools:context=".activities.PesquisaActivity">
-
-    <ProgressBar
-        android:id="@+id/progressbar_loading"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/colorRed"
-        android:indeterminateTintMode="src_atop"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout7"

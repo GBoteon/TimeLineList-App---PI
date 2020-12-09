@@ -4,26 +4,27 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.timelinelist.helpers.Filme
+import com.example.timelinelist.helpers.Serie
 
 class FilmesFragmentViewModel(application: Application): AndroidViewModel(application) {
     private val context = getApplication<Application>().applicationContext
     var listaFilme = MutableLiveData<ArrayList<Filme>>()
     fun getFilmes() {
-        listaFilme.value = arrayListOf( Filme("Mama mia"),
-                            Filme("Os Estranhos - Caçada Noturna"),
-                            Filme("A Wrinkle in Time"),
-                            Filme("Love, Simon"),
-                            Filme("John Wick 2"),
-                            Filme("Burnt"),
-                            Filme("Todo Dia"),
-                            Filme("Jogador Numero Um"),
-                            Filme("Continue Assistindo"),
-                            Filme("Slender"),
-                            Filme("Koe no Katashi"),
-                            Filme("Truth or Dare"),
-                            Filme("Próxima Parada: Apocalípse"),
-                            Filme("Operação Red Sparrow"),
-                            Filme("A Vida é Uma Festa"))
+        listaFilme.value =  arrayListOf( Filme("Weastworld"),
+            Filme("Station 19"),
+            Filme("The Handmaid's Tale"),
+            Filme("Siren"),
+            Filme("Mr. Robot"),
+            Filme("The Resident"),
+            Filme("Big Little Lies"),
+            Filme("La Casa de Papel"),
+            Filme("Punisher"),
+            Filme("Ozark"),
+            Filme("O Atirador"),
+            Filme("This is Us"),
+            Filme("The Mist"),
+            Filme("Unabomber"),
+            Filme("Batalha de Confeiteiros 2018"))
     }
 
 }

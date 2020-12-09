@@ -3,7 +3,6 @@ package com.example.timelinelist.models
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.timelinelist.helpers.Filme
 import com.example.timelinelist.helpers.Serie
 
 class SeriesFragmentViewModel(application: Application): AndroidViewModel(application) {

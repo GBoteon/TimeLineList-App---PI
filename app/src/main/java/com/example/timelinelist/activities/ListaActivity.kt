@@ -1,14 +1,11 @@
 package com.example.timelinelist.activities
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.res.Configuration
-import android.graphics.Color
-import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewpager.widget.ViewPager
 import com.example.timelinelist.R
 import com.example.timelinelist.adapters.ViewPagerAdapter
@@ -16,17 +13,14 @@ import com.example.timelinelist.fragments.FilmesFragment
 import com.example.timelinelist.fragments.SeriesFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import kotlinx.android.synthetic.main.activity_cadastro.*
-import kotlinx.android.synthetic.main.activity_editperfil.*
 import kotlinx.android.synthetic.main.activity_lista.*
-import kotlinx.android.synthetic.main.activity_pesquisa.*
-import kotlinx.android.synthetic.main.filme_item.*
 
 
 class ListaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista)
+        requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
 
         setupViewPager(viewpager_filmes_series)
         tablayout_tabs.setupWithViewPager(viewpager_filmes_series)

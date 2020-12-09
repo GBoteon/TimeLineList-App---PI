@@ -6,17 +6,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.timelinelist.Constants.API_KEY
 import com.example.timelinelist.Constants.LANG
-import com.example.timelinelist.helpers.BaseFilme
-import com.example.timelinelist.helpers.BaseSerie
-import com.example.timelinelist.helpers.Obra
+import com.example.timelinelist.helpers.*
 import com.example.timelinelist.repository
 import kotlinx.coroutines.launch
 
 class PesquisaViewModel(application: Application): AndroidViewModel(application) {
     private val context = getApplication<Application>().applicationContext
     var listaObra = MutableLiveData<ArrayList<Obra>>()
-    var listaFilmes = MutableLiveData<BaseFilme>()
-    var listaSeries = MutableLiveData<BaseSerie>()
+    var listaFilmes = MutableLiveData<BaseFilmeBusca>()
+    var listaSeries = MutableLiveData<BaseSerieBusca>()
+    var listaGeneros = MutableLiveData<BaseGenres>()
+    var listaFilmesDetalhe = MutableLiveData<BaseFilmeDetalhe>()
+    var listaSeriesDetalhe = MutableLiveData<BaseSerieDetalhe>()
 
     fun getObras() {
         viewModelScope.launch {
@@ -38,13 +39,13 @@ class PesquisaViewModel(application: Application): AndroidViewModel(application)
             )
         }
     }
-    fun getSeriesFromApi(query: String): BaseSerie? {
+    fun getSeriesFromApi(query: String): BaseSerieBusca? {
         viewModelScope.launch {
             listaSeries.setValue(repository.getSeries(API_KEY,LANG,query))
         }
         return listaSeries.value
     }
-    fun getFilmesFromApi(query: String): BaseFilme? {
+    fun getFilmesFromApi(query: String): BaseFilmeBusca? {
         viewModelScope.launch {
             listaFilmes.setValue(repository.getFilmes(API_KEY,LANG,query))
         }
@@ -59,6 +60,22 @@ class PesquisaViewModel(application: Application): AndroidViewModel(application)
         viewModelScope.launch {
             listaSeries.setValue(repository.getPopularSeries(API_KEY,LANG))
         }
+    }
+    fun getFilmesFromId(id: Int) {
+        viewModelScope.launch {
+            listaFilmesDetalhe.setValue(repository.getFilmeById(id,API_KEY,LANG))
+        }
+    }
+    fun getSeriesFromId(id: Int) {
+        viewModelScope.launch {
+            listaSeriesDetalhe.setValue(repository.getSerieById(id,API_KEY,LANG))
+        }
+    }
+    fun getGenres(tipo:String): BaseGenres? {
+        viewModelScope.launch {
+            listaGeneros.setValue(repository.getGenero(tipo,API_KEY,LANG))
+        }
+        return listaGeneros.value
     }
 
 }
