@@ -51,7 +51,7 @@
 
             <TextView
                 android:id="@+id/textview_nomeserie"
-                style="@style/DetalheTextView"
+                style="@style/DetalheTextViewOut"
                 android:ellipsize="marquee"
                 android:singleLine="true"
                 android:layout_width="0dp"
@@ -78,7 +78,7 @@
             android:orientation="horizontal">
 
             <TextView
-                style="@style/DetalheTextView"
+                style="@style/DetalheTextViewOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -95,11 +95,11 @@
                 android:layout_weight="0.05"
                 android:gravity="center"
                 android:text="⬤"
-                android:textColor="@color/colorRed"
+                android:textColor="@color/yellow"
                 android:textSize="10sp" />
 
             <TextView
-                style="@style/DetalheTextView"
+                style="@style/DetalheTextViewOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -116,11 +116,11 @@
                 android:layout_weight="0.05"
                 android:gravity="center"
                 android:text="⬤"
-                android:textColor="@color/colorRed"
+                android:textColor="@color/yellow"
                 android:textSize="10sp" />
 
             <TextView
-                style="@style/DetalheTextView"
+                style="@style/DetalheTextViewOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -137,11 +137,11 @@
                 android:layout_weight="0.05"
                 android:gravity="center"
                 android:text="⬤"
-                android:textColor="@color/colorRed"
+                android:textColor="@color/yellow"
                 android:textSize="10sp" />
 
             <TextView
-                style="@style/DetalheTextView"
+                style="@style/DetalheTextViewOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -201,7 +201,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="-5dp"
-                    android:buttonTint="@color/colorRed"
+                    android:buttonTint="@color/yellow"
                     android:layoutDirection="rtl"
                     android:text="Acompanhando"
                     android:textSize="16sp" />
@@ -211,7 +211,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="-5dp"
-                    android:buttonTint="@color/colorRed"
+                    android:buttonTint="@color/yellow"
                     android:layoutDirection="rtl"
                     android:text="Em Andamento"
                     android:textSize="16sp" />
@@ -221,7 +221,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="-5dp"
-                    android:buttonTint="@color/colorRed"
+                    android:buttonTint="@color/yellow"
                     android:layoutDirection="rtl"
                     android:text="Cancelada"
                     android:textSize="16sp" />
@@ -231,7 +231,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="-5dp"
-                    android:buttonTint="@color/colorRed"
+                    android:buttonTint="@color/yellow"
                     android:layoutDirection="rtl"
                     android:text="Finalizada"
                     android:textSize="16sp"  />
@@ -241,7 +241,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="-5dp"
-                    android:buttonTint="@color/colorRed"
+                    android:buttonTint="@color/yellow"
                     android:layoutDirection="rtl"
                     android:text="Largada"
                     android:textSize="16sp"  />
@@ -254,7 +254,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/custom_button_red"
+        android:background="@drawable/custom_button_yellow"
         android:text="Salvar"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"

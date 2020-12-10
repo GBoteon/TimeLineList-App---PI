@@ -43,7 +43,7 @@
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/textview_nomefilme"
-                style="@style/DetalheTextView"
+                style="@style/DetalheTextViewOut"
                 android:ellipsize="marquee"
                 android:singleLine="true"
                 android:layout_width="0dp"
@@ -69,7 +69,7 @@
             android:layout_marginTop="10dp"
             >
             <TextView
-                style="@style/DetalheTextView"
+                style="@style/DetalheTextViewOut"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:layout_width="wrap_content"
@@ -85,10 +85,10 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textSize="10sp"
-                android:textColor="@color/colorRed"
+                android:textColor="@color/yellow"
                 android:text="⬤"/>
             <TextView
-                style="@style/DetalheTextView"
+                style="@style/DetalheTextViewOut"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:layout_width="wrap_content"
@@ -104,10 +104,10 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textSize="10sp"
-                android:textColor="@color/colorRed"
+                android:textColor="@color/yellow"
                 android:text="⬤"/>
             <TextView
-                style="@style/DetalheTextView"
+                style="@style/DetalheTextViewOut"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:layout_width="wrap_content"
@@ -116,17 +116,17 @@
                 android:textSize="16sp"
                 android:text="Lançamento"/>
             <TextView
-                style="@style/DetalheTextView"
+                style="@style/DetalheTextViewOut"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.05"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textSize="10sp"
-                android:textColor="@color/colorRed"
+                android:textColor="@color/yellow"
                 android:text="⬤"/>
             <TextView
-                style="@style/DetalheTextView"
+                style="@style/DetalheTextViewOut"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:layout_width="wrap_content"
@@ -186,7 +186,7 @@
                 <CheckBox
                     style="@style/DetalheTextView"
                     android:id="@+id/checkBox1"
-                    android:buttonTint="@color/colorRed"
+                    android:buttonTint="@color/yellow"
                     android:layout_width="0dp"
                     android:layout_weight="0.1"
                     android:layout_height="wrap_content"
@@ -208,7 +208,7 @@
                 <CheckBox
                     style="@style/DetalheTextView"
                     android:id="@+id/checkBox2"
-                    android:buttonTint="@color/colorRed"
+                    android:buttonTint="@color/yellow"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.1"
@@ -232,7 +232,7 @@
                 <CheckBox
                     style="@style/DetalheTextView"
                     android:id="@+id/checkBox3"
-                    android:buttonTint="@color/colorRed"
+                    android:buttonTint="@color/yellow"
                     android:layout_width="0dp"
                     android:layout_weight="0.1"
                     android:layout_height="wrap_content"
@@ -273,7 +273,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="50dp"
-            android:background="@drawable/custom_button_red"
+            android:background="@drawable/custom_button_yellow"
             android:text="Salvar"
             android:textColor="@color/colorWhite"
             android:textSize="18dp"

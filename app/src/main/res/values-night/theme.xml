@@ -87,4 +87,17 @@
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
+    <style name="LinearLayoutToolbar" >
+        <item name="android:background">@color/darkestRed</item>
+    </style>
+
+    <style name="TablayoutTabs" >
+        <item name="android:background">@color/darkestRed</item>
+    </style>
+
+    <style name="EditTextBuscaApi">
+        <item name="android:background">@drawable/custom_edittextapi_night</item>
+        <item name="android:textColorHint">@color/colorBlack</item>
+        <item name="android:drawableTint">@color/colorBlack</item>
+    </style>
 </resources>

@@ -3,8 +3,8 @@
         <layer-list>
             <item>
                 <shape>
+                    <solid android:color="@color/darkgray" />
                     <corners android:radius="20dp" />
-                    <stroke android:width="0.5dp" android:color="@android:color/white" />
                 </shape>
             </item>
         </layer-list>

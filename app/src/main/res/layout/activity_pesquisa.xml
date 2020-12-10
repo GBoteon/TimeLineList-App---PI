@@ -22,6 +22,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout7"
+        style="@style/LinearLayoutToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -32,6 +33,7 @@
 
         <ImageView
             android:id="@+id/imageview_voltar_pesquisatolista"
+            android:layout_marginTop="5dp"
             style="@style/NavIcone"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -42,19 +44,23 @@
 
         <EditText
             android:id="@+id/edittext_busca"
-            style="@style/EditTextBusca"
+            style="@style/EditTextBuscaApi"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="5dp"
+            android:drawableTint="@color/colorAccent"
             android:hint="Buscar"
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:paddingLeft="20dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageview_voltar_pesquisatolista"
@@ -64,13 +70,15 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_tabs_pesquisa"
+        app:tabSelectedTextColor="@color/yellow"
+        style="@style/TablayoutTabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabInlineLabel="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
-        app:tabIndicatorColor="@color/colorRed" />
+        app:tabIndicatorColor="@color/yellow" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_filmes_series_pesquisa"

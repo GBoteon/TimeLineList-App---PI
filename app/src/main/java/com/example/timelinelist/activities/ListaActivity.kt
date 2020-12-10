@@ -35,17 +35,17 @@ class ListaActivity : AppCompatActivity() {
         val mode = resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)
         when (mode) {
             Configuration.UI_MODE_NIGHT_YES -> {
-                tablayout_tabs.getTabAt(0)?.icon?.setTint(getResources().getColor(R.color.colorRed))
+                tablayout_tabs.getTabAt(0)?.icon?.setTint(getResources().getColor(R.color.yellow))
                 tablayout_tabs.getTabAt(1)?.icon?.setTint(getResources().getColor(R.color.colorWhite))
             }
             Configuration.UI_MODE_NIGHT_NO -> {
-                tablayout_tabs.getTabAt(0)?.icon?.setTint(getResources().getColor(R.color.colorRed))
+                tablayout_tabs.getTabAt(0)?.icon?.setTint(getResources().getColor(R.color.yellow))
                 tablayout_tabs.getTabAt(1)?.icon?.setTint(getResources().getColor(R.color.colorBlack))
             }
         }
         tablayout_tabs.addOnTabSelectedListener(object : OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
-                    tab.icon?.setTint(getResources().getColor(R.color.colorRed))
+                    tab.icon?.setTint(getResources().getColor(R.color.yellow))
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {

@@ -9,6 +9,7 @@
 
     <LinearLayout
         android:id="@+id/linearlayout_toolbar"
+        style="@style/LinearLayoutToolbar"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:orientation="horizontal"
@@ -53,9 +54,11 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_tabs"
+        style="@style/TablayoutTabs"
+        app:tabSelectedTextColor="@color/yellow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/colorRed"
+        app:tabIndicatorColor="@color/yellow"
         app:tabInlineLabel="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,6 +86,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add"
+        android:backgroundTint="@color/yellow"
         android:scaleType="center"
         app:maxImageSize="45dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
