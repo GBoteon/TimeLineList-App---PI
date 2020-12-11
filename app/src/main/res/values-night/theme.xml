@@ -6,7 +6,6 @@
         <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorPrimaryDark">@color/colorTransparent</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/colorBlack</item>
         <item name="android:navigationBarColor">#00000000</item>
         <item name="android:statusBarColor">@color/colorTransparent</item>
         <item name="logo">@drawable/nome_nigth</item>
@@ -48,10 +47,6 @@
     <style name="DetalheTextView" parent="@android:style/TextAppearance.Small">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:buttonTint">@color/colorWhite</item>
-    </style>
-  
-    <style name="ImgCardViewStyle">
-        <item name="android:background">@drawable/custom_right_img_night</item>
     </style>
     <style name="EditText">
         <item name="android:background">@drawable/custom_edittext_night</item>

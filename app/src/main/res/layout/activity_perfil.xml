@@ -159,6 +159,7 @@
         android:drawableTop="@drawable/ic_donut_large_24"
         android:drawablePadding="5dp"
         android:paddingLeft="30dp"
+        android:paddingTop="10dp"
         android:paddingRight="30dp"
         android:paddingBottom="10dp"
         android:text="Estatistícas"

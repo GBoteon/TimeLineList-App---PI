@@ -7,16 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.timelinelist.R
 import com.example.timelinelist.activities.DetalheSerieActivity
-import com.example.timelinelist.adapters.ListaFilmesAdapter
 import com.example.timelinelist.adapters.ListaSeriesAdapter
-import com.example.timelinelist.models.SeriesFragmentViewModel
-import kotlinx.android.synthetic.main.fragment_filmes.view.*
+import com.example.timelinelist.viewmodels.SeriesFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_series.view.*
 
 class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {

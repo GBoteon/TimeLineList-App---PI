@@ -13,15 +13,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.example.timelinelist.activities.DetalheFilmeActivity
 import com.example.timelinelist.adapters.ListaFilmePesquisaAdapter
-import com.example.timelinelist.adapters.ListaSeriePesquisaAdapter
 import com.example.timelinelist.helpers.BaseFilmeBusca
-import com.example.timelinelist.helpers.BaseFilmeDetalhe
-import com.example.timelinelist.helpers.BaseSerieDetalhe
-import com.example.timelinelist.models.PesquisaViewModel
-import kotlinx.android.synthetic.main.activity_pesquisa.view.*
+import com.example.timelinelist.viewmodels.PesquisaViewModel
 import kotlinx.android.synthetic.main.fragment_pesquisafilmes.view.*
-import kotlinx.android.synthetic.main.fragment_pesquisaseries.view.*
-import kotlinx.android.synthetic.main.obra_item.view.*
 
 class PesquisaFilmesFragment : Fragment(), ListaFilmePesquisaAdapter.OnObraFilmeClickListener {
     private val viewModel: PesquisaViewModel by viewModels()

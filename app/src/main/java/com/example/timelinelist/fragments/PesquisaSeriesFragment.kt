@@ -14,9 +14,7 @@ import com.example.timelinelist.R
 import com.example.timelinelist.activities.DetalheSerieActivity
 import com.example.timelinelist.adapters.ListaSeriePesquisaAdapter
 import com.example.timelinelist.helpers.BaseSerieBusca
-import com.example.timelinelist.helpers.BaseSerieDetalhe
-import com.example.timelinelist.models.PesquisaViewModel
-import kotlinx.android.synthetic.main.activity_pesquisa.view.*
+import com.example.timelinelist.viewmodels.PesquisaViewModel
 import kotlinx.android.synthetic.main.fragment_pesquisafilmes.view.*
 import kotlinx.android.synthetic.main.fragment_pesquisaseries.view.*
 

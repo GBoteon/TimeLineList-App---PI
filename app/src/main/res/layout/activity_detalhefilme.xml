@@ -31,6 +31,7 @@
         android:layout_marginEnd="20dp"
         android:src="@drawable/ic_share" />
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,6 +42,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/textview_nomefilme"
@@ -66,6 +69,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
             >
@@ -98,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="16sp"
-                android:text="status"/>
+                android:text="Status"/>
             <TextView
                 style="@style/DetalheTextView"
                 android:layout_width="0dp"
@@ -140,165 +145,191 @@
                 android:textSize="16sp"
                 android:text="x,x/5"/>
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/root_descricaofilme"
-            android:visibility="visible"
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            style="@style/LinearLayoutStyle"
-            android:layout_marginTop="10dp">
-            <TextView
-                style="@style/DetalheTextView"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="16sp"
-                android:text="Sinopse"/>
-            <TextView
-                android:id="@+id/textview_descricaofilme"
-                style="@style/DetalheTextView"
-                android:animateLayoutChanges="true"
-                android:maxLines="3"
-                android:ellipsize="end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="fill_horizontal"
-                android:text="blablablablablablabla"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            style="@style/LinearLayoutStyle"
-            android:layout_marginTop="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp">
-                <TextView
-                    style="@style/DetalheTextView"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.9"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:textSize="16sp"
-                    android:text="Assistido no Cinema?"/>
-                <CheckBox
-                    style="@style/DetalheTextView"
-                    android:id="@+id/checkBox1"
-                    android:buttonTint="@color/colorRed"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="-5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="10dp">
-                <TextView
-                    style="@style/DetalheTextView"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.9"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:textSize="16sp"
-                    android:text="Dormiu?"/>
-                <CheckBox
-                    style="@style/DetalheTextView"
-                    android:id="@+id/checkBox2"
-                    android:buttonTint="@color/colorRed"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.1"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="-5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="10dp">
-                <TextView
-                    style="@style/DetalheTextView"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.9"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:textSize="16sp"
-                    android:text="Chorou?"/>
-                <CheckBox
-                    style="@style/DetalheTextView"
-                    android:id="@+id/checkBox3"
-                    android:buttonTint="@color/colorRed"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="-5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp">
-                <TextView
-                    style="@style/DetalheTextView"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.9"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:textSize="16sp"
-                    android:text="Favorito?"/>
-                <CheckBox
-                    style="@style/DetalheTextView"
-                    android:id="@+id/checkBox4"
-                    android:buttonTint="@color/colorRed"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="-5dp"/>
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            style="@style/LinearLayoutStyle"
-            android:layout_marginTop="10dp">
-            <TextView
-                style="@style/DetalheTextView"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_height="wrap_content"
-                android:text="Data: "
-                android:textSize="16sp"
-                android:gravity="center"
-                android:layout_gravity="center"/>
+            android:layout_width="match_parent">
 
-            <EditText
-                android:id="@+id/edittext_data"
-                style="@style/DetalheTextView"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/root_descricaofilme"
+                android:visibility="visible"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                android:textSize="18sp"
-                android:backgroundTint="@color/colorTransparent"
-                android:inputType="date"
-                android:focusable="false" />
-        </LinearLayout>
+                android:orientation="vertical"
+                style="@style/LinearLayoutStyle">
+                <TextView
+                    style="@style/DetalheTextView"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:text="Sinopse"/>
+                <TextView
+                    android:id="@+id/textview_descricaofilme"
+                    style="@style/DetalheTextView"
+                    android:animateLayoutChanges="true"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="fill_horizontal"
+                    android:text="blablablablablablabla"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                style="@style/LinearLayoutStyle">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp">
+                    <TextView
+                        style="@style/DetalheTextView"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.9"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:textSize="16sp"
+                        android:text="Assistido no Cinema?"/>
+                    <CheckBox
+                        style="@style/DetalheTextView"
+                        android:id="@+id/checkBox1"
+                        android:buttonTint="@color/colorRed"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        style="@style/DetalheTextView"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.9"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:textSize="16sp"
+                        android:text="Dormiu?"/>
+                    <CheckBox
+                        style="@style/DetalheTextView"
+                        android:id="@+id/checkBox2"
+                        android:buttonTint="@color/colorRed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.1"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="-5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        style="@style/DetalheTextView"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.9"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:textSize="16sp"
+                        android:text="Chorou?"/>
+                    <CheckBox
+                        style="@style/DetalheTextView"
+                        android:id="@+id/checkBox3"
+                        android:buttonTint="@color/colorRed"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp">
+                    <TextView
+                        style="@style/DetalheTextView"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.9"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:textSize="16sp"
+                        android:text="Favorito?"/>
+                    <CheckBox
+                        style="@style/DetalheTextView"
+                        android:id="@+id/checkBox4"
+                        android:buttonTint="@color/colorRed"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-5dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                style="@style/LinearLayoutStyle">
+                <TextView
+                    style="@style/DetalheTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:text="Data: "
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+
+                <EditText
+                    android:id="@+id/edittext_data"
+                    style="@style/DetalheTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:textSize="18sp"
+                    android:backgroundTint="@color/colorTransparent"
+                    android:inputType="date"
+                    android:focusable="false" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -308,7 +339,7 @@
             android:background="@drawable/custom_button_red"
             android:text="Salvar"
             android:textColor="@color/colorWhite"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="normal" />
     </LinearLayout>
 

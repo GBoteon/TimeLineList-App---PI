@@ -14,7 +14,9 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import com.example.timelinelist.Constants
 import com.example.timelinelist.Constants.BASE_IMAGE_URL
+import com.example.timelinelist.Constants.STATUS_FILME
 import com.example.timelinelist.R
 import com.example.timelinelist.helpers.BaseFilmeDetalhe
 import com.squareup.picasso.Picasso
@@ -80,9 +82,6 @@ class DetalheFilmeActivity : AppCompatActivity() {
             animSlide = AnimationUtils.loadAnimation(applicationContext,
                 R.anim.up_without_description)
         }
-
-        textview_nomefilme.text = titulo
-        textview_descricaofilme.text = descricao
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             textview_descricaofilme.justificationMode = LineBreaker.JUSTIFICATION_MODE_INTER_WORD
         }
@@ -90,12 +89,15 @@ class DetalheFilmeActivity : AppCompatActivity() {
             if (isCollapsed) {
                 textview_descricaofilme.maxLines = Int.MAX_VALUE
             } else {
-                textview_descricaofilme.maxLines = Companion.MAX_LINES_COLLAPSED
+                textview_descricaofilme.maxLines = MAX_LINES_COLLAPSED
             }
             isCollapsed = !isCollapsed
         }
-        textview_duracaofilme.text = "${filmeAtual.runtime} min"
-        textview_statusfilme.text = filmeAtual.status
+        var status = ""
+        for (stat in STATUS_FILME) {
+            if(filmeAtual.status==stat.key)
+                status = stat.value
+        }
         var data = ""
         val formatter = SimpleDateFormat("yyyy")
         val dateFormat = SimpleDateFormat("yyyy-mm-dd")
@@ -103,6 +105,11 @@ class DetalheFilmeActivity : AppCompatActivity() {
             @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
             data = formatter.format(dateFormat.parse(filmeAtual.releaseDate))
         }
+
+        textview_nomefilme.text = titulo
+        textview_descricaofilme.text = descricao
+        textview_duracaofilme.text = "${filmeAtual.runtime} min"
+        textview_statusfilme.text = status
         textview_lancamentofilme.text = data
         textview_notafilme.text = "${filmeAtual.voteAverage}/10"
 

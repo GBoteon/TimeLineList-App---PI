@@ -54,7 +54,11 @@ class DetalheSerieActivity : AppCompatActivity() {
         var titulo = serieAtual.name
         var descricao = serieAtual.overview
         var quanttemp = serieAtual.numberOfSeasons
-        var status = serieAtual.status
+        var status = ""
+        for (stat in Constants.STATUS_SERIE) {
+            if(serieAtual.status==stat.key)
+                status = stat.value
+        }
         var lancamento = serieAtual.firstAirDate
         var nota = serieAtual.voteAverage
         var animSlide = AnimationUtils.loadAnimation(applicationContext, R.anim.up)
@@ -63,10 +67,6 @@ class DetalheSerieActivity : AppCompatActivity() {
         } else {
             animSlide = AnimationUtils.loadAnimation(applicationContext, R.anim.up_without_description)
         }
-        textview_nomeserie.text = titulo
-        textview_descricaoserie.text = descricao
-        textview_quanttempserie.text = "$quanttemp Temps"
-        textview_statusserie.text = status
         var data = ""
         val formatter = SimpleDateFormat("yyyy")
         val dateFormat = SimpleDateFormat("yyyy-mm-dd")
@@ -74,6 +74,11 @@ class DetalheSerieActivity : AppCompatActivity() {
             @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
             data = formatter.format(dateFormat.parse(lancamento))
         }
+
+        textview_nomeserie.text = titulo
+        textview_descricaoserie.text = descricao
+        textview_quanttempserie.text = if (quanttemp==1) "$quanttemp Temp" else "$quanttemp Temps"
+        textview_statusserie.text = status
         textview_lancamentoserie.text = data
         textview_notaserie.text = "$nota/10"
 

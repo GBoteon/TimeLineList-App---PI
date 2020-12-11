@@ -1,10 +1,9 @@
-package com.example.timelinelist.models
+package com.example.timelinelist.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.timelinelist.helpers.Filme
-import com.example.timelinelist.helpers.Serie
 
 class FilmesFragmentViewModel(application: Application): AndroidViewModel(application) {
     private val context = getApplication<Application>().applicationContext

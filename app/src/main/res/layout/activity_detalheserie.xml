@@ -49,6 +49,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -77,6 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -109,7 +113,7 @@
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
-                android:text="status"
+                android:text="Status"
                 android:textSize="16sp" />
 
             <TextView
@@ -157,108 +161,125 @@
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/root_descricaoserie"
-            android:visibility="visible"
-            style="@style/LinearLayoutStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp"
             android:layout_marginTop="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/DetalheTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:maxLines="1"
-                android:text="Sinopse"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/textview_descricaoserie"
-                style="@style/DetalheTextView"
-                android:animateLayoutChanges="true"
-                android:maxLines="3"
-                android:ellipsize="end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="fill_horizontal"
-                android:text="blablablablablablabla" />
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/LinearLayoutStyle"
-            android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-            <RadioGroup
+            android:layout_width="match_parent">
+
+            <LinearLayout
+                android:id="@+id/root_descricaoserie"
+                android:visibility="visible"
+                style="@style/LinearLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginBottom="5dp">
-                <RadioButton
-                    android:id="@+id/checkbox_acompanhando"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
                     style="@style/DetalheTextView"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-5dp"
-                    android:buttonTint="@color/colorRed"
-                    android:layoutDirection="rtl"
-                    android:text="Acompanhando"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Sinopse"
                     android:textSize="16sp" />
-                <RadioButton
-                    android:id="@+id/checkbox_emandamento"
+
+                <TextView
+                    android:id="@+id/textview_descricaoserie"
                     style="@style/DetalheTextView"
-                    android:layout_width="match_parent"
+                    android:animateLayoutChanges="true"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="-5dp"
-                    android:buttonTint="@color/colorRed"
-                    android:layoutDirection="rtl"
-                    android:text="Em Andamento"
-                    android:textSize="16sp" />
-                <RadioButton
-                    android:id="@+id/checkbox_cancelada"
-                    style="@style/DetalheTextView"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="fill_horizontal"
+                    android:text="blablablablablablabla" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <LinearLayout
+                style="@style/LinearLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioGroup
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="-5dp"
-                    android:buttonTint="@color/colorRed"
-                    android:layoutDirection="rtl"
-                    android:text="Cancelada"
-                    android:textSize="16sp" />
-                <RadioButton
-                    android:id="@+id/checkbox_finalizada"
-                    style="@style/DetalheTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="-5dp"
-                    android:buttonTint="@color/colorRed"
-                    android:layoutDirection="rtl"
-                    android:text="Finalizada"
-                    android:textSize="16sp"  />
-                <RadioButton
-                    android:id="@+id/checkbox_largada"
-                    style="@style/DetalheTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="-5dp"
-                    android:buttonTint="@color/colorRed"
-                    android:layoutDirection="rtl"
-                    android:text="Largada"
-                    android:textSize="16sp"  />
-            </RadioGroup>
-        </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="5dp">
+                    <RadioButton
+                        android:id="@+id/checkbox_acompanhando"
+                        style="@style/DetalheTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-5dp"
+                        android:buttonTint="@color/colorRed"
+                        android:layoutDirection="rtl"
+                        android:text="Acompanhando"
+                        android:textSize="16sp" />
+                    <RadioButton
+                        android:id="@+id/checkbox_emandamento"
+                        style="@style/DetalheTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-5dp"
+                        android:buttonTint="@color/colorRed"
+                        android:layoutDirection="rtl"
+                        android:text="Em Andamento"
+                        android:textSize="16sp" />
+                    <RadioButton
+                        android:id="@+id/checkbox_cancelada"
+                        style="@style/DetalheTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-5dp"
+                        android:buttonTint="@color/colorRed"
+                        android:layoutDirection="rtl"
+                        android:text="Cancelada"
+                        android:textSize="16sp" />
+                    <RadioButton
+                        android:id="@+id/checkbox_finalizada"
+                        style="@style/DetalheTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-5dp"
+                        android:buttonTint="@color/colorRed"
+                        android:layoutDirection="rtl"
+                        android:text="Finalizada"
+                        android:textSize="16sp"  />
+                    <RadioButton
+                        android:id="@+id/checkbox_largada"
+                        style="@style/DetalheTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-5dp"
+                        android:buttonTint="@color/colorRed"
+                        android:layoutDirection="rtl"
+                        android:text="Largada"
+                        android:textSize="16sp"  />
+                </RadioGroup>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     <Button
         android:layout_width="match_parent"
