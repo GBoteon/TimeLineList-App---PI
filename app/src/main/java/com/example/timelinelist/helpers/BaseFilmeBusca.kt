@@ -43,4 +43,5 @@ data class BaseFilmeBusca(
         @SerializedName("vote_count")
         val voteCount: Int
     )
+
 }

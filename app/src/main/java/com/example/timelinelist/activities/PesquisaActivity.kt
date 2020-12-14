@@ -7,7 +7,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView.OnEditorActionListener
+import android.widget.TextView.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.timelinelist.R
 import com.example.timelinelist.adapters.ViewPagerAdapter
@@ -21,47 +21,31 @@ import kotlinx.android.synthetic.main.fragment_filmes.view.*
 import kotlinx.android.synthetic.main.fragment_pesquisafilmes.*
 import kotlinx.android.synthetic.main.fragment_pesquisafilmes.view.*
 import kotlinx.android.synthetic.main.fragment_pesquisaseries.*
+import kotlinx.android.synthetic.main.fragment_pesquisaseries.view.*
 import kotlinx.android.synthetic.main.obra_item.*
 
 
 class PesquisaActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesquisa)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
-        var adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(PesquisaFilmesFragment(), "Filmes")
-        adapter.addFragment(PesquisaSeriesFragment(), "Séries")
-        viewpager_filmes_series_pesquisa.setAdapter(adapter)
 
-        tablayout_tabs_pesquisa.setupWithViewPager(viewpager_filmes_series_pesquisa)
-        tablayout_tabs_pesquisa.getTabAt(0)?.setIcon(R.drawable.ic_movie)
-        tablayout_tabs_pesquisa.getTabAt(1)?.setIcon(R.drawable.ic_serie)
-        val mode = resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)
-        when (mode) {
-            Configuration.UI_MODE_NIGHT_YES -> {
-                tablayout_tabs_pesquisa.getTabAt(0)?.icon?.setTint(getResources().getColor(R.color.colorRed))
-                tablayout_tabs_pesquisa.getTabAt(1)?.icon?.setTint(getResources().getColor(R.color.colorWhite))
-            }
-            Configuration.UI_MODE_NIGHT_NO -> {
-                tablayout_tabs_pesquisa.getTabAt(0)?.icon?.setTint(getResources().getColor(R.color.colorRed))
-                tablayout_tabs_pesquisa.getTabAt(1)?.icon?.setTint(getResources().getColor(R.color.colorBlack))
-            }
-        }
+        setupViewPager()
+        setupColorIcones()
+
         tablayout_tabs_pesquisa.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                tab.icon?.setTint(getResources().getColor(R.color.colorRed))
+                tab.icon?.setTint(resources.getColor(R.color.colorRed))
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
-                val mode = resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)
-                when (mode) {
+                when (resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
                     Configuration.UI_MODE_NIGHT_YES -> {
-                        tab.icon?.setTint(getResources().getColor(R.color.colorWhite))
+                        tab.icon?.setTint(resources.getColor(R.color.colorWhite))
                     }
                     Configuration.UI_MODE_NIGHT_NO -> {
-                        tab.icon?.setTint(getResources().getColor(R.color.colorBlack))
+                        tab.icon?.setTint(resources.getColor(R.color.colorBlack))
                     }
                 }
             }
@@ -72,7 +56,7 @@ class PesquisaActivity : AppCompatActivity() {
         edittext_busca.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 hideSoftKeyboard(this)
-
+                var adapter = ViewPagerAdapter(supportFragmentManager)
                 val fragmentPesquisaFilmes = adapter.getItem(0) as PesquisaFilmesFragment
                 val fragmentPesquisaSeries = adapter.getItem(1) as PesquisaSeriesFragment
                 fragmentPesquisaFilmes.atualizaListaFilmes(edittext_busca.text.toString())
@@ -82,6 +66,7 @@ class PesquisaActivity : AppCompatActivity() {
             }
             false
         })
+
     }
 
     fun hideSoftKeyboard(activity: Activity) {
@@ -92,5 +77,25 @@ class PesquisaActivity : AppCompatActivity() {
             activity.currentFocus!!.windowToken, 0
         )
     }
-
+    private fun setupViewPager() {
+        var adapter = ViewPagerAdapter(supportFragmentManager)
+        adapter.addFragment(PesquisaFilmesFragment(), "Filmes")
+        adapter.addFragment(PesquisaSeriesFragment(), "Séries")
+        viewpager_filmes_series_pesquisa.adapter = adapter
+        tablayout_tabs_pesquisa.setupWithViewPager(viewpager_filmes_series_pesquisa)
+        tablayout_tabs_pesquisa.getTabAt(0)?.setIcon(R.drawable.ic_movie)
+        tablayout_tabs_pesquisa.getTabAt(1)?.setIcon(R.drawable.ic_serie)
+    }
+    private fun setupColorIcones() {
+        when (resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                tablayout_tabs_pesquisa.getTabAt(0)?.icon?.setTint(resources.getColor(R.color.colorRed))
+                tablayout_tabs_pesquisa.getTabAt(1)?.icon?.setTint(resources.getColor(R.color.colorWhite))
+            }
+            Configuration.UI_MODE_NIGHT_NO -> {
+                tablayout_tabs_pesquisa.getTabAt(0)?.icon?.setTint(resources.getColor(R.color.colorRed))
+                tablayout_tabs_pesquisa.getTabAt(1)?.icon?.setTint(resources.getColor(R.color.colorBlack))
+            }
+        }
+    }
 }

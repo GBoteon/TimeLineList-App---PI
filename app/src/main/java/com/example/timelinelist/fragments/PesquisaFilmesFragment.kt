@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.timelinelist.R
@@ -15,7 +17,10 @@ import com.example.timelinelist.activities.DetalheFilmeActivity
 import com.example.timelinelist.adapters.ListaFilmePesquisaAdapter
 import com.example.timelinelist.helpers.BaseFilmeBusca
 import com.example.timelinelist.viewmodels.PesquisaViewModel
+import kotlinx.android.synthetic.main.fragment_pesquisafilmes.*
 import kotlinx.android.synthetic.main.fragment_pesquisafilmes.view.*
+import kotlinx.android.synthetic.main.fragment_pesquisaseries.*
+import kotlinx.android.synthetic.main.fragment_pesquisaseries.view.*
 
 class PesquisaFilmesFragment : Fragment(), ListaFilmePesquisaAdapter.OnObraFilmeClickListener {
     private val viewModel: PesquisaViewModel by viewModels()
@@ -30,8 +35,8 @@ class PesquisaFilmesFragment : Fragment(), ListaFilmePesquisaAdapter.OnObraFilme
             println(it.toString())
             var adapter =  ListaFilmePesquisaAdapter(it, this)
             view.recyclerview_filmes_pesquisa.adapter = adapter
+            view.progressbar_loading_filmes.visibility = INVISIBLE
             adapter.notifyDataSetChanged()
-            view.progressbar_loading_filmes.visibility = View.INVISIBLE
         }
         return view
 
@@ -47,10 +52,8 @@ class PesquisaFilmesFragment : Fragment(), ListaFilmePesquisaAdapter.OnObraFilme
 
     }
     internal fun atualizaListaFilmes(text:String) {
-        var listaNovaFilmes = viewModel.getFilmesFromApi(text) as BaseFilmeBusca
-        var adapter =  ListaFilmePesquisaAdapter(listaNovaFilmes, this)
-        view?.recyclerview_filmes_pesquisa?.adapter = adapter
-        adapter.notifyDataSetChanged()
+        recyclerview_filmes_pesquisa.removeAllViewsInLayout()
+        progressbar_loading_filmes.visibility = VISIBLE
+        viewModel.getFilmesFromApi(text)
     }
-
 }

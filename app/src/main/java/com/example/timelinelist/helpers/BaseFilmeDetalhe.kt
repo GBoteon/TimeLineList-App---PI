@@ -1,8 +1,11 @@
 package com.example.timelinelist.helpers
 
 
+import android.annotation.SuppressLint
+import com.example.timelinelist.Constants
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
+import java.text.SimpleDateFormat
 
 data class BaseFilmeDetalhe(
     @SerializedName("adult")
@@ -87,4 +90,48 @@ data class BaseFilmeDetalhe(
         @SerializedName("name")
         val name: String
     ): Serializable
+
+    fun getId(): String {
+        return id.toString()
+    }
+    fun getTitulo(): String {
+        return title
+    }
+    fun getTempo(): String {
+        return if (runtime.toString()==""||runtime.toString()=="0") {
+            ""
+        } else {
+            "$runtime min"
+        }
+    }
+    fun getEstado(): String {
+        for (stat in Constants.STATUS_FILME) {
+            if(status==stat.key)
+                return stat.value
+        }
+        return ""
+    }
+    @SuppressLint("SimpleDateFormat")
+    fun getDataDeLancamento(): String {
+        val formatter = SimpleDateFormat("yyyy")
+        val dateFormat = SimpleDateFormat("yyyy-mm-dd")
+        return if (releaseDate!="") {
+            @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+            formatter.format(dateFormat.parse(releaseDate))
+        } else {
+            ""
+        }
+    }
+    fun getMediaVotos(): String {
+        return "${voteAverage}/10"
+    }
+    fun getSinopse(): String {
+        return overview
+    }
+    fun getWallpaper(): String {
+        return backdropPath
+    }
+    fun getPoster(): String {
+        return posterPath.toString()
+    }
 }

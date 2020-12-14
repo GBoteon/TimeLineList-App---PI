@@ -34,11 +34,16 @@ class DetalheSerieActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detalheserie)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
 
-        textview_nomeserie.isSelected = true
         imageview_voltar_serietolista.setOnClickListener {
             startActivity(Intent(this,PesquisaActivity::class.java))
         }
-
+        textview_nomeserie.setOnClickListener {
+            cardview_detalheposter_serie.visibility = View.VISIBLE
+            cardview_detalheposter_serie.background.alpha = 150
+        }
+        cardview_detalheposter_serie.setOnClickListener {
+            cardview_detalheposter_serie.visibility = View.INVISIBLE
+        }
         imageview_compartilhar.setOnClickListener {
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
@@ -50,38 +55,21 @@ class DetalheSerieActivity : AppCompatActivity() {
         }
 
         var serieAtual = intent.getSerializableExtra("serieClick") as BaseSerieDetalhe
-        var poster = "${Constants.BASE_IMAGE_URL}.${serieAtual.posterPath}"
-        var titulo = serieAtual.name
-        var descricao = serieAtual.overview
-        var quanttemp = serieAtual.numberOfSeasons
-        var status = ""
-        for (stat in Constants.STATUS_SERIE) {
-            if(serieAtual.status==stat.key)
-                status = stat.value
-        }
-        var lancamento = serieAtual.firstAirDate
-        var nota = serieAtual.voteAverage
+
+        textview_nomeserie.isSelected = true
+        textview_nomeserie.text = serieAtual.getTitulo()
+        textview_quanttempserie.text = serieAtual.getTemporadas()
+        textview_statusserie.text = serieAtual.getEstado()
+        textview_lancamentoserie.text = serieAtual.getDataDeLancamento()
+        textview_notaserie.text = serieAtual.getMediaVotos()
+
+        textview_descricaoserie.text = serieAtual.getSinopse()
         var animSlide = AnimationUtils.loadAnimation(applicationContext, R.anim.up)
-        if (descricao=="") {
+        if (serieAtual.getSinopse()=="") {
             root_descricaoserie.visibility= View.GONE
         } else {
             animSlide = AnimationUtils.loadAnimation(applicationContext, R.anim.up_without_description)
         }
-        var data = ""
-        val formatter = SimpleDateFormat("yyyy")
-        val dateFormat = SimpleDateFormat("yyyy-mm-dd")
-        if (lancamento!="") {
-            @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-            data = formatter.format(dateFormat.parse(lancamento))
-        }
-
-        textview_nomeserie.text = titulo
-        textview_descricaoserie.text = descricao
-        textview_quanttempserie.text = if (quanttemp==1) "$quanttemp Temp" else "$quanttemp Temps"
-        textview_statusserie.text = status
-        textview_lancamentoserie.text = data
-        textview_notaserie.text = "$nota/10"
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             textview_descricaoserie.justificationMode = LineBreaker.JUSTIFICATION_MODE_INTER_WORD
         }
@@ -94,8 +82,9 @@ class DetalheSerieActivity : AppCompatActivity() {
             isCollapsed = !isCollapsed
         }
 
+        var poster = "${Constants.BASE_IMAGE_URL}.${serieAtual.getPoster()}"
         Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(imageview_serie)
-
+        Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(imageview_detalheposter_serie)
 
         imageview_serie.startAnimation(animSlide)
         applyLayoutTransition()

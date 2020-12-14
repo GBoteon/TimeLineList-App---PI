@@ -1,7 +1,10 @@
 package com.example.timelinelist.helpers
 
+import android.annotation.SuppressLint
+import com.example.timelinelist.Constants
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
+import java.text.SimpleDateFormat
 
 data class BaseSerieDetalhe(
     @SerializedName("backdrop_path")
@@ -164,4 +167,49 @@ data class BaseSerieDetalhe(
         @SerializedName("name")
         val name: String
     ): Serializable
+    fun getId(): String {
+        return id.toString()
+    }
+    fun getTitulo(): String {
+        return name
+    }
+    fun getTemporadas(): String {
+        return if (numberOfSeasons==1) {
+            "$numberOfSeasons Temp"
+        } else if (numberOfSeasons.toString()=="") {
+            ""
+        } else {
+            "$numberOfSeasons Temps"
+        }
+    }
+    fun getEstado(): String {
+        for (stat in Constants.STATUS_SERIE) {
+            if(status==stat.key)
+                return stat.value
+        }
+        return ""
+    }
+    @SuppressLint("SimpleDateFormat")
+    fun getDataDeLancamento(): String {
+        val formatter = SimpleDateFormat("yyyy")
+        val dateFormat = SimpleDateFormat("yyyy-mm-dd")
+        return if (firstAirDate!="") {
+            @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+            formatter.format(dateFormat.parse(firstAirDate))
+        } else {
+            ""
+        }
+    }
+    fun getMediaVotos(): String {
+        return "$voteAverage/10"
+    }
+    fun getSinopse(): String {
+        return overview
+    }
+    fun getWallpaper(): String {
+        return backdropPath
+    }
+    fun getPoster(): String {
+        return posterPath
+    }
 }

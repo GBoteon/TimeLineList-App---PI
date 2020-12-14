@@ -29,6 +29,9 @@
     <style name="AppThemeNight.CardView" parent="CardView">
         <item name="cardBackgroundColor">@color/colorBlack</item>
     </style>
+    <style name="CardViewPoster" parent="CardView">
+        <item name="cardBackgroundColor">@color/colorBlack</item>
+    </style>
 
     <style name="CardTextView" parent="@android:style/TextAppearance.Small">
         <item name="android:textColor">@color/colorWhite</item>

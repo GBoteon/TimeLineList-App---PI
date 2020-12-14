@@ -40,9 +40,15 @@ class DetalheFilmeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detalhefilme)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
 
-        textview_nomefilme.isSelected = true
         imageview_voltar_filmetolista.setOnClickListener {
             startActivity(Intent(this,PesquisaActivity::class.java))
+        }
+        textview_nomefilme.setOnClickListener {
+            cardview_detalheposter_filme.visibility = View.VISIBLE
+            cardview_detalheposter_filme.background.alpha = 150
+        }
+        cardview_detalheposter_filme.setOnClickListener {
+            cardview_detalheposter_filme.visibility = View.INVISIBLE
         }
         imageview_compartilhar.setOnClickListener {
             val sendIntent: Intent = Intent().apply {
@@ -73,11 +79,16 @@ class DetalheFilmeActivity : AppCompatActivity() {
 
         var filmeAtual = intent.getSerializableExtra("filmeClick") as BaseFilmeDetalhe
 
-        var poster = "${BASE_IMAGE_URL}.${filmeAtual.posterPath}"
-        var titulo = filmeAtual.title
-        var descricao = filmeAtual.overview
+        textview_nomefilme.isSelected = true
+        textview_nomefilme.text = filmeAtual.getTitulo()
+        textview_duracaofilme.text = filmeAtual.getTempo()
+        textview_statusfilme.text = filmeAtual.getEstado()
+        textview_lancamentofilme.text = filmeAtual.getDataDeLancamento()
+        textview_notafilme.text = filmeAtual.getMediaVotos()
+
+        textview_descricaofilme.text = filmeAtual.getSinopse()
         var animSlide = AnimationUtils.loadAnimation(applicationContext, R.anim.up)
-        if (descricao=="") {
+        if (filmeAtual.getSinopse()=="") {
             root_descricaofilme.visibility= View.GONE
             animSlide = AnimationUtils.loadAnimation(applicationContext,
                 R.anim.up_without_description)
@@ -93,27 +104,10 @@ class DetalheFilmeActivity : AppCompatActivity() {
             }
             isCollapsed = !isCollapsed
         }
-        var status = ""
-        for (stat in STATUS_FILME) {
-            if(filmeAtual.status==stat.key)
-                status = stat.value
-        }
-        var data = ""
-        val formatter = SimpleDateFormat("yyyy")
-        val dateFormat = SimpleDateFormat("yyyy-mm-dd")
-        if (filmeAtual.releaseDate!="") {
-            @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-            data = formatter.format(dateFormat.parse(filmeAtual.releaseDate))
-        }
 
-        textview_nomefilme.text = titulo
-        textview_descricaofilme.text = descricao
-        textview_duracaofilme.text = "${filmeAtual.runtime} min"
-        textview_statusfilme.text = status
-        textview_lancamentofilme.text = data
-        textview_notafilme.text = "${filmeAtual.voteAverage}/10"
-
+        var poster = "${BASE_IMAGE_URL}.${filmeAtual.getPoster()}"
         Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(imageview_filme)
+        Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(imageview_detalheposter_filme)
         imageview_filme.startAnimation(animSlide)
         applyLayoutTransition()
     }
