@@ -1,6 +1,8 @@
 package com.example.timelinelist.viewmodels
 
 import android.app.Application
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -8,7 +10,12 @@ import com.example.timelinelist.Constants.API_KEY
 import com.example.timelinelist.Constants.LANG
 import com.example.timelinelist.helpers.*
 import com.example.timelinelist.repository
+import kotlinx.android.synthetic.main.activity_detalhefilme.*
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class PesquisaViewModel(application: Application): AndroidViewModel(application) {
 
@@ -17,6 +24,9 @@ class PesquisaViewModel(application: Application): AndroidViewModel(application)
     var listaGeneros = MutableLiveData<BaseGenres>()
     var listaFilmesDetalhe = MutableLiveData<BaseFilmeDetalhe>()
     var listaSeriesDetalhe = MutableLiveData<BaseSerieDetalhe>()
+
+    var dataFilme = MutableLiveData<EssencialFilme>()
+    var dataSerie = MutableLiveData<EssencialSerie>()
 
     fun getSeriesFromApi(query: String) {
         viewModelScope.launch {
@@ -47,11 +57,5 @@ class PesquisaViewModel(application: Application): AndroidViewModel(application)
         viewModelScope.launch {
             listaSeriesDetalhe.setValue(repository.getSerieById(id,API_KEY,LANG))
         }
-    }
-    fun getFilmeInfos(filme: BaseFilmeDetalhe) {
-
-    }
-    fun getSerieInfos(serie: BaseSerieDetalhe) {
-
     }
 }

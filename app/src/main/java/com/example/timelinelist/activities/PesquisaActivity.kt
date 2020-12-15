@@ -24,14 +24,13 @@ import kotlinx.android.synthetic.main.fragment_pesquisaseries.*
 import kotlinx.android.synthetic.main.fragment_pesquisaseries.view.*
 import kotlinx.android.synthetic.main.obra_item.*
 
-
 class PesquisaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pesquisa)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
-
-        setupViewPager()
+        var adapter = ViewPagerAdapter(supportFragmentManager)
+        setupViewPager(adapter)
         setupColorIcones()
 
         tablayout_tabs_pesquisa.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -56,7 +55,6 @@ class PesquisaActivity : AppCompatActivity() {
         edittext_busca.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 hideSoftKeyboard(this)
-                var adapter = ViewPagerAdapter(supportFragmentManager)
                 val fragmentPesquisaFilmes = adapter.getItem(0) as PesquisaFilmesFragment
                 val fragmentPesquisaSeries = adapter.getItem(1) as PesquisaSeriesFragment
                 fragmentPesquisaFilmes.atualizaListaFilmes(edittext_busca.text.toString())
@@ -77,8 +75,7 @@ class PesquisaActivity : AppCompatActivity() {
             activity.currentFocus!!.windowToken, 0
         )
     }
-    private fun setupViewPager() {
-        var adapter = ViewPagerAdapter(supportFragmentManager)
+    private fun setupViewPager(adapter: ViewPagerAdapter) {
         adapter.addFragment(PesquisaFilmesFragment(), "Filmes")
         adapter.addFragment(PesquisaSeriesFragment(), "Séries")
         viewpager_filmes_series_pesquisa.adapter = adapter

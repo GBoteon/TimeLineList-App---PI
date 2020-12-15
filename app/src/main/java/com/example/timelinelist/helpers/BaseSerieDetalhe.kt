@@ -1,11 +1,13 @@
 package com.example.timelinelist.helpers
 
 import android.annotation.SuppressLint
+import androidx.room.Entity
 import com.example.timelinelist.Constants
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 import java.text.SimpleDateFormat
 
+@Entity(tableName="series")
 data class BaseSerieDetalhe(
     @SerializedName("backdrop_path")
     val backdropPath: String,

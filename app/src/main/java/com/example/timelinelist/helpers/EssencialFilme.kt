@@ -1,6 +1,9 @@
 package com.example.timelinelist.helpers
 
+import android.annotation.SuppressLint
+import com.example.timelinelist.Constants
 import java.io.Serializable
+import java.text.SimpleDateFormat
 
 data class EssencialFilme(
     val id: Int,
@@ -15,6 +18,7 @@ data class EssencialFilme(
     var dataAssistidoPessoal: String,
     var informacoesPessoal: ArrayList<Boolean>
 ): Serializable {
+
     fun getId(): String {
         return id.toString()
     }
@@ -22,16 +26,32 @@ data class EssencialFilme(
         return title
     }
     fun getTempo(): String {
-        return title
+        return if (runtime.toString()==""||runtime.toString()=="0") {
+            ""
+        } else {
+            "$runtime min"
+        }
     }
     fun getEstado(): String {
-        return status
+        for (stat in Constants.STATUS_FILME) {
+            if(status==stat.key)
+                return stat.value
+        }
+        return ""
     }
+    @SuppressLint("SimpleDateFormat")
     fun getDataDeLancamento(): String {
-        return releaseDate
+        val formatter = SimpleDateFormat("yyyy")
+        val dateFormat = SimpleDateFormat("yyyy-mm-dd")
+        return if (releaseDate!="") {
+            @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+            formatter.format(dateFormat.parse(releaseDate))
+        } else {
+            ""
+        }
     }
     fun getMediaVotos(): String {
-        return voteAverage.toString()
+        return "${voteAverage}/10"
     }
     fun getSinopse(): String {
         return overview

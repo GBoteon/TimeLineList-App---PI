@@ -19,6 +19,7 @@ import com.example.timelinelist.Constants.BASE_IMAGE_URL
 import com.example.timelinelist.Constants.STATUS_FILME
 import com.example.timelinelist.R
 import com.example.timelinelist.helpers.BaseFilmeDetalhe
+import com.example.timelinelist.helpers.EssencialFilme
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detalhefilme.*
 import kotlinx.android.synthetic.main.activity_detalhefilme.imageview_compartilhar
