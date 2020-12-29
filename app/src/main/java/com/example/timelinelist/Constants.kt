@@ -17,4 +17,5 @@ object Constants {
     val GENEROS_SERIE = mapOf(10759 to "Action & Adventure", 16 to "Animação", 35 to "Comédia", 80 to "Crime", 99 to "Documentário", 18 to "Drama", 10751 to "Família", 10762 to "Kids", 9648 to "Mistério", 10763 to "News", 10764 to "Reality", 10765 to "Sci-Fi & Fantasy", 10766 to "Soap", 10767 to "Talk", 10768 to "War & Politics", 37 to "Faroeste")
     val STATUS_FILME = mapOf("Rumored" to "Rumor", "Planned" to "Planejado", "In Production" to "Em Produção", "Post Production" to "Pós-Produção", "Released" to "Lançado", "Canceled" to "Cancelado")
     val STATUS_SERIE = mapOf("Returning Series" to "Lançando", "Planned" to "Planejado", "In Production" to "Em Produção", "Ended" to "Finalizada", "Canceled" to "Cancelada", "Pilot" to "Piloto")
+    val STATUS_SERIE_PESSOAL = arrayListOf("Acompanhando", "Em Andamento", "Cancelada", "Finalizada", "Largada")
 }

@@ -19,4 +19,7 @@ interface AccessFilmes {
 
     @Query("DELETE FROM filmes WHERE id = :filmeId")
     suspend fun deleteFilme(filmeId: Int)
+
+    @Query("SELECT * FROM filmes WHERE id = :filmeId")
+    suspend fun selectFilme(filmeId: Int)
 }

@@ -1,16 +1,22 @@
 package com.example.timelinelist.adapters
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.timelinelist.Constants
 import com.example.timelinelist.R
+import com.example.timelinelist.helpers.EssencialFilme
 import com.example.timelinelist.helpers.Filme
+import com.squareup.picasso.Picasso
 
-class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener: OnFilmeClickListener): RecyclerView.Adapter<ListaFilmesAdapter.ListaFilmeViewHolder>(), Filterable {
+class ListaFilmesAdapter(private val listFilmes: ArrayList<EssencialFilme>, val listener: OnFilmeClickListener): RecyclerView.Adapter<ListaFilmesAdapter.ListaFilmeViewHolder>(), Filterable {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaFilmeViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.filme_item, parent, false)
@@ -23,11 +29,28 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener:
 
         var filme = filmesFilterList[position]
         holder.nome_filme.text = filme.title
-        holder
+        holder.data_filme.text = filme.dataAssistidoPessoal
+        holder.notapessoal_filme.text = "${filme.notaPessoal}/10"
+        var lista_indicadores = arrayListOf(holder.imageview_cinema, holder.imageview_dormiu, holder.imageview_chorou, holder.imageview_favorito)
+        for(position in 0..lista_indicadores.size-1)
+        {
+            if (filme.informacoesPessoal[position]) {
+                lista_indicadores[position].visibility = VISIBLE
+            }
+        }
+        Picasso.get().load(Uri.parse("${Constants.BASE_IMAGE_URL}${filme.backdropPath}")).placeholder(R.drawable.ic_logo).into(
+            holder.backdrop_filme)
+
     }
     inner class ListaFilmeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val nome_filme: TextView = itemView.findViewById(R.id.textview_nome_filme)
-
+        val data_filme: TextView = itemView.findViewById(R.id.textview_data_filme)
+        val notapessoal_filme: TextView = itemView.findViewById(R.id.textview_notapessoal_filme)
+        val imageview_cinema: ImageView = itemView.findViewById(R.id.imageview_cinema)
+        val imageview_dormiu: ImageView = itemView.findViewById(R.id.imageview_dormiu)
+        val imageview_chorou: ImageView = itemView.findViewById(R.id.imageview_chorou)
+        val imageview_favorito: ImageView = itemView.findViewById(R.id.imageview_favorito)
+        val backdrop_filme: ImageView = itemView.findViewById(R.id.imageview_backdrop_filme)
         init {
             itemView.setOnClickListener(this)
         }
@@ -43,7 +66,7 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener:
 
     }
 
-    var filmesFilterList = ArrayList<Filme>()
+    var filmesFilterList = ArrayList<EssencialFilme>()
 
     init {
         filmesFilterList = listFilmes
@@ -55,9 +78,9 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener:
                 if (charSearch.isEmpty()) {
                     filmesFilterList = listFilmes
                 } else {
-                    val resultList = ArrayList<Filme>()
+                    val resultList = ArrayList<EssencialFilme>()
                     for (row in listFilmes) {
-                        if (row.title.toLowerCase().contains(charSearch.toLowerCase())) {
+                        if ((row.title.toLowerCase().contains(charSearch.toLowerCase()))||(row.dataAssistidoPessoal.toLowerCase().contains(charSearch.toLowerCase()))) {
                             resultList.add(row)
                         }
                     }
@@ -70,7 +93,7 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<Filme>, val listener:
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filmesFilterList = results?.values as ArrayList<Filme>
+                filmesFilterList = results?.values as ArrayList<EssencialFilme>
                 notifyDataSetChanged()
             }
 

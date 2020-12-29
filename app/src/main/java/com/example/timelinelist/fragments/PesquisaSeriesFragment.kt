@@ -46,6 +46,7 @@ class PesquisaSeriesFragment : Fragment(), ListaSeriePesquisaAdapter.OnObraSerie
         viewModel.listaSeriesDetalhe.observe(viewLifecycleOwner) {
             val intent = Intent(context, DetalheSerieActivity::class.java)
             intent.putExtra("serieClick", it)
+            intent.putExtra("activity", true)
             startActivity(intent)
         }
 

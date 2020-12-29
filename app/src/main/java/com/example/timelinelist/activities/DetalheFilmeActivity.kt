@@ -2,30 +2,33 @@ package com.example.timelinelist.activities
 
 import android.animation.LayoutTransition
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
+import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.graphics.text.LineBreaker
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
+import android.view.View.*
 import android.view.animation.AnimationUtils
+import android.widget.RatingBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.timelinelist.Constants
 import com.example.timelinelist.Constants.BASE_IMAGE_URL
-import com.example.timelinelist.Constants.STATUS_FILME
 import com.example.timelinelist.R
 import com.example.timelinelist.helpers.BaseFilmeDetalhe
-import com.example.timelinelist.helpers.EssencialFilme
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detalhefilme.*
 import kotlinx.android.synthetic.main.activity_detalhefilme.imageview_compartilhar
 import kotlinx.android.synthetic.main.activity_detalheserie.*
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class DetalheFilmeActivity : AppCompatActivity() {
 
@@ -42,7 +45,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
 
         imageview_voltar_filmetolista.setOnClickListener {
-            startActivity(Intent(this,PesquisaActivity::class.java))
+            startActivity(Intent(this, PesquisaActivity::class.java))
         }
         textview_nomefilme.setOnClickListener {
             cardview_detalheposter_filme.visibility = View.VISIBLE
@@ -50,6 +53,18 @@ class DetalheFilmeActivity : AppCompatActivity() {
         }
         cardview_detalheposter_filme.setOnClickListener {
             cardview_detalheposter_filme.visibility = View.INVISIBLE
+        }
+        edittext_nota.setOnClickListener {
+            cardview_rating_filme.visibility = VISIBLE
+            cardview_detalheposter_filme.background.alpha = 150
+        }
+        button_ok_nota.setOnClickListener {
+            cardview_rating_filme.visibility = INVISIBLE
+            var value = ratingbar_nota.rating
+            edittext_nota.setText((value*2).toString())
+        }
+        button_cancel_nota.setOnClickListener {
+            cardview_rating_filme.visibility = INVISIBLE
         }
         imageview_compartilhar.setOnClickListener {
             val sendIntent: Intent = Intent().apply {
@@ -108,9 +123,11 @@ class DetalheFilmeActivity : AppCompatActivity() {
 
         var poster = "${BASE_IMAGE_URL}.${filmeAtual.getPoster()}"
         Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(imageview_filme)
-        Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(imageview_detalheposter_filme)
+        Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(
+            imageview_detalheposter_filme)
         imageview_filme.startAnimation(animSlide)
         applyLayoutTransition()
+
     }
     private fun updateLabel(myCalendar: Calendar) {
         val myFormat = "dd/MM/yyyy"

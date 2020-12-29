@@ -1,16 +1,21 @@
 package com.example.timelinelist.adapters
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.timelinelist.Constants
 import com.example.timelinelist.R
+import com.example.timelinelist.helpers.EssencialSerie
 import com.example.timelinelist.helpers.Serie
+import com.squareup.picasso.Picasso
 
-class ListaSeriesAdapter(private val listSerie: ArrayList<Serie>, val listener: OnSerieClickListener): RecyclerView.Adapter<ListaSeriesAdapter.ListaSeriesViewHolder>(), Filterable {
+class ListaSeriesAdapter(private val listSerie: ArrayList<EssencialSerie>, val listener: OnSerieClickListener): RecyclerView.Adapter<ListaSeriesAdapter.ListaSeriesViewHolder>(), Filterable {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaSeriesViewHolder {
         var itemView = LayoutInflater.from(parent.context).inflate(R.layout.serie_item, parent, false)
@@ -21,10 +26,24 @@ class ListaSeriesAdapter(private val listSerie: ArrayList<Serie>, val listener: 
 
     override fun onBindViewHolder(holder: ListaSeriesViewHolder, position: Int) {
         var serie = seriesFilterList[position]
-        holder.nome_serie.text = serie.title
+        holder.nome_serie.text = serie.name
+        for(position in 0..Constants.STATUS_SERIE_PESSOAL.size-1)
+        {
+            if (serie.statusPessoal[position]) {
+                holder.status_serie.text = Constants.STATUS_SERIE_PESSOAL[position]
+            }
+        }
+        holder.notapessoal_serie.text = "${serie.notaPessoal}/10"
+        Picasso.get().load(Uri.parse("${Constants.BASE_IMAGE_URL}${serie.backdropPath}")).placeholder(R.drawable.ic_logo).into(
+            holder.backdrop_serie)
+
     }
     inner class ListaSeriesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val nome_serie: TextView = itemView.findViewById(R.id.nome_serie)
+        val nome_serie: TextView = itemView.findViewById(R.id.textview_nome_serie)
+        val status_serie: TextView = itemView.findViewById(R.id.textview_status_serie)
+        val notapessoal_serie: TextView = itemView.findViewById(R.id.textview_notapessoal_serie)
+        val backdrop_serie: ImageView = itemView.findViewById(R.id.imageview_backdrop_serie)
+
         init {
             itemView.setOnClickListener(this)
         }
@@ -39,7 +58,7 @@ class ListaSeriesAdapter(private val listSerie: ArrayList<Serie>, val listener: 
         fun serieClick(position: Int)
     }
 
-    var seriesFilterList = ArrayList<Serie>()
+    var seriesFilterList = ArrayList<EssencialSerie>()
 
     init {
         seriesFilterList = listSerie
@@ -51,9 +70,9 @@ class ListaSeriesAdapter(private val listSerie: ArrayList<Serie>, val listener: 
                 if (charSearch.isEmpty()) {
                     seriesFilterList = listSerie
                 } else {
-                    val resultList = ArrayList<Serie>()
+                    val resultList = ArrayList<EssencialSerie>()
                     for (row in listSerie) {
-                        if (row.title.toLowerCase().contains(charSearch.toLowerCase())) {
+                        if (row.name.toLowerCase().contains(charSearch.toLowerCase())) {
                             resultList.add(row)
                         }
                     }
@@ -66,7 +85,7 @@ class ListaSeriesAdapter(private val listSerie: ArrayList<Serie>, val listener: 
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                seriesFilterList = results?.values as ArrayList<Serie>
+                seriesFilterList = results?.values as ArrayList<EssencialSerie>
                 notifyDataSetChanged()
             }
 

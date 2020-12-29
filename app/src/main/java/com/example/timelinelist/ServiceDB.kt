@@ -17,6 +17,9 @@ interface RepositoryFilmes{
     //deletes
     suspend fun deleteFilmeTask(filme: BaseFilmeDetalhe)
 
+    //select
+    suspend fun selectFilmeTask(filme: BaseFilmeDetalhe)
+
 }
 interface RepositorySeries{
 
@@ -31,6 +34,9 @@ interface RepositorySeries{
 
     //deletes
     suspend fun deleteSerieTask(serie: BaseSerieDetalhe)
+
+    //select
+    suspend fun selectSerieTask(serie: BaseSerieDetalhe)
 
 }
 
@@ -51,6 +57,10 @@ class RepositoryImplementationFilmes(val serieDAO: AccessFilmes): RepositoryFilm
         TODO("Not yet implemented")
     }
 
+    override suspend fun selectFilmeTask(filme: BaseFilmeDetalhe) {
+        TODO("Not yet implemented")
+    }
+
 }
 class RepositoryImplementationSeries(val serieDAO: AccessSeries): RepositorySeries{
     override suspend fun getAllSeriesTask(): List<BaseSerieDetalhe> {
@@ -66,6 +76,10 @@ class RepositoryImplementationSeries(val serieDAO: AccessSeries): RepositorySeri
     }
 
     override suspend fun deleteSerieTask(serie: BaseSerieDetalhe) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun selectSerieTask(serie: BaseSerieDetalhe) {
         TODO("Not yet implemented")
     }
 

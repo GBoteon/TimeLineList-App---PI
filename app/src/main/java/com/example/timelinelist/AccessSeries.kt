@@ -19,4 +19,7 @@ interface AccessSeries {
 
     @Query("DELETE FROM series WHERE id = :serieId")
     suspend fun deleteSeries(serieId: Int)
+
+    @Query("SELECT * FROM series WHERE id = :serieId")
+    suspend fun selectSerie(serieId: Int)
 }
