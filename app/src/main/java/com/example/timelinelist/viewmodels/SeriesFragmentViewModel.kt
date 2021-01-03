@@ -11,12 +11,13 @@ import kotlinx.coroutines.launch
 
 class SeriesFragmentViewModel(application: Application): AndroidViewModel(application) {
 
-    var listaSerie = MutableLiveData<ArrayList<EssencialSerie>>()
+    var listaSerie = MutableLiveData<List<EssencialSerie>>()
     var serieDetalhe = MutableLiveData<BaseSerieDetalhe>()
 
     fun getSeries() {
-        listaSerie.value =  arrayListOf( EssencialSerie(82856,"The Mandalorian","/o7qi2v4uWQ8bZ1tW3KI0Ztn2epk.jpg", arrayListOf(true, false, false, false, false), 9.4f),
-                                        EssencialSerie(71712,"The Good Doctor: O Bom Doutor","/zlXPNnnUlyg6KyvvjGd2ZxG6Tnw.jpg", arrayListOf(false, true, false, false, false), 9.3f))
+        listaSerie.value =  listOf( EssencialSerie(0,82856,"The Mandalorian","/o7qi2v4uWQ8bZ1tW3KI0Ztn2epk.jpg", "12/12/1996", "Acompanhando", 9.4f),
+            EssencialSerie(1,71712,"The Good Doctor: O Bom Doutor","/zlXPNnnUlyg6KyvvjGd2ZxG6Tnw.jpg", "12/12/1996", "Acompanhando", 9.3f))
+
     }
     fun getSeriesFromId(id: Int) {
         viewModelScope.launch {

@@ -43,9 +43,18 @@ class DetalheFilmeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalhefilme)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
-
+        if(intent.getStringExtra("origem")=="Pesquisa") {
+            button_delete_filme.visibility = GONE
+            button_salvareditar_filme.text = "SALVAR"
+        } else {
+            button_salvareditar_filme.text = "EDITAR"
+        }
         imageview_voltar_filmetolista.setOnClickListener {
-            startActivity(Intent(this, PesquisaActivity::class.java))
+            if(intent.getStringExtra("origem")=="ListaPessoal") {
+                startActivity(Intent(this,ListaActivity::class.java))
+            } else {
+                startActivity(Intent(this,PesquisaActivity::class.java))
+            }
         }
         textview_nomefilme.setOnClickListener {
             cardview_detalheposter_filme.visibility = View.VISIBLE
@@ -54,16 +63,19 @@ class DetalheFilmeActivity : AppCompatActivity() {
         cardview_detalheposter_filme.setOnClickListener {
             cardview_detalheposter_filme.visibility = View.INVISIBLE
         }
-        edittext_nota.setOnClickListener {
+        edittext_nota_filme.setOnClickListener {
             cardview_rating_filme.visibility = VISIBLE
             cardview_detalheposter_filme.background.alpha = 150
         }
-        button_ok_nota.setOnClickListener {
-            cardview_rating_filme.visibility = INVISIBLE
-            var value = ratingbar_nota.rating
-            edittext_nota.setText((value*2).toString())
+        ratingbar_nota_filme.setOnRatingBarChangeListener { _, rating, _ ->
+            edittext_nota_filme.setText((rating*2).toString())
         }
-        button_cancel_nota.setOnClickListener {
+        button_ok_nota_filme.setOnClickListener {
+            cardview_rating_filme.visibility = INVISIBLE
+            var value = ratingbar_nota_filme.rating
+            edittext_nota_filme.setText((value*2).toString())
+        }
+        button_cancel_nota_filme.setOnClickListener {
             cardview_rating_filme.visibility = INVISIBLE
         }
         imageview_compartilhar.setOnClickListener {
@@ -76,7 +88,6 @@ class DetalheFilmeActivity : AppCompatActivity() {
             startActivity(shareIntent)
         }
         val myCalendar: Calendar = Calendar.getInstance()
-
         val date =
             OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 myCalendar.set(Calendar.YEAR, year)
@@ -84,8 +95,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 updateLabel(myCalendar)
             }
-
-        edittext_data.setOnClickListener {
+        edittext_data_filme.setOnClickListener {
             DatePickerDialog(
                 this@DetalheFilmeActivity, R.style.DialogTheme, date, myCalendar
                     .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
@@ -94,7 +104,9 @@ class DetalheFilmeActivity : AppCompatActivity() {
         }
 
         var filmeAtual = intent.getSerializableExtra("filmeClick") as BaseFilmeDetalhe
-
+        if(intent.getStringExtra("origem")=="ListaPessoal") {
+            // TODO
+        }
         textview_nomefilme.isSelected = true
         textview_nomefilme.text = filmeAtual.getTitulo()
         textview_duracaofilme.text = filmeAtual.getTempo()
@@ -132,7 +144,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
     private fun updateLabel(myCalendar: Calendar) {
         val myFormat = "dd/MM/yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
-        edittext_data.setText(sdf.format(myCalendar.getTime()))
+        edittext_data_filme.setText(sdf.format(myCalendar.getTime()))
     }
 
     private fun applyLayoutTransition() {

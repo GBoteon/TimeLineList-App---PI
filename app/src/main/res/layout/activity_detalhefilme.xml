@@ -59,6 +59,7 @@
                 android:textStyle="bold" />
 
             <ImageView
+                android:id="@+id/button_delete_filme"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -277,7 +278,7 @@
                     android:gravity="center"
                     android:layout_gravity="center"/>
                 <EditText
-                    android:id="@+id/edittext_data"
+                    android:id="@+id/edittext_data_filme"
                     style="@style/DetalheTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -296,7 +297,7 @@
                     android:gravity="center"
                     android:layout_gravity="center"/>
                 <EditText
-                    android:id="@+id/edittext_nota"
+                    android:id="@+id/edittext_nota_filme"
                     style="@style/DetalheTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -308,6 +309,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <Button
+            android:id="@+id/button_salvareditar_filme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
@@ -349,7 +351,7 @@
         android:layout_marginEnd="20dp"
         style="@style/CardViewPoster">
         <RatingBar
-            android:id="@+id/ratingbar_nota"
+            android:id="@+id/ratingbar_nota_filme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:progressBackgroundTint="@color/colorBlack"
@@ -369,7 +371,7 @@
             android:orientation="horizontal"
             android:gravity="end">
             <TextView
-                android:id="@+id/button_cancel_nota"
+                android:id="@+id/button_cancel_nota_filme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/DetalheTextView"
@@ -377,7 +379,7 @@
                 android:textSize="17dp"
                 android:text="CANCEL"/>
             <TextView
-                android:id="@+id/button_ok_nota"
+                android:id="@+id/button_ok_nota_filme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/DetalheTextView"

@@ -53,11 +53,12 @@ class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {
         if(!context?.let { isOnline(it) }!!) {
             Toast.makeText(context, "Sem conexão com internet", Toast.LENGTH_LONG).show()
         } else {
-            var idClick = viewModel.listaSerie.value?.get(position)?.id as Int
+            var idClick = viewModel.listaSerie.value?.get(position)?.serieid as Int
             viewModel.getSeriesFromId(idClick)
             viewModel.serieDetalhe.observe(viewLifecycleOwner) {
                 val intent = Intent(context, DetalheSerieActivity::class.java)
                 intent.putExtra("serieClick", it)
+                intent.putExtra("origem", "ListaPessoal")
                 startActivity(intent)
             }
         }

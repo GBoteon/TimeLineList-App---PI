@@ -17,7 +17,6 @@ import com.example.timelinelist.viewmodels.FilmesFragmentViewModel
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.example.timelinelist.activities.DetalheFilmeActivity
-import com.example.timelinelist.activities.PesquisaActivity
 import com.example.timelinelist.adapters.ListaFilmesAdapter
 import kotlinx.android.synthetic.main.fragment_filmes.view.*
 
@@ -29,7 +28,6 @@ class FilmesFragment : Fragment(), ListaFilmesAdapter.OnFilmeClickListener {
         val view: View = inflater.inflate(R.layout.fragment_filmes, container, false)
 
         viewModel.getFilmes()
-
 
         viewModel.listaFilme.observe(viewLifecycleOwner) {
             var adapter =  ListaFilmesAdapter(it, this)
@@ -54,11 +52,12 @@ class FilmesFragment : Fragment(), ListaFilmesAdapter.OnFilmeClickListener {
         if(!context?.let { isOnline(it) }!!) {
             Toast.makeText(context, "Sem conexão com internet", Toast.LENGTH_LONG).show()
         } else {
-            var idClick = viewModel.listaFilme.value?.get(position)?.id as Int
+            var idClick = viewModel.listaFilme.value?.get(position)?.filmeid as Int
             viewModel.getFilmesFromId(idClick)
             viewModel.filmeDetalhe.observe(viewLifecycleOwner) {
                 val intent = Intent(context, DetalheFilmeActivity::class.java)
                 intent.putExtra("filmeClick", it)
+                intent.putExtra("origem", "ListaPessoal")
                 startActivity(intent)
             }
         }

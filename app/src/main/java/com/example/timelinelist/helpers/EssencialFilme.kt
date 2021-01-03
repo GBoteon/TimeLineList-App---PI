@@ -1,15 +1,21 @@
 package com.example.timelinelist.helpers
 
-import android.annotation.SuppressLint
-import com.example.timelinelist.Constants
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
-import java.text.SimpleDateFormat
 
+@Entity(tableName="filmes")
 data class EssencialFilme(
-    val id: Int,
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
+    val filmeid: Int,
     val title: String,
     val backdropPath: String,
     var dataAssistidoPessoal: String,
-    var informacoesPessoal: ArrayList<Boolean>,
+    var cinema: Int,
+    var dormiu: Int,
+    var chorou: Int,
+    var favorito: Int,
     var notaPessoal: Float
 ): Serializable

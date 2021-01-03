@@ -15,7 +15,7 @@ import com.example.timelinelist.helpers.EssencialSerie
 import com.example.timelinelist.helpers.Serie
 import com.squareup.picasso.Picasso
 
-class ListaSeriesAdapter(private val listSerie: ArrayList<EssencialSerie>, val listener: OnSerieClickListener): RecyclerView.Adapter<ListaSeriesAdapter.ListaSeriesViewHolder>(), Filterable {
+class ListaSeriesAdapter(private val listSerie: List<EssencialSerie>, val listener: OnSerieClickListener): RecyclerView.Adapter<ListaSeriesAdapter.ListaSeriesViewHolder>(), Filterable {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaSeriesViewHolder {
         var itemView = LayoutInflater.from(parent.context).inflate(R.layout.serie_item, parent, false)
@@ -27,10 +27,11 @@ class ListaSeriesAdapter(private val listSerie: ArrayList<EssencialSerie>, val l
     override fun onBindViewHolder(holder: ListaSeriesViewHolder, position: Int) {
         var serie = seriesFilterList[position]
         holder.nome_serie.text = serie.name
-        for(position in 0..Constants.STATUS_SERIE_PESSOAL.size-1)
+
+        for(position in Constants.STATUS_SERIE_PESSOAL)
         {
-            if (serie.statusPessoal[position]) {
-                holder.status_serie.text = Constants.STATUS_SERIE_PESSOAL[position]
+            if (serie.statusPessoal==position) {
+                holder.status_serie.text = position
             }
         }
         holder.notapessoal_serie.text = "${serie.notaPessoal}/10"
@@ -58,7 +59,7 @@ class ListaSeriesAdapter(private val listSerie: ArrayList<EssencialSerie>, val l
         fun serieClick(position: Int)
     }
 
-    var seriesFilterList = ArrayList<EssencialSerie>()
+    var seriesFilterList = listOf<EssencialSerie>()
 
     init {
         seriesFilterList = listSerie

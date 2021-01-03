@@ -47,6 +47,7 @@ class PesquisaFilmesFragment : Fragment(), ListaFilmePesquisaAdapter.OnObraFilme
         viewModel.listaFilmesDetalhe.observe(viewLifecycleOwner) {
             val intent = Intent(context, DetalheFilmeActivity::class.java)
             intent.putExtra("filmeClick", it)
+            intent.putExtra("origem", "Pesquisa")
             startActivity(intent)
         }
 

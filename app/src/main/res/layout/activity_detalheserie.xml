@@ -67,6 +67,7 @@
                 android:textStyle="bold" />
 
             <ImageView
+                android:id="@+id/button_delete_serie"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -281,8 +282,61 @@
                 </RadioGroup>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                style="@style/LinearLayoutStyle">
+                <TextView
+                    style="@style/DetalheTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:text="Data: "
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+                <EditText
+                    android:id="@+id/edittext_data_serie"
+                    style="@style/DetalheTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.6"
+                    android:textSize="18sp"
+                    android:backgroundTint="@color/colorTransparent"
+                    android:inputType="date"
+                    android:focusable="false" />
+                <TextView
+                    style="@style/DetalheTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:text="Nota: "
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+                <EditText
+                    android:id="@+id/edittext_nota_serie"
+                    style="@style/DetalheTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:textSize="18sp"
+                    android:backgroundTint="@color/colorTransparent"
+                    android:inputType="text"
+                    android:focusable="false"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     <Button
+        android:id="@+id/button_salvareditar_serie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -313,5 +367,54 @@
             android:adjustViewBounds="true"
             android:src="@drawable/poster" />
     </androidx.cardview.widget.CardView>
-
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="40dp"
+        app:cardCornerRadius="20dp"
+        android:id="@+id/cardview_rating_serie"
+        android:visibility="invisible"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        style="@style/CardViewPoster">
+        <RatingBar
+            android:id="@+id/ratingbar_nota_serie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:progressBackgroundTint="@color/colorBlack"
+            android:secondaryProgressTint="@color/colorTransparent"
+            android:progressTint="@color/colorRed"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:rating="5"
+            android:numStars="5"
+            android:stepSize="0.05"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            android:gravity="end">
+            <TextView
+                android:id="@+id/button_cancel_nota_serie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/DetalheTextView"
+                android:padding="10dp"
+                android:textSize="17dp"
+                android:text="CANCEL"/>
+            <TextView
+                android:id="@+id/button_ok_nota_serie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/DetalheTextView"
+                android:padding="10dp"
+                android:textSize="17dp"
+                android:textColor="@color/colorRed"
+                android:text="OK"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </FrameLayout>

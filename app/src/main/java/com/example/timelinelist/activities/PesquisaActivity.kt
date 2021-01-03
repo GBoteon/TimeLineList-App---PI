@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_pesquisaseries.*
 import kotlinx.android.synthetic.main.fragment_pesquisaseries.view.*
 import kotlinx.android.synthetic.main.obra_item.*
 
+@Suppress("DEPRECATION")
 class PesquisaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

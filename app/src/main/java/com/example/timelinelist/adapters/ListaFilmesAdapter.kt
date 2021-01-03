@@ -13,13 +13,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.timelinelist.Constants
 import com.example.timelinelist.R
 import com.example.timelinelist.helpers.EssencialFilme
-import com.example.timelinelist.helpers.Filme
 import com.squareup.picasso.Picasso
+import java.util.*
+import kotlin.collections.ArrayList
 
-class ListaFilmesAdapter(private val listFilmes: ArrayList<EssencialFilme>, val listener: OnFilmeClickListener): RecyclerView.Adapter<ListaFilmesAdapter.ListaFilmeViewHolder>(), Filterable {
+class ListaFilmesAdapter(
+    private val listFilmes: List<EssencialFilme>,
+    val listener: OnFilmeClickListener
+): RecyclerView.Adapter<ListaFilmesAdapter.ListaFilmeViewHolder>(), Filterable {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaFilmeViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.filme_item, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.filme_item,
+            parent,
+            false)
         return ListaFilmeViewHolder(itemView)
     }
 
@@ -31,14 +37,14 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<EssencialFilme>, val 
         holder.nome_filme.text = filme.title
         holder.data_filme.text = filme.dataAssistidoPessoal
         holder.notapessoal_filme.text = "${filme.notaPessoal}/10"
-        var lista_indicadores = arrayListOf(holder.imageview_cinema, holder.imageview_dormiu, holder.imageview_chorou, holder.imageview_favorito)
-        for(position in 0..lista_indicadores.size-1)
-        {
-            if (filme.informacoesPessoal[position]) {
-                lista_indicadores[position].visibility = VISIBLE
-            }
-        }
-        Picasso.get().load(Uri.parse("${Constants.BASE_IMAGE_URL}${filme.backdropPath}")).placeholder(R.drawable.ic_logo).into(
+
+        if(filme.cinema==1) {holder.imageview_cinema.visibility = VISIBLE}
+        if(filme.dormiu==1) {holder.imageview_dormiu.visibility = VISIBLE}
+        if(filme.chorou==1) {holder.imageview_chorou.visibility = VISIBLE}
+        if(filme.favorito==1) {holder.imageview_favorito.visibility = VISIBLE}
+
+        Picasso.get().load(Uri.parse("${Constants.BASE_IMAGE_URL}${filme.backdropPath}")).placeholder(
+            R.drawable.ic_logo).into(
             holder.backdrop_filme)
 
     }
@@ -66,7 +72,7 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<EssencialFilme>, val 
 
     }
 
-    var filmesFilterList = ArrayList<EssencialFilme>()
+    var filmesFilterList = listOf<EssencialFilme>()
 
     init {
         filmesFilterList = listFilmes
@@ -80,7 +86,8 @@ class ListaFilmesAdapter(private val listFilmes: ArrayList<EssencialFilme>, val 
                 } else {
                     val resultList = ArrayList<EssencialFilme>()
                     for (row in listFilmes) {
-                        if ((row.title.toLowerCase().contains(charSearch.toLowerCase()))||(row.dataAssistidoPessoal.toLowerCase().contains(charSearch.toLowerCase()))) {
+                        if ((row.title.toLowerCase().contains(charSearch.toLowerCase()))||(row.dataAssistidoPessoal.toLowerCase().contains(
+                                charSearch.toLowerCase()))) {
                             resultList.add(row)
                         }
                     }
