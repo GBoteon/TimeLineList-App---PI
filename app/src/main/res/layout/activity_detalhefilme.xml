@@ -214,7 +214,7 @@
                     android:layout_marginBottom="5dp">
                     <CheckBox
                         style="@style/DetalheTextView"
-                        android:id="@+id/checkBox1"
+                        android:id="@+id/checkbox_cinema"
                         android:text="Assistido no Cinema?"
                         android:textSize="16sp"
                         android:layoutDirection="rtl"
@@ -224,7 +224,7 @@
                         android:layout_marginBottom="-5dp"/>
                     <CheckBox
                         style="@style/DetalheTextView"
-                        android:id="@+id/checkBox2"
+                        android:id="@+id/checkbox_dormiu"
                         android:text="Dormiu?"
                         android:textSize="16sp"
                         android:layoutDirection="rtl"
@@ -234,7 +234,7 @@
                         android:layout_marginBottom="-5dp"/>
                     <CheckBox
                         style="@style/DetalheTextView"
-                        android:id="@+id/checkBox3"
+                        android:id="@+id/checkbox_chorou"
                         android:text="Chorou?"
                         android:textSize="16sp"
                         android:layoutDirection="rtl"
@@ -244,7 +244,7 @@
                         android:layout_marginBottom="-5dp"/>
                     <CheckBox
                         style="@style/DetalheTextView"
-                        android:id="@+id/checkBox4"
+                        android:id="@+id/checkbox_favorito"
                         android:text="Favorito?"
                         android:textSize="16sp"
                         android:layoutDirection="rtl"
@@ -278,7 +278,7 @@
                     android:gravity="center"
                     android:layout_gravity="center"/>
                 <EditText
-                    android:id="@+id/edittext_data_filme"
+                    android:id="@+id/edittext_dataassistido_filme"
                     style="@style/DetalheTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

@@ -12,13 +12,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.timelinelist.R
+import com.example.timelinelist.*
 import com.example.timelinelist.activities.DetalheFilmeActivity
 import com.example.timelinelist.activities.DetalheSerieActivity
 import com.example.timelinelist.adapters.ListaSeriesAdapter
+import com.example.timelinelist.database.BaseDadosSeries
 import com.example.timelinelist.viewmodels.SeriesFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_series.view.*
 
@@ -26,10 +30,29 @@ class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {
 
     private val viewModel: SeriesFragmentViewModel by viewModels()
 
+    internal var context: Context? = null
+    lateinit var repositorySeries: RepositorySeries
+    lateinit var dbSeries: BaseDadosSeries
+
+    override fun onAttach(context: Context) {
+        this.context = context
+        super.onAttach(context)
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_series, container, false)
 
+        dbSeries = BaseDadosSeries.invoke(context)
+        repositorySeries = RepositoryImplementationSeries(dbSeries.seriesDAO())
+        val viewModel by viewModels<SeriesFragmentViewModel> {
+            object : ViewModelProvider.Factory {
+                override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                    return SeriesFragmentViewModel(repositorySeries) as T
+                }
+            }
+        }
+
         viewModel.getSeries()
+
         viewModel.listaSerie.observe(viewLifecycleOwner) {
             var adapter =  ListaSeriesAdapter(it, this)
             view.recyclerview_series.adapter = adapter
@@ -54,11 +77,13 @@ class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {
             Toast.makeText(context, "Sem conexão com internet", Toast.LENGTH_LONG).show()
         } else {
             var idClick = viewModel.listaSerie.value?.get(position)?.serieid as Int
+            var idunico = viewModel.listaSerie.value?.get(position)?.id as Int
             viewModel.getSeriesFromId(idClick)
             viewModel.serieDetalhe.observe(viewLifecycleOwner) {
                 val intent = Intent(context, DetalheSerieActivity::class.java)
                 intent.putExtra("serieClick", it)
                 intent.putExtra("origem", "ListaPessoal")
+                intent.putExtra("idunico", idunico)
                 startActivity(intent)
             }
         }

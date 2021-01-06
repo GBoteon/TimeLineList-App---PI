@@ -3,7 +3,6 @@ package com.example.timelinelist.activities
 import android.animation.LayoutTransition
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.graphics.text.LineBreaker
 import android.net.Uri
@@ -12,10 +11,17 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.animation.AnimationUtils
+import android.widget.RadioButton
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.timelinelist.Constants
-import com.example.timelinelist.R
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.timelinelist.*
+import com.example.timelinelist.database.BaseDadosSeries
 import com.example.timelinelist.helpers.BaseSerieDetalhe
+import com.example.timelinelist.helpers.EssencialSerie
+import com.example.timelinelist.viewmodels.SeriesFragmentViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detalhefilme.*
 import kotlinx.android.synthetic.main.activity_detalheserie.*
@@ -32,10 +38,24 @@ class DetalheSerieActivity : AppCompatActivity() {
     }
     private var isCollapsed = INITIAL_IS_COLLAPSED
 
+    lateinit var repositorySeries: RepositorySeries
+    lateinit var dbSeries: BaseDadosSeries
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalheserie)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
+
+        dbSeries = BaseDadosSeries.invoke(this)
+        repositorySeries = RepositoryImplementationSeries(dbSeries.seriesDAO())
+        val viewModel by viewModels<SeriesFragmentViewModel> {
+            object : ViewModelProvider.Factory {
+                override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                    return SeriesFragmentViewModel(repositorySeries) as T
+                }
+            }
+        }
+
         if(intent.getStringExtra("origem")=="Pesquisa") {
             button_delete_serie.visibility = GONE
             button_salvareditar_serie.text = "SALVAR"
@@ -44,9 +64,9 @@ class DetalheSerieActivity : AppCompatActivity() {
         }
         imageview_voltar_serietolista.setOnClickListener {
             if(intent.getStringExtra("origem")=="ListaPessoal") {
-                startActivity(Intent(this,ListaActivity::class.java))
+                startActivity(Intent(this, ListaActivity::class.java))
             } else {
-                startActivity(Intent(this,PesquisaActivity::class.java))
+                startActivity(Intent(this, PesquisaActivity::class.java))
             }
         }
         textview_nomeserie.setOnClickListener {
@@ -61,12 +81,12 @@ class DetalheSerieActivity : AppCompatActivity() {
             cardview_detalheposter_serie.background.alpha = 150
         }
         ratingbar_nota_serie.setOnRatingBarChangeListener { _, rating, _ ->
-            edittext_nota_serie.setText((rating*2).toString())
+            edittext_nota_serie.setText((rating * 2).toString())
         }
         button_ok_nota_serie.setOnClickListener {
             cardview_rating_serie.visibility = View.INVISIBLE
             var value = ratingbar_nota_serie.rating
-            edittext_nota_serie.setText((value*2).toString())
+            edittext_nota_serie.setText((value * 2).toString())
         }
         button_cancel_nota_serie.setOnClickListener {
             cardview_rating_serie.visibility = View.INVISIBLE
@@ -88,7 +108,7 @@ class DetalheSerieActivity : AppCompatActivity() {
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 updateLabel(myCalendar)
             }
-        edittext_data_serie.setOnClickListener {
+        edittext_dataassistido_serie.setOnClickListener {
             DatePickerDialog(
                 this@DetalheSerieActivity, R.style.DialogTheme, date, myCalendar
                     .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
@@ -96,8 +116,40 @@ class DetalheSerieActivity : AppCompatActivity() {
             ).show()
         }
         var serieAtual = intent.getSerializableExtra("serieClick") as BaseSerieDetalhe
-        if(intent.getStringExtra("origem")=="ListaPessoal") {
-            // TODO
+        var idunico = intent.getIntExtra("idunico", 0)
+        button_salvareditar_serie.setOnClickListener {
+            if(intent.getStringExtra("origem")=="Pesquisa") {
+                viewModel.addSerie(EssencialSerie(
+                    null,
+                    serieAtual.id,
+                    serieAtual.name,
+                    serieAtual.backdropPath,
+                    edittext_dataassistido_serie.text.toString(),
+                    getSelectedRadioButton(),
+                    edittext_nota_serie.text.toString()
+                ))
+                Toast.makeText(this, "Serie Adicionado", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, ListaActivity::class.java))
+            } else {
+                viewModel.updateSerie(EssencialSerie(
+                    idunico,
+                    serieAtual.id,
+                    serieAtual.name,
+                    serieAtual.backdropPath,
+                    edittext_dataassistido_serie.text.toString(),
+                    getSelectedRadioButton(),
+                    edittext_nota_serie.text.toString()
+                ))
+                Toast.makeText(this, "Serie Atualizado", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, ListaActivity::class.java))
+            }
+        }
+        button_delete_serie.setOnClickListener {
+            if(intent.getStringExtra("origem")=="ListaPessoal") {
+                viewModel.deleteSerie(idunico)
+                Toast.makeText(this, "Serie Removida", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, ListaActivity::class.java))
+            }
         }
         textview_nomeserie.isSelected = true
         textview_nomeserie.text = serieAtual.getTitulo()
@@ -111,7 +163,8 @@ class DetalheSerieActivity : AppCompatActivity() {
         if (serieAtual.getSinopse()=="") {
             root_descricaoserie.visibility= View.GONE
         } else {
-            animSlide = AnimationUtils.loadAnimation(applicationContext, R.anim.up_without_description)
+            animSlide = AnimationUtils.loadAnimation(applicationContext,
+                R.anim.up_without_description)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             textview_descricaoserie.justificationMode = LineBreaker.JUSTIFICATION_MODE_INTER_WORD
@@ -127,7 +180,8 @@ class DetalheSerieActivity : AppCompatActivity() {
 
         var poster = "${Constants.BASE_IMAGE_URL}.${serieAtual.getPoster()}"
         Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(imageview_serie)
-        Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(imageview_detalheposter_serie)
+        Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(
+            imageview_detalheposter_serie)
 
         imageview_serie.startAnimation(animSlide)
         applyLayoutTransition()
@@ -135,12 +189,17 @@ class DetalheSerieActivity : AppCompatActivity() {
     private fun updateLabel(myCalendar: Calendar) {
         val myFormat = "dd/MM/yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
-        edittext_data_serie.setText(sdf.format(myCalendar.getTime()))
+        edittext_dataassistido_serie.setText(sdf.format(myCalendar.getTime()))
     }
     private fun applyLayoutTransition() {
         val transition = LayoutTransition()
         transition.setDuration(500)
         transition.enableTransitionType(LayoutTransition.CHANGING)
         root_descricaoserie.layoutTransition = transition
+    }
+    private fun getSelectedRadioButton(): String {
+        val selectedId: Int = radiogroup_status_serie.checkedRadioButtonId
+        var radioButton = findViewById<View>(selectedId) as RadioButton
+        return radioButton.text.toString()
     }
 }

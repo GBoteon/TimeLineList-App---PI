@@ -18,6 +18,6 @@ interface AccessSeries {
     @Update
     suspend fun updateSeries(serie: EssencialSerie)
 
-    @Query("DELETE FROM series WHERE id = :serieId")
-    suspend fun deleteSeries(serieId: Int)
+    @Query("DELETE FROM series WHERE id = :id")
+    suspend fun deleteSeries(id: Int)
 }

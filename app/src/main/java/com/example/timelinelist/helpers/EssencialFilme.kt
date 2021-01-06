@@ -8,14 +8,24 @@ import java.io.Serializable
 @Entity(tableName="filmes")
 data class EssencialFilme(
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    @ColumnInfo(name = "id")
+    var id: Int?,
+    @ColumnInfo(name = "filmeid")
     val filmeid: Int,
+    @ColumnInfo(name = "title")
     val title: String,
+    @ColumnInfo(name = "backdropPath")
     val backdropPath: String,
+    @ColumnInfo(name = "dataAssistidoPessoal")
     var dataAssistidoPessoal: String,
+    @ColumnInfo(name = "cinema")
     var cinema: Int,
+    @ColumnInfo(name = "dormiu")
     var dormiu: Int,
+    @ColumnInfo(name = "chorou")
     var chorou: Int,
+    @ColumnInfo(name = "favorito")
     var favorito: Int,
-    var notaPessoal: Float
+    @ColumnInfo(name = "notaPessoal")
+    var notaPessoal: String
 ): Serializable

@@ -17,7 +17,7 @@ interface RepositoryFilmes{
     suspend fun updateFilmeTask(filme: EssencialFilme)
 
     //deletes
-    suspend fun deleteFilmeTask(filme: EssencialFilme)
+    suspend fun deleteFilmeTask(id: Int)
 
 }
 interface RepositorySeries{
@@ -32,7 +32,7 @@ interface RepositorySeries{
     suspend fun updateSerieTask(serie: EssencialSerie)
 
     //deletes
-    suspend fun deleteSerieTask(serie: EssencialSerie)
+    suspend fun deleteSerieTask(id: Int)
 
 
 }
@@ -43,15 +43,15 @@ class RepositoryImplementationFilmes(val serieDAO: AccessFilmes): RepositoryFilm
     }
 
     override suspend fun addFilmeTask(filme: EssencialFilme) {
-        TODO("Not yet implemented")
+        return serieDAO.addFilme(filme)
     }
 
     override suspend fun updateFilmeTask(filme: EssencialFilme) {
-        TODO("Not yet implemented")
+        return serieDAO.updateFilme(filme)
     }
 
-    override suspend fun deleteFilmeTask(filme: EssencialFilme) {
-        TODO("Not yet implemented")
+    override suspend fun deleteFilmeTask(id: Int) {
+        return serieDAO.deleteFilme(id)
     }
 
 }
@@ -61,15 +61,15 @@ class RepositoryImplementationSeries(val serieDAO: AccessSeries): RepositorySeri
     }
 
     override suspend fun addSerieTask(serie: EssencialSerie) {
-        TODO("Not yet implemented")
+        return serieDAO.addSeries(serie)
     }
 
     override suspend fun updateSerieTask(serie: EssencialSerie) {
-        TODO("Not yet implemented")
+        return serieDAO.updateSeries(serie)
     }
 
-    override suspend fun deleteSerieTask(serie: EssencialSerie) {
-        TODO("Not yet implemented")
+    override suspend fun deleteSerieTask(id: Int) {
+        return serieDAO.deleteSeries(id)
     }
 
 }

@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -18,14 +19,24 @@ import android.view.View.*
 import android.view.animation.AnimationUtils
 import android.widget.RatingBar
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.timelinelist.Constants.BASE_IMAGE_URL
 import com.example.timelinelist.R
+import com.example.timelinelist.RepositoryFilmes
+import com.example.timelinelist.RepositoryImplementationFilmes
+import com.example.timelinelist.database.BaseDadosFilmes
 import com.example.timelinelist.helpers.BaseFilmeDetalhe
+import com.example.timelinelist.helpers.EssencialFilme
+import com.example.timelinelist.viewmodels.FilmesFragmentViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detalhefilme.*
 import kotlinx.android.synthetic.main.activity_detalhefilme.imageview_compartilhar
 import kotlinx.android.synthetic.main.activity_detalheserie.*
+import kotlinx.android.synthetic.main.filme_item.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,11 +49,25 @@ class DetalheFilmeActivity : AppCompatActivity() {
     }
     private var isCollapsed = INITIAL_IS_COLLAPSED
 
+    lateinit var repositoryFilmes: RepositoryFilmes
+    lateinit var dbFilmes: BaseDadosFilmes
+
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalhefilme)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
+
+        dbFilmes = BaseDadosFilmes.invoke(this)
+        repositoryFilmes = RepositoryImplementationFilmes(dbFilmes.filmesDAO())
+        val viewModel by viewModels<FilmesFragmentViewModel> {
+            object : ViewModelProvider.Factory {
+                override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                    return FilmesFragmentViewModel(repositoryFilmes) as T
+                }
+            }
+        }
+
         if(intent.getStringExtra("origem")=="Pesquisa") {
             button_delete_filme.visibility = GONE
             button_salvareditar_filme.text = "SALVAR"
@@ -95,7 +120,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 updateLabel(myCalendar)
             }
-        edittext_data_filme.setOnClickListener {
+        edittext_dataassistido_filme.setOnClickListener {
             DatePickerDialog(
                 this@DetalheFilmeActivity, R.style.DialogTheme, date, myCalendar
                     .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
@@ -104,9 +129,48 @@ class DetalheFilmeActivity : AppCompatActivity() {
         }
 
         var filmeAtual = intent.getSerializableExtra("filmeClick") as BaseFilmeDetalhe
-        if(intent.getStringExtra("origem")=="ListaPessoal") {
-            // TODO
+        var idunico = intent.getIntExtra("idunico", 0)
+        button_salvareditar_filme.setOnClickListener {
+            if(intent.getStringExtra("origem")=="Pesquisa") {
+                viewModel.addFilme(EssencialFilme(
+                    null,
+                    filmeAtual.id,
+                    filmeAtual.title,
+                    filmeAtual.backdropPath,
+                    edittext_dataassistido_filme.text.toString(),
+                    getCheckboxCinema(),
+                    getCheckboxDormiu(),
+                    getCheckboxChorou(),
+                    getCheckboxFavorito(),
+                    edittext_nota_filme.text.toString()
+                    ))
+                Toast.makeText(this, "Filme Adicionado", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this,ListaActivity::class.java))
+            } else {
+                viewModel.updateFilme(EssencialFilme(
+                    idunico,
+                    filmeAtual.id,
+                    filmeAtual.title,
+                    filmeAtual.backdropPath,
+                    edittext_dataassistido_filme.text.toString(),
+                    getCheckboxCinema(),
+                    getCheckboxDormiu(),
+                    getCheckboxChorou(),
+                    getCheckboxFavorito(),
+                    edittext_nota_filme.text.toString()
+                ))
+                Toast.makeText(this, "Filme Atualizado", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this,ListaActivity::class.java))
+            }
         }
+        button_delete_filme.setOnClickListener {
+            if(intent.getStringExtra("origem")=="ListaPessoal") {
+                viewModel.deleteFilme(idunico)
+                Toast.makeText(this, "Filme Removido", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this,ListaActivity::class.java))
+            }
+        }
+
         textview_nomefilme.isSelected = true
         textview_nomefilme.text = filmeAtual.getTitulo()
         textview_duracaofilme.text = filmeAtual.getTempo()
@@ -144,7 +208,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
     private fun updateLabel(myCalendar: Calendar) {
         val myFormat = "dd/MM/yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
-        edittext_data_filme.setText(sdf.format(myCalendar.getTime()))
+        edittext_dataassistido_filme.setText(sdf.format(myCalendar.getTime()))
     }
 
     private fun applyLayoutTransition() {
@@ -152,5 +216,17 @@ class DetalheFilmeActivity : AppCompatActivity() {
         transition.setDuration(500)
         transition.enableTransitionType(LayoutTransition.CHANGING)
         root_descricaofilme.layoutTransition = transition
+    }
+    private fun getCheckboxCinema(): Int {
+        return if(checkbox_cinema.isChecked) {1} else {0}
+    }
+    private fun getCheckboxDormiu(): Int {
+        return if(checkbox_dormiu.isChecked) {1} else {0}
+    }
+    private fun getCheckboxChorou(): Int {
+        return if(checkbox_chorou.isChecked) {1} else {0}
+    }
+    private fun getCheckboxFavorito(): Int {
+        return if(checkbox_favorito.isChecked) {1} else {0}
     }
 }

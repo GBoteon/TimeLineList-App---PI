@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorPrimaryDark">@color/colorTransparent</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/colorBlack</item>
+        <item name="android:windowBackground">@color/colorFundoEscuro</item>
         <item name="android:navigationBarColor">#00000000</item>
         <item name="android:statusBarColor">@color/colorTransparent</item>
         <item name="logo">@drawable/nome_nigth</item>

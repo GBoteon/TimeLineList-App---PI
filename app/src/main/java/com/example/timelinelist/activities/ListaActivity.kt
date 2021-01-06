@@ -9,12 +9,19 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
-import com.example.timelinelist.R
+import com.example.timelinelist.*
 import com.example.timelinelist.adapters.ViewPagerAdapter
+import com.example.timelinelist.database.BaseDadosFilmes
+import com.example.timelinelist.database.BaseDadosSeries
 import com.example.timelinelist.fragments.FilmesFragment
 import com.example.timelinelist.fragments.SeriesFragment
+import com.example.timelinelist.viewmodels.FilmesFragmentViewModel
+import com.example.timelinelist.viewmodels.SeriesFragmentViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import kotlinx.android.synthetic.main.activity_lista.*
@@ -114,5 +121,6 @@ class ListaActivity : AppCompatActivity() {
             }
         }
     }
+
 
 }

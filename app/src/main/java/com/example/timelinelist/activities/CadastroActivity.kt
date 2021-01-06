@@ -15,11 +15,9 @@ class CadastroActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cadastro)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
 
-
-                btnCadastro.setOnClickListener {
+        btnCadastro.setOnClickListener {
             val intent = Intent(this, ListaActivity::class.java)
             startActivity(intent)
-
         }
     }
 }

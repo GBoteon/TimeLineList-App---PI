@@ -34,6 +34,7 @@ class ListaSeriesAdapter(private val listSerie: List<EssencialSerie>, val listen
                 holder.status_serie.text = position
             }
         }
+        holder.data_serie.text = serie.dataAssistidoPessoal
         holder.notapessoal_serie.text = "${serie.notaPessoal}/10"
         Picasso.get().load(Uri.parse("${Constants.BASE_IMAGE_URL}${serie.backdropPath}")).placeholder(R.drawable.ic_logo).into(
             holder.backdrop_serie)
@@ -42,6 +43,7 @@ class ListaSeriesAdapter(private val listSerie: List<EssencialSerie>, val listen
     inner class ListaSeriesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val nome_serie: TextView = itemView.findViewById(R.id.textview_nome_serie)
         val status_serie: TextView = itemView.findViewById(R.id.textview_status_serie)
+        val data_serie: TextView = itemView.findViewById(R.id.textview_data_serie)
         val notapessoal_serie: TextView = itemView.findViewById(R.id.textview_notapessoal_serie)
         val backdrop_serie: ImageView = itemView.findViewById(R.id.imageview_backdrop_serie)
 

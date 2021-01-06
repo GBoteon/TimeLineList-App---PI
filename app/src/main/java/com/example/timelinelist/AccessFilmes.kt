@@ -18,6 +18,6 @@ interface AccessFilmes {
     @Update
     suspend fun updateFilme(filme: EssencialFilme)
 
-    @Query("DELETE FROM filmes WHERE id = :filmeId")
-    suspend fun deleteFilme(filmeId: Int)
+    @Query("DELETE FROM filmes WHERE id = :id")
+    suspend fun deleteFilme(id: Int)
 }
