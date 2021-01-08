@@ -23,6 +23,7 @@ import com.example.timelinelist.RepositoryImplementationFilmes
 import com.example.timelinelist.activities.DetalheFilmeActivity
 import com.example.timelinelist.adapters.ListaFilmesAdapter
 import com.example.timelinelist.database.BaseDadosFilmes
+import com.example.timelinelist.helpers.EssencialFilme
 import com.example.timelinelist.viewmodels.FilmesFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_filmes.view.*
 
@@ -82,14 +83,13 @@ class FilmesFragment : Fragment(), ListaFilmesAdapter.OnFilmeClickListener {
         if(!context?.let { isOnline(it) }!!) {
             Toast.makeText(context, "Sem conexão com internet", Toast.LENGTH_LONG).show()
         } else {
-            var idClick = viewModel.listaFilme.value?.get(position)?.filmeid as Int
-            var idunico = viewModel.listaFilme.value?.get(position)?.id as Int
-            viewModel.getFilmesFromId(idClick)
+            var filmeClick = viewModel.listaFilme.value?.get(position) as EssencialFilme
+            viewModel.getFilmesFromId(filmeClick.filmeid)
             viewModel.filmeDetalhe.observe(viewLifecycleOwner) {
                 val intent = Intent(context, DetalheFilmeActivity::class.java)
                 intent.putExtra("filmeClick", it)
+                intent.putExtra("filmeDB", filmeClick)
                 intent.putExtra("origem", "ListaPessoal")
-                intent.putExtra("idunico", idunico)
                 startActivity(intent)
             }
         }

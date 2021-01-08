@@ -23,6 +23,7 @@ import com.example.timelinelist.activities.DetalheFilmeActivity
 import com.example.timelinelist.activities.DetalheSerieActivity
 import com.example.timelinelist.adapters.ListaSeriesAdapter
 import com.example.timelinelist.database.BaseDadosSeries
+import com.example.timelinelist.helpers.EssencialSerie
 import com.example.timelinelist.viewmodels.SeriesFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_series.view.*
 
@@ -76,14 +77,13 @@ class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {
         if(!context?.let { isOnline(it) }!!) {
             Toast.makeText(context, "Sem conexão com internet", Toast.LENGTH_LONG).show()
         } else {
-            var idClick = viewModel.listaSerie.value?.get(position)?.serieid as Int
-            var idunico = viewModel.listaSerie.value?.get(position)?.id as Int
-            viewModel.getSeriesFromId(idClick)
+            var serieClick = viewModel.listaSerie.value?.get(position) as EssencialSerie
+            viewModel.getSeriesFromId(serieClick.serieid)
             viewModel.serieDetalhe.observe(viewLifecycleOwner) {
                 val intent = Intent(context, DetalheSerieActivity::class.java)
                 intent.putExtra("serieClick", it)
+                intent.putExtra("serieDB", serieClick)
                 intent.putExtra("origem", "ListaPessoal")
-                intent.putExtra("idunico", idunico)
                 startActivity(intent)
             }
         }

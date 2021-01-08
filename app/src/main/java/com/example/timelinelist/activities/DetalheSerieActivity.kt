@@ -8,6 +8,7 @@ import android.graphics.text.LineBreaker
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import android.view.View.GONE
 import android.view.animation.AnimationUtils
@@ -81,7 +82,7 @@ class DetalheSerieActivity : AppCompatActivity() {
             cardview_detalheposter_serie.background.alpha = 150
         }
         ratingbar_nota_serie.setOnRatingBarChangeListener { _, rating, _ ->
-            edittext_nota_serie.setText((rating * 2).toString())
+            textview_notaselecionada_serie.setText((rating * 2).toString())
         }
         button_ok_nota_serie.setOnClickListener {
             cardview_rating_serie.visibility = View.INVISIBLE
@@ -116,7 +117,18 @@ class DetalheSerieActivity : AppCompatActivity() {
             ).show()
         }
         var serieAtual = intent.getSerializableExtra("serieClick") as BaseSerieDetalhe
-        var idunico = intent.getIntExtra("idunico", 0)
+        var idunico = 0
+        if (intent.getStringExtra("origem")=="ListaPessoal") {
+            var serieDB = intent.getSerializableExtra("serieDB") as EssencialSerie
+            idunico = serieDB.id!!
+            edittext_dataassistido_serie.text = serieDB.dataAssistidoPessoal
+            edittext_nota_serie.text = serieDB.notaPessoal
+            if (serieDB.statusPessoal == Constants.STATUS_SERIE_PESSOAL[0]) checkbox_acompanhando.isChecked = true
+            if (serieDB.statusPessoal == Constants.STATUS_SERIE_PESSOAL[1]) checkbox_emandamento.isChecked = true
+            if (serieDB.statusPessoal == Constants.STATUS_SERIE_PESSOAL[2]) checkbox_finalizada.isChecked = true
+            if (serieDB.statusPessoal == Constants.STATUS_SERIE_PESSOAL[3]) checkbox_largada.isChecked = true
+        }
+
         button_salvareditar_serie.setOnClickListener {
             if(intent.getStringExtra("origem")=="Pesquisa") {
                 viewModel.addSerie(EssencialSerie(

@@ -3,6 +3,7 @@ package com.example.timelinelist.adapters
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -36,6 +37,10 @@ class ListaSeriesAdapter(private val listSerie: List<EssencialSerie>, val listen
         }
         holder.data_serie.text = serie.dataAssistidoPessoal
         holder.notapessoal_serie.text = "${serie.notaPessoal}/10"
+
+        if (serie.dataAssistidoPessoal==""){holder.data_serie.visibility = GONE}
+        if (serie.notaPessoal==""){holder.notapessoal_serie.visibility = GONE}
+
         Picasso.get().load(Uri.parse("${Constants.BASE_IMAGE_URL}${serie.backdropPath}")).placeholder(R.drawable.ic_logo).into(
             holder.backdrop_serie)
 

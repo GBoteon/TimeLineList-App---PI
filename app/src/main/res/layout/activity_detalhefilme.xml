@@ -277,16 +277,17 @@
                     android:textSize="16sp"
                     android:gravity="center"
                     android:layout_gravity="center"/>
-                <EditText
+                <TextView
                     android:id="@+id/edittext_dataassistido_filme"
                     style="@style/DetalheTextView"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_weight="0.6"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     android:backgroundTint="@color/colorTransparent"
-                    android:inputType="date"
-                    android:focusable="false" />
+                    android:layout_gravity="left"
+                    android:gravity="center_vertical" />
                 <TextView
                     style="@style/DetalheTextView"
                     android:layout_width="wrap_content"
@@ -296,16 +297,17 @@
                     android:textSize="16sp"
                     android:gravity="center"
                     android:layout_gravity="center"/>
-                <EditText
+                <TextView
                     android:id="@+id/edittext_nota_filme"
                     style="@style/DetalheTextView"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_weight="0.3"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     android:backgroundTint="@color/colorTransparent"
-                    android:inputType="text"
-                    android:focusable="false"/>
+                    android:layout_gravity="left"
+                    android:gravity="center_vertical" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <Button
@@ -350,6 +352,26 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         style="@style/CardViewPoster">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            android:gravity="top">
+            <TextView
+                android:id="@+id/textview_notaselecionada_filme"
+                style="@style/DetalheTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:padding="10dp"
+                android:text="Nota"
+                android:textColor="@color/colorRed"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+        </LinearLayout>
         <RatingBar
             android:id="@+id/ratingbar_nota_filme"
             android:layout_width="wrap_content"

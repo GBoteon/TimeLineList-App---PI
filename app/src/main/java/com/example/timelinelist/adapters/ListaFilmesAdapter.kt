@@ -3,6 +3,7 @@ package com.example.timelinelist.adapters
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Filter
@@ -42,6 +43,8 @@ class ListaFilmesAdapter(
         if(filme.dormiu==1) {holder.imageview_dormiu.visibility = VISIBLE}
         if(filme.chorou==1) {holder.imageview_chorou.visibility = VISIBLE}
         if(filme.favorito==1) {holder.imageview_favorito.visibility = VISIBLE}
+        if(filme.dataAssistidoPessoal=="") {holder.data_filme.visibility = GONE}
+        if(filme.notaPessoal=="") {holder.notapessoal_filme.visibility = GONE}
 
         Picasso.get().load(Uri.parse("${Constants.BASE_IMAGE_URL}${filme.backdropPath}")).placeholder(
             R.drawable.ic_logo).into(

@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.timelinelist.Constants
 import com.example.timelinelist.Constants.BASE_IMAGE_URL
 import com.example.timelinelist.R
 import com.example.timelinelist.RepositoryFilmes
@@ -93,7 +94,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
             cardview_detalheposter_filme.background.alpha = 150
         }
         ratingbar_nota_filme.setOnRatingBarChangeListener { _, rating, _ ->
-            edittext_nota_filme.setText((rating*2).toString())
+            textview_notaselecionada_filme.setText((rating*2).toString())
         }
         button_ok_nota_filme.setOnClickListener {
             cardview_rating_filme.visibility = INVISIBLE
@@ -129,7 +130,17 @@ class DetalheFilmeActivity : AppCompatActivity() {
         }
 
         var filmeAtual = intent.getSerializableExtra("filmeClick") as BaseFilmeDetalhe
-        var idunico = intent.getIntExtra("idunico", 0)
+        var idunico = 0
+        if (intent.getStringExtra("origem")=="ListaPessoal") {
+            var filmeDB = intent.getSerializableExtra("filmeDB") as EssencialFilme
+            idunico = filmeDB.id!!
+            edittext_dataassistido_filme.text = filmeDB.dataAssistidoPessoal
+            edittext_nota_filme.text = filmeDB.notaPessoal
+            if (filmeDB.cinema==1) checkbox_cinema.isChecked = true
+            if (filmeDB.dormiu==1) checkbox_dormiu.isChecked = true
+            if (filmeDB.chorou==1) checkbox_chorou.isChecked = true
+            if (filmeDB.favorito==1) checkbox_favorito.isChecked = true
+        }
         button_salvareditar_filme.setOnClickListener {
             if(intent.getStringExtra("origem")=="Pesquisa") {
                 viewModel.addFilme(EssencialFilme(
@@ -201,6 +212,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
         Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(imageview_filme)
         Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(
             imageview_detalheposter_filme)
+
         imageview_filme.startAnimation(animSlide)
         applyLayoutTransition()
 
