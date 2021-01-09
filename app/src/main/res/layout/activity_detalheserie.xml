@@ -231,36 +231,36 @@
                     android:layout_marginTop="1dp"
                     android:layout_marginBottom="5dp">
                     <RadioButton
-                        android:id="@+id/checkbox_emandamento"
+                        android:id="@+id/checkbox_assistindo"
                         style="@style/DetalheTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="-5dp"
                         android:buttonTint="@color/colorRed"
                         android:layoutDirection="rtl"
-                        android:text="Em Andamento"
+                        android:text="Assistindo"
                         android:textSize="16sp"
                         android:checked="true"/>
                     <RadioButton
-                        android:id="@+id/checkbox_acompanhando"
+                        android:id="@+id/checkbox_completa"
                         style="@style/DetalheTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="-5dp"
                         android:buttonTint="@color/colorRed"
                         android:layoutDirection="rtl"
-                        android:text="Acompanhando"
-                        android:textSize="16sp" />
-                    <RadioButton
-                        android:id="@+id/checkbox_finalizada"
-                        style="@style/DetalheTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="-5dp"
-                        android:buttonTint="@color/colorRed"
-                        android:layoutDirection="rtl"
-                        android:text="Finalizada"
+                        android:text="Completa"
                         android:textSize="16sp"  />
+                    <RadioButton
+                        android:id="@+id/checkbox_emespera"
+                        style="@style/DetalheTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-5dp"
+                        android:buttonTint="@color/colorRed"
+                        android:layoutDirection="rtl"
+                        android:text="Em Espera"
+                        android:textSize="16sp" />
                     <RadioButton
                         android:id="@+id/checkbox_largada"
                         style="@style/DetalheTextView"
@@ -271,6 +271,16 @@
                         android:layoutDirection="rtl"
                         android:text="Largada"
                         android:textSize="16sp"  />
+                    <RadioButton
+                        android:id="@+id/checkbox_pretendoassistir"
+                        style="@style/DetalheTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-5dp"
+                        android:buttonTint="@color/colorRed"
+                        android:layoutDirection="rtl"
+                        android:text="Pretendo Assistir"
+                        android:textSize="16sp" />
                 </RadioGroup>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

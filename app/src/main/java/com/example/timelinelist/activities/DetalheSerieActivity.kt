@@ -123,10 +123,12 @@ class DetalheSerieActivity : AppCompatActivity() {
             idunico = serieDB.id!!
             edittext_dataassistido_serie.text = serieDB.dataAssistidoPessoal
             edittext_nota_serie.text = serieDB.notaPessoal
-            if (serieDB.statusPessoal == Constants.STATUS_SERIE_PESSOAL[0]) checkbox_acompanhando.isChecked = true
-            if (serieDB.statusPessoal == Constants.STATUS_SERIE_PESSOAL[1]) checkbox_emandamento.isChecked = true
-            if (serieDB.statusPessoal == Constants.STATUS_SERIE_PESSOAL[2]) checkbox_finalizada.isChecked = true
+            if (serieDB.statusPessoal == Constants.STATUS_SERIE_PESSOAL[0]) checkbox_assistindo.isChecked = true
+            if (serieDB.statusPessoal == Constants.STATUS_SERIE_PESSOAL[1]) checkbox_completa.isChecked = true
+            if (serieDB.statusPessoal == Constants.STATUS_SERIE_PESSOAL[2]) checkbox_emespera.isChecked = true
             if (serieDB.statusPessoal == Constants.STATUS_SERIE_PESSOAL[3]) checkbox_largada.isChecked = true
+            if (serieDB.statusPessoal == Constants.STATUS_SERIE_PESSOAL[4]) checkbox_pretendoassistir.isChecked = true
+
         }
 
         button_salvareditar_serie.setOnClickListener {
