@@ -22,9 +22,11 @@ class LoginActivity : AppCompatActivity() {
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
 
         button_login.setOnClickListener {
-            singinUsuarioFirebase(edittext_login_email.text.toString(), edittext_login_senha.text.toString())
-            val intent = Intent(this, ListaActivity::class.java)
-            startActivity(intent)
+            if((edittext_login_email.text.toString().isNotBlank())&&(edittext_login_senha.text.toString().isNotBlank())) {
+                singinUsuarioFirebase(edittext_login_email.text.toString(), edittext_login_senha.text.toString())
+            } else {
+                Toast.makeText(this, "Informe o email e a senha.", Toast.LENGTH_LONG).show()
+            }
         }
         button_cadastro.setOnClickListener {
             val intent = Intent(this, CadastroActivity::class.java)
@@ -32,19 +34,14 @@ class LoginActivity : AppCompatActivity() {
         }
     }
     fun singinUsuarioFirebase(email: String, senha: String) {
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha).addOnCompleteListener {
-                task ->
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha).addOnCompleteListener { task ->
             if(task.isSuccessful) {
-                val emailUser = task.result?.user!!.email
                 sharedPrefs.edit().putString(Constants.KEY_IDUSER, task.result?.user!!.uid).apply()
-                sharedPrefs.edit().putString(Constants.KEY_NOME,
-                    edittext_cadastro_nome.text.toString()).apply()
-                sharedPrefs.edit().putString(Constants.KEY_SOBRENOME,
-                    edittext_cadastro_sobrenome.text.toString()).apply()
-                sharedPrefs.edit().putString(Constants.KEY_EMAIL, emailUser).apply()
+                sharedPrefs.edit().putString(Constants.KEY_EMAIL, task.result?.user!!.email).apply()
                 startActivity(Intent(this, ListaActivity::class.java))
             } else {
                 Toast.makeText(this, task.exception?.message.toString(), Toast.LENGTH_SHORT).show()
+                println(task.exception?.message.toString())
             }
         }
     }
