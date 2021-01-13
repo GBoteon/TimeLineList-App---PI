@@ -55,6 +55,9 @@
         <item name="android:textColorHint">@color/colorBlack</item>
         <item name="android:drawableTint">@color/colorBlack</item>
     </style>
+    <style name="EditTextMaterial">
+        <item name="passwordToggleTint">@color/colorBlack</item>
+    </style>
     <style name="Button">
         <item name="android:backgroundTint">@color/colorBlack</item>
         <item name="android:drawableTint">@color/colorWhite</item>

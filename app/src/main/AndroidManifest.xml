@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.timelinelist">
+    package="com.manasomali.timelinelist">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,24 +13,24 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.EditPerfilActivity" />
-        <activity android:name=".activities.CadastroActivity" />
-        <activity android:name=".activities.EstatisticasActivity" />
-        <activity android:name=".activities.PerfilActivity" />
-        <activity android:name=".activities.ListaActivity" />
-        <activity android:name=".activities.PesquisaActivity" />
-        <activity android:name=".activities.LoadingActivity" >
+        <activity android:name="com.manasomali.timelinelist.activities.EditPerfilActivity" />
+        <activity android:name="com.manasomali.timelinelist.activities.CadastroActivity" />
+        <activity android:name="com.manasomali.timelinelist.activities.EstatisticasActivity" />
+        <activity android:name="com.manasomali.timelinelist.activities.PerfilActivity" />
+        <activity android:name="com.manasomali.timelinelist.activities.ListaActivity" />
+        <activity android:name="com.manasomali.timelinelist.activities.PesquisaActivity" />
+        <activity android:name="com.manasomali.timelinelist.activities.LoadingActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.LoginActivity" />
+        <activity android:name="com.manasomali.timelinelist.activities.LoginActivity" />
         <activity
-            android:name=".activities.DetalheSerieActivity"
+            android:name="com.manasomali.timelinelist.activities.DetalheSerieActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
-            android:name=".activities.DetalheFilmeActivity"
+            android:name="com.manasomali.timelinelist.activities.DetalheFilmeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
     </application>
 

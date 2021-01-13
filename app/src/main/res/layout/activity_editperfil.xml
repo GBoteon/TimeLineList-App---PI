@@ -19,85 +19,85 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/circularImageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/avatar"
+        app:civ_border="true"
+        app:civ_border_color="@color/colorBlack"
+        app:civ_border_color_direction="top_to_bottom"
+        app:civ_border_width="2dp"
+        app:civ_shadow="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_editpefiltoperfil" />
+
+    <ImageView
+        android:id="@+id/imageview_exitfirebase"
+        style="@style/NavIcone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_exit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/circularImageView"
         app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_editpefiltoperfil">
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="140dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="0.5"
-            app:srcCompat="@mipmap/ic_avatar_round" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_weight="0.5"
-            android:orientation="vertical">
-
             <EditText
-                android:id="@+id/edittext_nome"
+                android:id="@+id/edittext_editaperfil_nome"
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
                 android:layout_marginBottom="40dp"
                 android:drawableStart="@drawable/ic_person"
                 android:drawablePadding="16dp"
-                android:padding="8dp"
                 android:hint="Nome"
-                android:textSize="8pt" />
+                android:padding="8dp"
+                android:textSize="10pt" />
 
             <EditText
-                android:id="@+id/edittext_sobrenome"
+                android:id="@+id/edittext_editaperfil_sobrenome"
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
                 android:drawableStart="@drawable/ic_person"
                 android:drawablePadding="16dp"
-                android:padding="8dp"
                 android:hint="@string/second_name"
-                android:textSize="8pt" />
-        </LinearLayout>
+                android:padding="8dp"
+                android:textSize="10pt" />
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/edittext_email"
-        style="@style/EditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:drawableStart="@drawable/ic_person"
-        android:drawablePadding="16dp"
-        android:padding="8dp"
-        android:hint="Email"
-        android:textSize="8pt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
-
     <Button
-        android:id="@+id/button_save"
+        android:id="@+id/button_editaperfil_save"
         style="@style/Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/round_bg"
-        android:text="@string/save"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="10dp"
+        android:text="Salvar"
         android:textSize="8pt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_email"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
         app:layout_constraintVertical_bias="0.819" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

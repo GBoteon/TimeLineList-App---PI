@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "313009394887",
+    "project_id": "timelinelist-fab74",
+    "storage_bucket": "timelinelist-fab74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313009394887:android:e30c202251df8e91ee1ae2",
+        "android_client_info": {
+          "package_name": "com.manasomali.timelinelist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313009394887-ogf5rtgosf0h61cu8mm6q3kqksdoi3o9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.manasomali.timelinelist",
+            "certificate_hash": "9f817887ea7e5707d9b8d21b5ca3248b03920eb1"
+          }
+        },
+        {
+          "client_id": "313009394887-0uf6svkeburnfujdteano02p4e426s83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjcE77jw5ADEqyMEV-Cghd_iDW-6tJlao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313009394887-0uf6svkeburnfujdteano02p4e426s83.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

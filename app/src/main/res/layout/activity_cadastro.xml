@@ -7,6 +7,17 @@
     android:screenOrientation="portrait"
     tools:context=".activities.CadastroActivity">
     <ImageView
+        android:id="@+id/imageview_voltar_cadastrotologin"
+        style="@style/NavIcone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
         android:id="@+id/imageIcone"
         android:layout_width="match_parent"
         android:layout_height="90dp"
@@ -32,133 +43,152 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageIcone" />
 
-    <EditText
-        android:id="@+id/inputNome"
-        style="@style/EditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        android:drawableStart="@drawable/ic_person"
-        android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="Nome"
-        android:inputType="text"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageLogo" />
-
-    <EditText
-        android:id="@+id/inputSobrenome"
-        style="@style/EditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        android:drawableStart="@drawable/ic_person"
-        android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="Sobrenome"
-        android:inputType="text"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputNome" />
-
-    <EditText
-        android:id="@+id/inputEmailCadastro"
-        style="@style/EditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        android:drawableStart="@drawable/ic_person"
-        android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="E-mail"
-        android:inputType="text"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputSobrenome" />
-
-    <EditText
-        android:id="@+id/inputPassword"
-        style="@style/EditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        android:drawableStart="@drawable/ic_lock"
-        android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputEmailCadastro" />
-
-    <EditText
-        android:id="@+id/inputConfirmPassword"
-        style="@style/EditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        android:drawableStart="@drawable/ic_lock"
-        android:drawablePadding="16dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputConfirmPassword">
-
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorRed"
-            android:text="@string/termosDeUso" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnCadastro"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout1"
+        style="@style/EditTextMaterial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="16dp"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageLogo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edittext_cadastro_nome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/EditText"
+            android:ems="10"
+            android:hint="Nome"
+            android:drawableStart="@drawable/ic_person"
+            android:drawablePadding="16dp"
+            android:padding="8dp"
+            android:inputType="textPersonName"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        style="@style/EditTextMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="16dp"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edittext_cadastro_sobrenome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/EditText"
+            android:ems="10"
+            android:hint="Sobrenome"
+            android:drawableStart="@drawable/ic_person"
+            android:drawablePadding="16dp"
+            android:padding="8dp"
+            android:inputType="textPersonName"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout3"
+        style="@style/EditTextMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="16dp"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edittext_cadastro_email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/EditText"
+            android:ems="10"
+            android:hint="E-mail"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="16dp"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout4"
+        style="@style/EditTextMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="16dp"
+        app:hintEnabled="false"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edittext_cadastro_senha1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/EditText"
+            android:ems="10"
+            android:hint="Senha"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="16dp"
+            android:padding="8dp"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout5"
+        style="@style/EditTextMaterial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="16dp"
+        app:hintEnabled="false"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edittext_cadastro_senha2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/EditText"
+            android:ems="10"
+            android:hint="Senha"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="16dp"
+            android:padding="8dp"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/button_cadastro_cadastrese"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/round_btn_cadastro"
         android:text="@string/cadastrese"
+        android:textSize="18sp"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
         app:layout_constraintVertical_bias="0.207" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

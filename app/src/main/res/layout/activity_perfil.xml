@@ -25,11 +25,12 @@
         style="@style/NavIcone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
         android:clickable="true"
         android:src="@drawable/ic_edit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintHorizontal_bias="0.975"
         app:layout_constraintStart_toEndOf="@+id/imageview_voltar_pefiltolista"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +53,7 @@
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="150dp"
-        android:layout_gravity="start"
+        android:layout_gravity="center_vertical"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
@@ -62,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_pefiltolista">
 
         <TextView
-            android:id="@+id/textview_nome"
+            android:id="@+id/textview_perfil_nome"
             style="@style/TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,10 +73,10 @@
             android:padding="8dp"
             android:text="Nome"
             android:textColorHint="@color/colorBlack"
-            android:textSize="8pt" />
+            android:textSize="10pt" />
 
         <TextView
-            android:id="@+id/textview_sobrenome"
+            android:id="@+id/textview_perfil_sobrenome"
             style="@style/TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,23 +85,23 @@
             android:padding="8dp"
             android:text="@string/second_name"
             android:textColorHint="@color/colorBlack"
-            android:textSize="8pt" />
+            android:textSize="10pt" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/inputEmailCadastro"
+        android:id="@+id/textview_perfil_email"
         style="@style/TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:drawableStart="@drawable/ic_person"
+        android:drawableStart="@drawable/ic_email"
         android:drawablePadding="16dp"
         android:padding="8dp"
         android:text="Email"
         android:textColorHint="@color/colorBlack"
-        android:textSize="8pt"
+        android:textSize="10pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/circularImageView" />
@@ -116,10 +117,10 @@
         android:drawablePadding="16dp"
         android:padding="8dp"
         android:text="Temas"
-        android:textSize="8pt"
+        android:textSize="10pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputEmailCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/textview_perfil_email" />
 
     <RadioGroup
         android:id="@+id/themeGroup"
@@ -136,7 +137,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorRed"
-            android:text="Escuro" />
+            android:text="Escuro"
+            android:textSize="8pt"/>
 
         <RadioButton
             android:id="@+id/themeLight"
@@ -144,7 +146,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorRed"
-            android:text="Claro" />
+            android:text="Claro"
+            android:textSize="8pt" />
 
     </RadioGroup>
 
