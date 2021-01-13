@@ -65,7 +65,10 @@
             android:hint="Nome"
             android:drawableStart="@drawable/ic_person"
             android:drawablePadding="16dp"
-            android:padding="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:inputType="textPersonName"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,8 +94,10 @@
             android:hint="Sobrenome"
             android:drawableStart="@drawable/ic_person"
             android:drawablePadding="16dp"
-            android:padding="8dp"
-            android:inputType="textPersonName"/>
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"            android:inputType="textPersonName"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -117,7 +122,10 @@
             android:hint="E-mail"
             android:drawableStart="@drawable/ic_email"
             android:drawablePadding="16dp"
-            android:padding="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
