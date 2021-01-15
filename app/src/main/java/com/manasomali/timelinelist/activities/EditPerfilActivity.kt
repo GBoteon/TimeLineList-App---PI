@@ -39,7 +39,7 @@ class EditPerfilActivity : AppCompatActivity() {
         }
         edittext_editaperfil_nome.setText(sharedPrefs.getString(KEY_NOME, EMPTY_STRING).toString())
         edittext_editaperfil_sobrenome.setText(sharedPrefs.getString(KEY_SOBRENOME, EMPTY_STRING).toString())
-        Picasso.get().load(Uri.parse(sharedPrefs.getString(Constants.KEY_FOTO, EMPTY_STRING))).placeholder(R.drawable.ic_logo).into(
+        Picasso.get().load(Uri.parse(sharedPrefs.getString(Constants.KEY_FOTO, EMPTY_STRING))).placeholder(R.mipmap.ic_person).into(
             circularimageview_editperfil)
     }
 }

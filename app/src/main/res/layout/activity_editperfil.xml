@@ -24,11 +24,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="20dp"
-        android:src="@drawable/avatar"
-        app:civ_border="true"
-        app:civ_border_color="@color/colorBlack"
-        app:civ_border_color_direction="top_to_bottom"
-        app:civ_border_width="2dp"
+        app:civ_border="false"
         app:civ_shadow="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_editpefiltoperfil" />
@@ -48,7 +44,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout4"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
@@ -68,6 +64,7 @@
                 android:drawablePadding="16dp"
                 android:hint="Nome"
                 android:padding="8dp"
+                android:inputType="textMultiLine"
                 android:textSize="10pt" />
 
             <EditText
@@ -79,6 +76,7 @@
                 android:drawablePadding="16dp"
                 android:hint="@string/second_name"
                 android:padding="8dp"
+                android:inputType="textMultiLine"
                 android:textSize="10pt" />
     </LinearLayout>
     <Button

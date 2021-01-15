@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.res.Configuration
+import android.graphics.drawable.BitmapDrawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
@@ -65,7 +66,7 @@ class ListaActivity : AppCompatActivity() {
             }
         }
         Picasso.get().load(Uri.parse(sharedPrefs.getString(Constants.KEY_FOTO,
-            Constants.EMPTY_STRING))).placeholder(R.drawable.ic_logo).into(
+            Constants.EMPTY_STRING))).placeholder(R.mipmap.ic_person).into(
             toolbar_button_right)
     }
 

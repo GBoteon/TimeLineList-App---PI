@@ -46,7 +46,7 @@ class PerfilActivity : AppCompatActivity() {
         textview_perfil_nome.text = sharedPrefs.getString(KEY_NOME, EMPTY_STRING)
         textview_perfil_sobrenome.text = sharedPrefs.getString(KEY_SOBRENOME, EMPTY_STRING)
         textview_perfil_email.text = sharedPrefs.getString(KEY_EMAIL, EMPTY_STRING)
-        Picasso.get().load(Uri.parse(sharedPrefs.getString(KEY_FOTO, EMPTY_STRING))).placeholder(R.drawable.ic_logo).into(
+        Picasso.get().load(Uri.parse(sharedPrefs.getString(KEY_FOTO, EMPTY_STRING))).placeholder(R.mipmap.ic_person).into(
             circularimageview_perfil)
     }
 

@@ -67,12 +67,10 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(
             this) { task ->
             if(task.isSuccessful) {
-                endLoading()
                 sharedPrefs.edit().putString(Constants.KEY_IDUSER, task.result?.user!!.uid).apply()
                 sharedPrefs.edit().putString(Constants.KEY_EMAIL, task.result?.user!!.email).apply()
                 startActivity(Intent(this, ListaActivity::class.java))
             } else {
-                endLoading()
                 Toast.makeText(this, task.exception?.message.toString(), Toast.LENGTH_SHORT).show()
                 println("erro: ${task.exception?.message.toString()}")
             }
@@ -101,18 +99,18 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    endLoading()
                     Toast.makeText(this, "Logado com sucesso", Toast.LENGTH_SHORT).show()
                     val user = firebaseAuth.currentUser
-                    println(user?.photoUrl.toString())
                     sharedPrefs.edit().putString(Constants.KEY_IDUSER, user?.uid).apply()
-                    sharedPrefs.edit().putString(Constants.KEY_NOME, user?.displayName).apply()
-                    sharedPrefs.edit().putString(Constants.KEY_EMAIL, user?.email).apply()
+                    var nomes = task.result?.user!!.displayName?.split(" ")?.map { it.trim() }
+                    sharedPrefs.edit().putString(Constants.KEY_NOME, nomes?.get(0)).apply()
+                    sharedPrefs.edit().putString(Constants.KEY_EMAIL, nomes?.get(1)).apply()
                     sharedPrefs.edit().putString(Constants.KEY_FOTO, user?.photoUrl.toString()).apply()
+                    endLoading()
                     startActivity(Intent(this, ListaActivity::class.java))
                 } else {
-                    endLoading()
                     Toast.makeText(this, "Login falhou.", Toast.LENGTH_SHORT).show()
+                    endLoading()
                 }
             }
     }
@@ -122,19 +120,18 @@ class LoginActivity : AppCompatActivity() {
         button_cadastro.isClickable = false
         siginbutton_google.isClickable = false
         siginbutton_facebook.isClickable = false
-        edittext_login_email.isFocusable = false
-        edittext_login_senha.isFocusable = false
+        edittext_login_email.isEnabled = false
+        edittext_login_senha.isEnabled = false
         progressbar_loading_login.visibility = VISIBLE
         progressbar_loading_login.background.alpha = 150
     }
     fun endLoading() {
-        Toast.makeText(this, "Aguarde...", Toast.LENGTH_SHORT).show()
         siginbutton_google.isClickable = true
         button_cadastro.isClickable = true
         siginbutton_google.isClickable = true
         siginbutton_facebook.isClickable = true
-        edittext_login_email.isFocusable = true
-        edittext_login_senha.isFocusable = true
+        edittext_login_email.isEnabled = true
+        edittext_login_senha.isEnabled = true
         progressbar_loading_login.visibility = GONE
     }
 
