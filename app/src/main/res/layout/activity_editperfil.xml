@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/circularImageView"
+        android:id="@+id/circularimageview_editperfil"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="20dp"
@@ -39,6 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:src="@drawable/ic_exit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.955"
@@ -54,7 +55,7 @@
         android:layout_marginEnd="20dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/circularImageView"
+        app:layout_constraintStart_toEndOf="@+id/circularimageview_editperfil"
         app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_editpefiltoperfil">
 
             <EditText

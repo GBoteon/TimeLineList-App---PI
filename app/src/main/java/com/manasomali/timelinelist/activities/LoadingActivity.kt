@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.auth.FirebaseAuth
+import com.manasomali.timelinelist.Constants
 import com.manasomali.timelinelist.Constants.KEY_THEME
 import com.manasomali.timelinelist.Constants.PREFS_NAME
 import com.manasomali.timelinelist.Constants.THEME_UNDEFINED
@@ -31,6 +32,12 @@ class LoadingActivity : AppCompatActivity() {
 
         var intent = Intent(this, LoginActivity::class.java)
         if (FirebaseAuth.getInstance().currentUser != null) {
+            sharedPrefs.edit().putString(Constants.KEY_IDUSER, FirebaseAuth.getInstance().currentUser?.uid).apply()
+            val nomes: List<String> = FirebaseAuth.getInstance().currentUser?.displayName.toString().split(" ").map { it -> it.trim() }
+            sharedPrefs.edit().putString(Constants.KEY_NOME, nomes[0]).apply()
+            sharedPrefs.edit().putString(Constants.KEY_SOBRENOME, nomes[1]).apply()
+            sharedPrefs.edit().putString(Constants.KEY_EMAIL, FirebaseAuth.getInstance().currentUser?.email).apply()
+            sharedPrefs.edit().putString(Constants.KEY_FOTO, FirebaseAuth.getInstance().currentUser?.photoUrl.toString()).apply()
             intent = Intent(this, ListaActivity::class.java)
         }
         scope.launch {

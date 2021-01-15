@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/circularImageView"
+        android:id="@+id/circularimageview_perfil"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="20dp"
@@ -59,7 +59,7 @@
         android:layout_marginEnd="20dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/circularImageView"
+        app:layout_constraintStart_toEndOf="@+id/circularimageview_perfil"
         app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_pefiltolista">
 
         <TextView
@@ -104,7 +104,7 @@
         android:textSize="10pt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circularImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/circularimageview_perfil" />
     <TextView
         android:id="@+id/switchcompat_tema"
         style="@style/TextView"

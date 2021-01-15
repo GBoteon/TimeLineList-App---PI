@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
@@ -16,6 +17,8 @@ import com.manasomali.timelinelist.fragments.FilmesFragment
 import com.manasomali.timelinelist.fragments.SeriesFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_editperfil.*
 import kotlinx.android.synthetic.main.activity_lista.*
 
 
@@ -25,6 +28,7 @@ class ListaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
+        val sharedPrefs by lazy {  getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE) }
 
         setupViewPager()
         setupColorIcones()
@@ -60,7 +64,9 @@ class ListaActivity : AppCompatActivity() {
                 startActivity(Intent(this, PesquisaActivity::class.java))
             }
         }
-
+        Picasso.get().load(Uri.parse(sharedPrefs.getString(Constants.KEY_FOTO,
+            Constants.EMPTY_STRING))).placeholder(R.drawable.ic_logo).into(
+            toolbar_button_right)
     }
 
     private fun setupViewPager() {

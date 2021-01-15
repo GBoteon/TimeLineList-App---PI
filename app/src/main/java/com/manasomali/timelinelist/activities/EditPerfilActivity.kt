@@ -3,6 +3,7 @@ package com.manasomali.timelinelist.activities
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -12,6 +13,7 @@ import com.manasomali.timelinelist.Constants.EMPTY_STRING
 import com.manasomali.timelinelist.Constants.KEY_NOME
 import com.manasomali.timelinelist.Constants.KEY_SOBRENOME
 import com.manasomali.timelinelist.R
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_editperfil.*
 import kotlinx.android.synthetic.main.activity_perfil.*
 
@@ -37,5 +39,7 @@ class EditPerfilActivity : AppCompatActivity() {
         }
         edittext_editaperfil_nome.setText(sharedPrefs.getString(KEY_NOME, EMPTY_STRING).toString())
         edittext_editaperfil_sobrenome.setText(sharedPrefs.getString(KEY_SOBRENOME, EMPTY_STRING).toString())
+        Picasso.get().load(Uri.parse(sharedPrefs.getString(Constants.KEY_FOTO, EMPTY_STRING))).placeholder(R.drawable.ic_logo).into(
+            circularimageview_editperfil)
     }
 }

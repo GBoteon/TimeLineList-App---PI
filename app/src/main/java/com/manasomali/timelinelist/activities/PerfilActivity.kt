@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.manasomali.timelinelist.Constants.EMPTY_STRING
 import com.manasomali.timelinelist.Constants.KEY_EMAIL
+import com.manasomali.timelinelist.Constants.KEY_FOTO
 import com.manasomali.timelinelist.Constants.KEY_NOME
 import com.manasomali.timelinelist.Constants.KEY_SOBRENOME
 import com.manasomali.timelinelist.Constants.KEY_THEME
@@ -17,6 +19,8 @@ import com.manasomali.timelinelist.Constants.THEME_DARK
 import com.manasomali.timelinelist.Constants.THEME_LIGHT
 import com.manasomali.timelinelist.Constants.THEME_UNDEFINED
 import com.manasomali.timelinelist.R
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_detalhefilme.*
 import kotlinx.android.synthetic.main.activity_perfil.*
 
 
@@ -42,6 +46,8 @@ class PerfilActivity : AppCompatActivity() {
         textview_perfil_nome.text = sharedPrefs.getString(KEY_NOME, EMPTY_STRING)
         textview_perfil_sobrenome.text = sharedPrefs.getString(KEY_SOBRENOME, EMPTY_STRING)
         textview_perfil_email.text = sharedPrefs.getString(KEY_EMAIL, EMPTY_STRING)
+        Picasso.get().load(Uri.parse(sharedPrefs.getString(KEY_FOTO, EMPTY_STRING))).placeholder(R.drawable.ic_logo).into(
+            circularimageview_perfil)
     }
 
     private fun initThemeListener(){

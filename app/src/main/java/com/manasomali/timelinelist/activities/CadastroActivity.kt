@@ -43,7 +43,7 @@ class CadastroActivity : AppCompatActivity() {
         }
     }
     fun cadastroUsuarioFirebase(email: String, senha: String) {
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, senha).addOnCompleteListener { task ->
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, senha).addOnCompleteListener(this) { task ->
             if(task.isSuccessful) {
                 val emailUser = task.result?.user!!.email
                 Toast.makeText(this, "Usuário cadastrado.", Toast.LENGTH_LONG).show()
