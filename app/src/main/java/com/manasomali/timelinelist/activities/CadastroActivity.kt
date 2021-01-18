@@ -52,8 +52,8 @@ class CadastroActivity : AppCompatActivity() {
                 Toast.makeText(this, "Usuário cadastrado.", Toast.LENGTH_LONG).show()
                 sharedPrefs.edit().putString(Constants.KEY_IDUSER, task.result?.user!!.uid).apply()
                 var nomes = task.result?.user!!.displayName?.split(" ")?.map { it.trim() }
-                sharedPrefs.edit().putString(Constants.KEY_NOME, edittext_cadastro_nome.text.toString()).apply()
-                sharedPrefs.edit().putString(Constants.KEY_SOBRENOME, edittext_cadastro_sobrenome.text.toString()).apply()
+                sharedPrefs.edit().putString(Constants.KEY_NOME, nomes?.get(0)).apply()
+                sharedPrefs.edit().putString(Constants.KEY_SOBRENOME, nomes?.get(1)).apply()
                 sharedPrefs.edit().putString(Constants.KEY_EMAIL, emailUser).apply()
                 startActivity(Intent(this, ListaActivity::class.java))
             } else {

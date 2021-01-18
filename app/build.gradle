@@ -90,6 +90,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
     // optional - ReactiveStreams support for LiveData
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
+    // facebook
+    implementation 'com.facebook.android:facebook-login:6.5.1'
     // firebase
     implementation platform('com.google.firebase:firebase-bom:26.3.0')
     implementation 'com.google.android.gms:play-services-base:17.5.0'
@@ -100,6 +102,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     // firebase database
     implementation 'com.google.firebase:firebase-database:19.6.0'
+    // firebase notification
+    implementation 'com.google.firebase:firebase-messaging:21.0.1'
 
 }
 allprojects {

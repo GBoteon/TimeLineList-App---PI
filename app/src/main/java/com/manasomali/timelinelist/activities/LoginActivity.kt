@@ -1,26 +1,33 @@
 package com.manasomali.timelinelist.activities
 
-import android.R.attr
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.os.Bundle
-import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
+import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.manasomali.timelinelist.Constants
 import com.manasomali.timelinelist.R
-import kotlinx.android.synthetic.main.activity_detalhefilme.*
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -29,9 +36,11 @@ class LoginActivity : AppCompatActivity() {
         const val RC_SIGN_IN = 120
     }
 
+
     val sharedPrefs by lazy {  getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE) }
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var callbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +55,8 @@ class LoginActivity : AppCompatActivity() {
 
         button_login.setOnClickListener {
             if((edittext_login_email.text.toString().isNotBlank())&&(edittext_login_senha.text.toString().isNotBlank())) {
-                singinUsuarioFirebase(edittext_login_email.text.toString(), edittext_login_senha.text.toString())
+                singinUsuarioFirebase(edittext_login_email.text.toString(),
+                    edittext_login_senha.text.toString())
                 startLoading()
             } else {
                 Toast.makeText(this, "Informe o email e a senha.", Toast.LENGTH_LONG).show()
@@ -56,13 +66,22 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, CadastroActivity::class.java)
             startActivity(intent)
         }
+        val user = Firebase.auth.currentUser
         siginbutton_google.setOnClickListener {
-            signinFirebaseGoogle()
-            startLoading()
+            if (user == null) {
+                signinFirebaseGoogle()
+                startLoading()
+            }
         }
 
-
+        siginbutton_facebook.setOnClickListener {
+            if (user == null) {
+                signinFirebaseFacebook()
+                startLoading()
+            }
+        }
     }
+
     fun singinUsuarioFirebase(email: String, senha: String) {
         firebaseAuth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(
             this) { task ->
@@ -80,32 +99,49 @@ class LoginActivity : AppCompatActivity() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
+    private fun signinFirebaseFacebook() {
+        callbackManager = CallbackManager.Factory.create()
+        siginbutton_facebook.setPermissions("email", "user_photos", "public_profile")
+        siginbutton_facebook.registerCallback(callbackManager, object :
+            FacebookCallback<LoginResult> {
+            override fun onSuccess(loginResult: LoginResult) {
+                handleFacebookAccessToken(loginResult.accessToken)
+            }
+            override fun onCancel() {
+                println("facebook:onCancel")
+                Toast.makeText(this@LoginActivity, "Login cancelado.", Toast.LENGTH_SHORT).show()
+            }
+            override fun onError(error: FacebookException) {
+                println("facebook:onError $error")
+                Toast.makeText(this@LoginActivity, "Login falhou: $error", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode != RC_SIGN_IN) {
+            callbackManager.onActivityResult(requestCode, resultCode, data)
+        }
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 println("firebaseAuthWithGoogle:" + account.id)
-                firebaseAuthWithGoogle(account.idToken!!)
+                handleGoogleAccessToken(account.idToken!!)
             } catch (e: ApiException) {
                 Toast.makeText(this, "Login falhou.", Toast.LENGTH_SHORT).show()
                 endLoading()
             }
         }
     }
-    private fun firebaseAuthWithGoogle(idToken: String) {
+    private fun handleGoogleAccessToken(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Logado com sucesso", Toast.LENGTH_SHORT).show()
                     val user = firebaseAuth.currentUser
-                    sharedPrefs.edit().putString(Constants.KEY_IDUSER, user?.uid).apply()
-                    var nomes = task.result?.user!!.displayName?.split(" ")?.map { it.trim() }
-                    sharedPrefs.edit().putString(Constants.KEY_NOME, nomes?.get(0)).apply()
-                    sharedPrefs.edit().putString(Constants.KEY_EMAIL, nomes?.get(1)).apply()
-                    sharedPrefs.edit().putString(Constants.KEY_FOTO, user?.photoUrl.toString()).apply()
+                    setupUser(user)
                     endLoading()
                     startActivity(Intent(this, ListaActivity::class.java))
                 } else {
@@ -114,6 +150,25 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
     }
+    private fun handleFacebookAccessToken(token: AccessToken) {
+        val credential = FacebookAuthProvider.getCredential(token.token)
+        firebaseAuth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    println("signInWithCredential:success")
+                    Toast.makeText(this, "Logado com sucesso", Toast.LENGTH_SHORT).show()
+                    val user = firebaseAuth.currentUser
+                    setupUser(user)
+                    endLoading()
+                    startActivity(Intent(this, ListaActivity::class.java))
+                } else {
+                    println("signInWithCredential:failure = ${task.exception}")
+                    Toast.makeText(this, "Login falhou.", Toast.LENGTH_SHORT).show()
+                    endLoading()
+                }
+            }
+    }
+
     fun startLoading() {
         Toast.makeText(this, "Aguarde...", Toast.LENGTH_SHORT).show()
         button_login.isClickable = false
@@ -133,6 +188,14 @@ class LoginActivity : AppCompatActivity() {
         edittext_login_email.isEnabled = true
         edittext_login_senha.isEnabled = true
         progressbar_loading_login.visibility = GONE
+    }
+    fun setupUser(user: FirebaseUser?) {
+        sharedPrefs.edit().putString(Constants.KEY_IDUSER, user!!.uid).apply()
+        var nomes = user.displayName?.split(" ")?.map { it.trim() }
+        sharedPrefs.edit().putString(Constants.KEY_NOME, nomes?.get(0)).apply()
+        sharedPrefs.edit().putString(Constants.KEY_SOBRENOME, nomes?.get(1)).apply()
+        sharedPrefs.edit().putString(Constants.KEY_EMAIL, user.email).apply()
+        sharedPrefs.edit().putString(Constants.KEY_FOTO, user.photoUrl.toString()).apply()
     }
 
 }

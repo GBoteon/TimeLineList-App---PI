@@ -120,28 +120,31 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-        <ImageView
+        <com.google.android.gms.common.SignInButton
             android:id="@+id/siginbutton_google"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/icon_google" />
-
-        <ImageView
+            android:layout_height="40dp"
+            android:layout_gravity="center" />
+        <com.facebook.login.widget.LoginButton
             android:id="@+id/siginbutton_facebook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/icon_facebook" />
+            android:layout_height="40dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            xmlns:facebook="http://schemas.android.com/apk/res-auto"
+            facebook:com_facebook_login_text="Fazer login"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 

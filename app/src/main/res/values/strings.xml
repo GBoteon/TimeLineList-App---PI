@@ -12,4 +12,7 @@
     <string name="email">E-mail</string>
     <string name="statistics">Estatisticas</string>
     <string name="save">SALVAR</string>
+    <string name="default_notification_channel_id">100</string>
+    <string name="facebook_app_id">1197687687300672</string> <string name="fb_login_protocol_scheme">fb1197687687300672</string>
+
 </resources>

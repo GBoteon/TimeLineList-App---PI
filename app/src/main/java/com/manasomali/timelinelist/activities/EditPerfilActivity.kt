@@ -7,7 +7,10 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.manasomali.timelinelist.Constants
 import com.manasomali.timelinelist.Constants.EMPTY_STRING
 import com.manasomali.timelinelist.Constants.KEY_NOME
@@ -34,7 +37,8 @@ class EditPerfilActivity : AppCompatActivity() {
             startActivity(Intent(this, PerfilActivity::class.java))
         }
         imageview_exitfirebase.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
+            Firebase.auth.signOut()
+            LoginManager.getInstance().logOut()
             startActivity(Intent(this, LoginActivity::class.java))
         }
         edittext_editaperfil_nome.setText(sharedPrefs.getString(KEY_NOME, EMPTY_STRING).toString())
