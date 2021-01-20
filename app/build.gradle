@@ -104,7 +104,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.6.0'
     // firebase notification
     implementation 'com.google.firebase:firebase-messaging:21.0.1'
+    // firebase storage
+    implementation 'com.google.firebase:firebase-firestore-ktx:22.0.1'
+    implementation 'com.google.firebase:firebase-storage:19.2.1'
+    // firebase firestore
 
+    // spots-dialog
+    implementation 'com.github.d-max:spots-dialog:1.1@aar'
 }
 allprojects {
     repositories {

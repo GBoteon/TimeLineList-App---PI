@@ -54,31 +54,49 @@
         app:layout_constraintStart_toEndOf="@+id/circularimageview_editperfil"
         app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_editpefiltoperfil">
 
-            <EditText
-                android:id="@+id/edittext_editaperfil_nome"
-                style="@style/EditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="40dp"
-                android:drawableStart="@drawable/ic_person"
-                android:drawablePadding="16dp"
-                android:hint="Nome"
-                android:padding="8dp"
-                android:inputType="textMultiLine"
-                android:textSize="10pt" />
+        <EditText
+            android:id="@+id/edittext_editaperfil_nome"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:drawableStart="@drawable/ic_person"
+            android:drawablePadding="16dp"
+            android:hint="Nome"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            android:textSize="10pt" />
 
-            <EditText
-                android:id="@+id/edittext_editaperfil_sobrenome"
-                style="@style/EditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_person"
-                android:drawablePadding="16dp"
-                android:hint="@string/second_name"
-                android:padding="8dp"
-                android:inputType="textMultiLine"
-                android:textSize="10pt" />
+        <EditText
+            android:id="@+id/edittext_editaperfil_sobrenome"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_person"
+            android:drawablePadding="16dp"
+            android:hint="@string/second_name"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            android:textSize="10pt" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_editaperfil_mudarfoto"
+        style="@style/Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/round_bg"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="10dp"
+        android:text="Alterar Foto"
+        android:textSize="8pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circularimageview_editperfil" />
+
     <Button
         android:id="@+id/button_editaperfil_save"
         style="@style/Button"
@@ -96,7 +114,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/button_editaperfil_mudarfoto"
         app:layout_constraintVertical_bias="0.819" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
