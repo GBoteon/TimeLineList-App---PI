@@ -102,6 +102,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     // firebase database
     implementation 'com.google.firebase:firebase-database:19.6.0'
+    implementation 'com.google.firebase:firebase-database-ktx'
     // firebase notification
     implementation 'com.google.firebase:firebase-messaging:21.0.1'
     // firebase storage

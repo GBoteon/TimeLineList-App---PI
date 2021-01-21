@@ -19,6 +19,7 @@ import com.manasomali.timelinelist.Constants.THEME_DARK
 import com.manasomali.timelinelist.Constants.THEME_LIGHT
 import com.manasomali.timelinelist.Constants.THEME_UNDEFINED
 import com.manasomali.timelinelist.R
+import com.manasomali.timelinelist.UserSetup
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detalhefilme.*
 import kotlinx.android.synthetic.main.activity_perfil.*
@@ -46,7 +47,7 @@ class PerfilActivity : AppCompatActivity() {
         textview_perfil_nome.text = sharedPrefs.getString(KEY_NOME, EMPTY_STRING)
         textview_perfil_sobrenome.text = sharedPrefs.getString(KEY_SOBRENOME, EMPTY_STRING)
         textview_perfil_email.text = sharedPrefs.getString(KEY_EMAIL, EMPTY_STRING)
-        Picasso.get().load(Uri.parse(sharedPrefs.getString(KEY_FOTO, EMPTY_STRING))).placeholder(R.mipmap.ic_person).into(
+        Picasso.get().load(Uri.parse(UserSetup.getUserFoto(this).toString())).placeholder(R.mipmap.ic_person).into(
             circularimageview_perfil)
     }
 

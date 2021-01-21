@@ -6,7 +6,6 @@ object Constants {
     const val BASE_IMAGE_URL = "http://image.tmdb.org/t/p/w500/"
     const val LANG = "pt-BR"
     const val APP_KEY = "APP"
-    const val UIID_KEY = "UIID"
     const val EMPTY_STRING = ""
     const val PREFS_NAME = "user_prefs"
     const val KEY_THEME = "prefs.theme"

@@ -25,9 +25,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.manasomali.timelinelist.Constants
 import com.manasomali.timelinelist.R
+import com.manasomali.timelinelist.UserSetup
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -36,8 +39,6 @@ class LoginActivity : AppCompatActivity() {
         const val RC_SIGN_IN = 120
     }
 
-
-    val sharedPrefs by lazy {  getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE) }
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var callbackManager: CallbackManager
@@ -55,9 +56,9 @@ class LoginActivity : AppCompatActivity() {
 
         button_login.setOnClickListener {
             if((edittext_login_email.text.toString().isNotBlank())&&(edittext_login_senha.text.toString().isNotBlank())) {
-                singinUsuarioFirebase(edittext_login_email.text.toString(),
+                singinFirebaseEmailSenha(edittext_login_email.text.toString(),
                     edittext_login_senha.text.toString())
-                startLoading()
+                    startLoading()
             } else {
                 Toast.makeText(this, "Informe o email e a senha.", Toast.LENGTH_LONG).show()
             }
@@ -82,16 +83,17 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun singinUsuarioFirebase(email: String, senha: String) {
+    fun singinFirebaseEmailSenha(email: String, senha: String) {
         firebaseAuth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(
             this) { task ->
             if(task.isSuccessful) {
-                sharedPrefs.edit().putString(Constants.KEY_IDUSER, task.result?.user!!.uid).apply()
-                sharedPrefs.edit().putString(Constants.KEY_EMAIL, task.result?.user!!.email).apply()
+                val user = firebaseAuth.currentUser
+                UserSetup.saveUser(this, user!!)
+                endLoading()
                 startActivity(Intent(this, ListaActivity::class.java))
             } else {
                 Toast.makeText(this, task.exception?.message.toString(), Toast.LENGTH_SHORT).show()
-                println("erro: ${task.exception?.message.toString()}")
+                endLoading()
             }
         }
     }
@@ -141,11 +143,11 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Logado com sucesso", Toast.LENGTH_SHORT).show()
                     val user = firebaseAuth.currentUser
-                    setupUser(user)
+                    UserSetup.saveUser(this, user!!)
                     endLoading()
                     startActivity(Intent(this, ListaActivity::class.java))
                 } else {
-                    Toast.makeText(this, "Login falhou.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, task.exception?.message.toString(), Toast.LENGTH_SHORT).show()
                     endLoading()
                 }
             }
@@ -158,12 +160,11 @@ class LoginActivity : AppCompatActivity() {
                     println("signInWithCredential:success")
                     Toast.makeText(this, "Logado com sucesso", Toast.LENGTH_SHORT).show()
                     val user = firebaseAuth.currentUser
-                    setupUser(user)
+                    UserSetup.saveUser(this, user!!)
                     endLoading()
                     startActivity(Intent(this, ListaActivity::class.java))
                 } else {
-                    println("signInWithCredential:failure = ${task.exception}")
-                    Toast.makeText(this, "Login falhou.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, task.exception?.message.toString(), Toast.LENGTH_SHORT).show()
                     endLoading()
                 }
             }
@@ -189,13 +190,4 @@ class LoginActivity : AppCompatActivity() {
         edittext_login_senha.isEnabled = true
         progressbar_loading_login.visibility = GONE
     }
-    fun setupUser(user: FirebaseUser?) {
-        sharedPrefs.edit().putString(Constants.KEY_IDUSER, user!!.uid).apply()
-        var nomes = user.displayName?.split(" ")?.map { it.trim() }
-        sharedPrefs.edit().putString(Constants.KEY_NOME, nomes?.get(0)).apply()
-        sharedPrefs.edit().putString(Constants.KEY_SOBRENOME, nomes?.get(1)).apply()
-        sharedPrefs.edit().putString(Constants.KEY_EMAIL, user.email).apply()
-        sharedPrefs.edit().putString(Constants.KEY_FOTO, user.photoUrl.toString()).apply()
-    }
-
 }

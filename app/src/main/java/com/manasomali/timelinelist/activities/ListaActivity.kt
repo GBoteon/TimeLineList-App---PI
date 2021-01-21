@@ -65,8 +65,7 @@ class ListaActivity : AppCompatActivity() {
                 startActivity(Intent(this, PesquisaActivity::class.java))
             }
         }
-        Picasso.get().load(Uri.parse(sharedPrefs.getString(Constants.KEY_FOTO,
-            Constants.EMPTY_STRING))).placeholder(R.mipmap.ic_person).into(
+        Picasso.get().load(Uri.parse(UserSetup.getUserFoto(this).toString())).placeholder(R.mipmap.ic_person).into(
             toolbar_button_right)
     }
 

@@ -19,15 +19,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/circularimageview_editperfil"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="20dp"
-        app:civ_border="false"
-        app:civ_shadow="false"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_editpefiltoperfil" />
+        app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_editpefiltoperfil">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/circularimageview_editperfil"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            app:civ_border="false"
+            app:civ_shadow="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_editpefiltoperfil" />
+
+        <Button
+            android:id="@+id/button_editaperfil_mudarfoto"
+            style="@style/Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_bg"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="Alterar Foto"
+            android:layout_gravity="center"
+            android:textSize="7pt" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/imageview_exitfirebase"
@@ -51,7 +76,6 @@
         android:layout_marginEnd="20dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/circularimageview_editperfil"
         app:layout_constraintTop_toBottomOf="@+id/imageview_voltar_editpefiltoperfil">
 
         <EditText
@@ -80,22 +104,6 @@
             android:textSize="10pt" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_editaperfil_mudarfoto"
-        style="@style/Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/round_bg"
-        android:paddingLeft="30dp"
-        android:paddingTop="10dp"
-        android:paddingRight="30dp"
-        android:paddingBottom="10dp"
-        android:text="Alterar Foto"
-        android:textSize="8pt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circularimageview_editperfil" />
 
     <Button
         android:id="@+id/button_editaperfil_save"
@@ -114,7 +122,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_editaperfil_mudarfoto"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.819" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
