@@ -6,68 +6,82 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.observe
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.manasomali.timelinelist.Constants
 import com.manasomali.timelinelist.R
+import com.manasomali.timelinelist.viewmodels.AuthViewModel
 import kotlinx.android.synthetic.main.activity_cadastro.*
 import kotlinx.android.synthetic.main.activity_login.*
 
 
 class CadastroActivity : AppCompatActivity() {
-
-    val sharedPrefs by lazy {  getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE) }
+    private val viewModel: AuthViewModel by viewModels()
+    private lateinit var firebaseAuth: FirebaseAuth
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
+        firebaseAuth = FirebaseAuth.getInstance()
+
         imageview_voltar_cadastrotologin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
         button_cadastro_cadastrese.setOnClickListener {
-            if((edittext_cadastro_nome.text.toString().isNotBlank())&&(edittext_cadastro_sobrenome.text.toString().isNotBlank())&&(edittext_cadastro_email.text.toString().isNotBlank())&&(edittext_cadastro_senha1.text.toString().isNotBlank())) {
-                if(edittext_cadastro_senha2.text.toString()==edittext_cadastro_senha1.text.toString()) {
-                    cadastroUsuarioFirebase(edittext_cadastro_email.text.toString(),
-                        edittext_cadastro_senha1.text.toString())
-                    startLoading()
-                } else {
-                    Toast.makeText(this, "Senhas não são iguais.", Toast.LENGTH_LONG).show()
-                }
+            val nome = edittext_cadastro_nome.text.toString()
+            val sobrenome = edittext_cadastro_sobrenome.text.toString()
+            val email = edittext_cadastro_email.text.toString()
+            val senha1 = edittext_cadastro_senha1.text.toString()
+            val senha2 = edittext_cadastro_senha2.text.toString()
+            if(validaCampos(nome, sobrenome, email, senha1, senha2)) {
+                viewModel.cadastroUsuarioFirebase(email,senha1,nome,sobrenome)
             } else {
-                Toast.makeText(this, "Informe os dados.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Informe os campos corretamente.", Toast.LENGTH_LONG).show()
             }
         }
+        initViewModel()
     }
-    fun cadastroUsuarioFirebase(email: String, senha: String) {
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, senha).addOnCompleteListener(
-            this) { task ->
-            if(task.isSuccessful) {
-                setDisplayName()
-                val emailUser = task.result?.user!!.email
-                Toast.makeText(this, "Usuário cadastrado.", Toast.LENGTH_LONG).show()
-                sharedPrefs.edit().putString(Constants.KEY_IDUSER, task.result?.user!!.uid).apply()
-                var nomes = task.result?.user!!.displayName?.split(" ")?.map { it.trim() }
-                sharedPrefs.edit().putString(Constants.KEY_NOME, nomes?.get(0)).apply()
-                sharedPrefs.edit().putString(Constants.KEY_SOBRENOME, nomes?.get(1)).apply()
-                sharedPrefs.edit().putString(Constants.KEY_EMAIL, emailUser).apply()
+
+    private fun initViewModel() {
+        viewModel.stateRegister.observe(this) {
+            if(it) {
                 startActivity(Intent(this, ListaActivity::class.java))
-            } else {
-                Toast.makeText(this, task.exception?.message.toString(), Toast.LENGTH_SHORT).show()
             }
-            endLoading()
+        }
+        viewModel.loading.observe(this) {
+            if(it) {
+                startLoading()
+            } else {
+                endLoading()
+            }
         }
     }
-    fun setDisplayName() {
-        val user = FirebaseAuth.getInstance().currentUser
-        val profileUpdates = UserProfileChangeRequest.Builder().setDisplayName(edittext_cadastro_nome.text.toString()+" "+edittext_cadastro_sobrenome.text.toString()).build()
-        user!!.updateProfile(profileUpdates)
+    private fun validaCampos(nome: String, sobrenome:String, email: String, password1: String, password2: String): Boolean {
+        return when {
+            nome.isBlank() || sobrenome.isBlank() || email.isBlank() || password1.isBlank() -> {
+                false
+            }
+            password1!=password2 -> {
+                false
+            }
+            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                false
+            }
+            password1.length < 6 -> {
+                false
+            }
+            else -> true
+        }
     }
-    fun startLoading() {
+    private fun startLoading() {
         Toast.makeText(this, "Aguarde...", Toast.LENGTH_SHORT).show()
         button_cadastro_cadastrese.isClickable = false
         edittext_cadastro_nome.isFocusable = false
@@ -77,7 +91,7 @@ class CadastroActivity : AppCompatActivity() {
         progressbar_loading_login.visibility = View.VISIBLE
         progressbar_loading_login.background.alpha = 150
     }
-    fun endLoading() {
+    private fun endLoading() {
         button_cadastro_cadastrese.isClickable = true
         edittext_cadastro_nome.isEnabled = true
         edittext_cadastro_email.isEnabled = true

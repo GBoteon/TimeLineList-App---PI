@@ -14,12 +14,9 @@ class PesquisaViewModel(application: Application): AndroidViewModel(application)
 
     var listaFilmes = MutableLiveData<BaseFilmeBusca>()
     var listaSeries = MutableLiveData<BaseSerieBusca>()
-    var listaGeneros = MutableLiveData<BaseGenres>()
     var listaFilmesDetalhe = MutableLiveData<BaseFilmeDetalhe>()
     var listaSeriesDetalhe = MutableLiveData<BaseSerieDetalhe>()
 
-    var dataFilme = MutableLiveData<EssencialFilme>()
-    var dataSerie = MutableLiveData<EssencialSerie>()
 
     fun getSeriesFromApi(query: String) {
         viewModelScope.launch {

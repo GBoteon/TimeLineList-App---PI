@@ -18,6 +18,8 @@ import com.manasomali.timelinelist.fragments.FilmesFragment
 import com.manasomali.timelinelist.fragments.SeriesFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_editperfil.*
 import kotlinx.android.synthetic.main.activity_lista.*
@@ -29,7 +31,8 @@ class ListaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
-        val sharedPrefs by lazy {  getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE) }
+        val db = FirebaseFirestore.getInstance()
+        val firebaseAuth = FirebaseAuth.getInstance()
 
         setupViewPager()
         setupColorIcones()
@@ -65,8 +68,20 @@ class ListaActivity : AppCompatActivity() {
                 startActivity(Intent(this, PesquisaActivity::class.java))
             }
         }
-        Picasso.get().load(Uri.parse(UserSetup.getUserFoto(this).toString())).placeholder(R.mipmap.ic_person).into(
-            toolbar_button_right)
+        val docRef = db.collection("users").document(firebaseAuth.currentUser!!.uid)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val foto = document.get("foto").toString()
+                    Picasso.get().load(Uri.parse(foto)).placeholder(R.mipmap.ic_person).into(
+                        toolbar_button_right)
+                } else {
+                    Toast.makeText(this, "Falha em pegar os dados.", Toast.LENGTH_LONG).show()
+                }
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "Falha em pegar os dados: $exception", Toast.LENGTH_LONG).show()
+            }
     }
 
     private fun setupViewPager() {

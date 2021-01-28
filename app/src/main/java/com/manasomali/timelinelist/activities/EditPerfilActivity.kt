@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -27,6 +28,7 @@ import com.manasomali.timelinelist.UserSetup
 import com.squareup.picasso.Picasso
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_editperfil.*
+import kotlinx.android.synthetic.main.activity_perfil.*
 
 
 class EditPerfilActivity : AppCompatActivity() {
@@ -35,6 +37,8 @@ class EditPerfilActivity : AppCompatActivity() {
     lateinit var alertDialog: AlertDialog
     lateinit var storageReference: StorageReference
     private val COD_IMG = 1000
+    val db = FirebaseFirestore.getInstance()
+    val firebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,12 +58,27 @@ class EditPerfilActivity : AppCompatActivity() {
             LoginManager.getInstance().logOut()
             startActivity(Intent(this, LoginActivity::class.java))
         }
-        edittext_editaperfil_nome.setText(sharedPrefs.getString(KEY_NOME, EMPTY_STRING).toString())
-        edittext_editaperfil_sobrenome.setText(sharedPrefs.getString(KEY_SOBRENOME, EMPTY_STRING)
-            .toString())
-        Picasso.get().load(Uri.parse(UserSetup.getUserFoto(this).toString())).placeholder(
-            R.mipmap.ic_person).into(
-            circularimageview_editperfil)
+
+        val docRef = db.collection("users").document(firebaseAuth.currentUser!!.uid)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val nome = document.get("nome").toString()
+                    val sobrenome = document.get("sobrenome").toString()
+                    val foto = document.get("foto").toString()
+                    edittext_editaperfil_nome.setText(nome)
+                    edittext_editaperfil_sobrenome.setText(sobrenome)
+                    Picasso.get().load(Uri.parse(foto)).placeholder(R.mipmap.ic_person).into(circularimageview_editperfil)
+                } else {
+                    Toast.makeText(this, "Falha em pegar os dados.", Toast.LENGTH_LONG).show()
+                }
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "Falha em pegar os dados: $exception", Toast.LENGTH_LONG).show()
+            }
+
+
+
         button_editaperfil_mudarfoto.setOnClickListener {
             setImgFirebase()
         }

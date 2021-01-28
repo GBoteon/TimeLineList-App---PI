@@ -19,7 +19,6 @@ class SeriesFragmentViewModel(private val repositoryDB: RepositorySeries) : View
                 Constants.LANG))
         }
     }
-
     fun getSeries() {
         viewModelScope.launch {
             listaSerie.value = repositoryDB.getAllSeriesTask()

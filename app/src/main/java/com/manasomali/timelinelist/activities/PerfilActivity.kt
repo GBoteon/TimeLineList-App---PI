@@ -6,8 +6,11 @@ import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.manasomali.timelinelist.Constants.EMPTY_STRING
 import com.manasomali.timelinelist.Constants.KEY_EMAIL
 import com.manasomali.timelinelist.Constants.KEY_FOTO
@@ -28,6 +31,8 @@ import kotlinx.android.synthetic.main.activity_perfil.*
 class PerfilActivity : AppCompatActivity() {
 
     val sharedPrefs by lazy {  getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
+    val db = FirebaseFirestore.getInstance()
+    val firebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +41,7 @@ class PerfilActivity : AppCompatActivity() {
 
         initThemeListener()
         initTheme()
+
         imageview_voltar_pefiltolista.setOnClickListener { startActivity(Intent(this,
             ListaActivity::class.java)) }
         imageview_editperfil.setOnClickListener { startActivity(Intent(this,
@@ -44,11 +50,27 @@ class PerfilActivity : AppCompatActivity() {
         button_estatisticas.setOnClickListener { startActivity(Intent(this,
             EstatisticasActivity::class.java)) }
 
-        textview_perfil_nome.text = sharedPrefs.getString(KEY_NOME, EMPTY_STRING)
-        textview_perfil_sobrenome.text = sharedPrefs.getString(KEY_SOBRENOME, EMPTY_STRING)
-        textview_perfil_email.text = sharedPrefs.getString(KEY_EMAIL, EMPTY_STRING)
-        Picasso.get().load(Uri.parse(UserSetup.getUserFoto(this).toString())).placeholder(R.mipmap.ic_person).into(
-            circularimageview_perfil)
+        val docRef = db.collection("users").document(firebaseAuth.currentUser!!.uid)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val nome = document.get("nome").toString()
+                    val sobrenome = document.get("sobrenome").toString()
+                    val email = document.get("email").toString()
+                    val foto = document.get("foto").toString()
+                    textview_perfil_nome.text = nome
+                    textview_perfil_sobrenome.text = sobrenome
+                    textview_perfil_email.text = email
+                    Picasso.get().load(Uri.parse(foto)).placeholder(R.mipmap.ic_person).into(circularimageview_perfil)
+                } else {
+                    Toast.makeText(this, "Falha em pegar os dados.", Toast.LENGTH_LONG).show()
+                }
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "Falha em pegar os dados: $exception", Toast.LENGTH_LONG).show()
+
+            }
+
     }
 
     private fun initThemeListener(){

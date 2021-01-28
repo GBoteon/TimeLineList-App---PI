@@ -19,7 +19,7 @@
         <activity android:name="com.manasomali.timelinelist.activities.PerfilActivity" />
         <activity android:name="com.manasomali.timelinelist.activities.ListaActivity" />
         <activity android:name="com.manasomali.timelinelist.activities.PesquisaActivity" />
-        <activity android:name="com.manasomali.timelinelist.activities.LoadingActivity" >
+        <activity android:name="com.manasomali.timelinelist.activities.SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

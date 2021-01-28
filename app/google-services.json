@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "313009394887",
+    "firebase_url": "https://timelinelist-fab74-default-rtdb.firebaseio.com",
     "project_id": "timelinelist-fab74",
     "storage_bucket": "timelinelist-fab74.appspot.com"
   },
@@ -14,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "313009394887-ogf5rtgosf0h61cu8mm6q3kqksdoi3o9.apps.googleusercontent.com",
+          "client_id": "313009394887-mjpoq9258jo72eit8sgpikh35lqtdga7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.manasomali.timelinelist",

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.firebase.auth.FirebaseAuth
@@ -16,19 +17,22 @@ import com.manasomali.timelinelist.Constants.THEME_UNDEFINED
 import com.manasomali.timelinelist.R
 import kotlinx.coroutines.*
 import com.manasomali.timelinelist.UserSetup
+import com.manasomali.timelinelist.viewmodels.AuthViewModel
 
 
-class LoadingActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
+
+    private val viewModel: AuthViewModel by viewModels()
 
     val sharedPrefs by lazy {  getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
     val scope = CoroutineScope(Dispatchers.Main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_loading)
+        setContentView(R.layout.activity_splash)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
 
-        when (getSavedTheme()) {
+        when (sharedPrefs.getInt(KEY_THEME, THEME_UNDEFINED)) {
             0 -> setTema(AppCompatDelegate.MODE_NIGHT_NO)
             1 -> setTema(AppCompatDelegate.MODE_NIGHT_YES)
             -1 -> setTema(AppCompatDelegate.MODE_NIGHT_NO)
@@ -62,7 +66,6 @@ class LoadingActivity : AppCompatActivity() {
         scope.cancel()
         super.onPause()
     }
-    private fun getSavedTheme() = sharedPrefs.getInt(KEY_THEME, THEME_UNDEFINED)
     private fun setTema(themeMode: Int) {
         AppCompatDelegate.setDefaultNightMode(themeMode)
     }

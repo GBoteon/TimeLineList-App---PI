@@ -39,6 +39,7 @@ object UserSetup {
             preferences.edit().putString(KEY_FOTO, user.photoUrl.toString()).apply()
         }.addOnCanceledListener {
             preferences.edit().putString(KEY_FOTO, user.photoUrl.toString()).apply()
+
         }
     }
 
