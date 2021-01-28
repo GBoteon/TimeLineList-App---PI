@@ -16,7 +16,6 @@ import com.manasomali.timelinelist.Constants.PREFS_NAME
 import com.manasomali.timelinelist.Constants.THEME_UNDEFINED
 import com.manasomali.timelinelist.R
 import kotlinx.coroutines.*
-import com.manasomali.timelinelist.UserSetup
 import com.manasomali.timelinelist.viewmodels.AuthViewModel
 
 
@@ -41,7 +40,6 @@ class SplashActivity : AppCompatActivity() {
         var intent = Intent(this, LoginActivity::class.java)
         val user = Firebase.auth.currentUser
         if (user != null) {
-            UserSetup.saveUser(this, user)
             for (user in FirebaseAuth.getInstance().currentUser!!.providerData) {
                 if (user.providerId == "password") {
                     Toast.makeText(this, "Sign In usando email e password", Toast.LENGTH_SHORT).show()

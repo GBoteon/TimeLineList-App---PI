@@ -11,7 +11,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.observe
 import com.manasomali.timelinelist.*
 import com.manasomali.timelinelist.adapters.ViewPagerAdapter
 import com.manasomali.timelinelist.fragments.FilmesFragment
@@ -20,6 +22,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.manasomali.timelinelist.viewmodels.AuthViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_editperfil.*
 import kotlinx.android.synthetic.main.activity_lista.*
@@ -27,11 +30,12 @@ import kotlinx.android.synthetic.main.activity_lista.*
 
 @Suppress("DEPRECATION")
 class ListaActivity : AppCompatActivity() {
+    private val viewModel: AuthViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
-        val db = FirebaseFirestore.getInstance()
         val firebaseAuth = FirebaseAuth.getInstance()
 
         setupViewPager()
@@ -68,20 +72,10 @@ class ListaActivity : AppCompatActivity() {
                 startActivity(Intent(this, PesquisaActivity::class.java))
             }
         }
-        val docRef = db.collection("users").document(firebaseAuth.currentUser!!.uid)
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    val foto = document.get("foto").toString()
-                    Picasso.get().load(Uri.parse(foto)).placeholder(R.mipmap.ic_person).into(
-                        toolbar_button_right)
-                } else {
-                    Toast.makeText(this, "Falha em pegar os dados.", Toast.LENGTH_LONG).show()
-                }
-            }
-            .addOnFailureListener { exception ->
-                Toast.makeText(this, "Falha em pegar os dados: $exception", Toast.LENGTH_LONG).show()
-            }
+        viewModel.getUser(firebaseAuth.currentUser!!.uid)
+        viewModel.usuario.observe(this) {
+            Picasso.get().load(Uri.parse(it.foto)).placeholder(R.mipmap.ic_person).into(toolbar_button_right)
+        }
     }
 
     private fun setupViewPager() {

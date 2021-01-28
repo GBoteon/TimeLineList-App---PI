@@ -7,28 +7,26 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.observe
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.manasomali.timelinelist.Constants.EMPTY_STRING
-import com.manasomali.timelinelist.Constants.KEY_EMAIL
-import com.manasomali.timelinelist.Constants.KEY_FOTO
-import com.manasomali.timelinelist.Constants.KEY_NOME
-import com.manasomali.timelinelist.Constants.KEY_SOBRENOME
 import com.manasomali.timelinelist.Constants.KEY_THEME
 import com.manasomali.timelinelist.Constants.PREFS_NAME
 import com.manasomali.timelinelist.Constants.THEME_DARK
 import com.manasomali.timelinelist.Constants.THEME_LIGHT
 import com.manasomali.timelinelist.Constants.THEME_UNDEFINED
 import com.manasomali.timelinelist.R
-import com.manasomali.timelinelist.UserSetup
+import com.manasomali.timelinelist.viewmodels.AuthViewModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_detalhefilme.*
+import kotlinx.android.synthetic.main.activity_editperfil.*
 import kotlinx.android.synthetic.main.activity_perfil.*
 
 
 class PerfilActivity : AppCompatActivity() {
+    private val viewModel: AuthViewModel by viewModels()
 
     val sharedPrefs by lazy {  getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
     val db = FirebaseFirestore.getInstance()
@@ -49,27 +47,13 @@ class PerfilActivity : AppCompatActivity() {
 
         button_estatisticas.setOnClickListener { startActivity(Intent(this,
             EstatisticasActivity::class.java)) }
-
-        val docRef = db.collection("users").document(firebaseAuth.currentUser!!.uid)
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    val nome = document.get("nome").toString()
-                    val sobrenome = document.get("sobrenome").toString()
-                    val email = document.get("email").toString()
-                    val foto = document.get("foto").toString()
-                    textview_perfil_nome.text = nome
-                    textview_perfil_sobrenome.text = sobrenome
-                    textview_perfil_email.text = email
-                    Picasso.get().load(Uri.parse(foto)).placeholder(R.mipmap.ic_person).into(circularimageview_perfil)
-                } else {
-                    Toast.makeText(this, "Falha em pegar os dados.", Toast.LENGTH_LONG).show()
-                }
-            }
-            .addOnFailureListener { exception ->
-                Toast.makeText(this, "Falha em pegar os dados: $exception", Toast.LENGTH_LONG).show()
-
-            }
+        viewModel.getUser(firebaseAuth.currentUser!!.uid)
+        viewModel.usuario.observe(this) {
+            textview_perfil_nome.text = it.nome
+            textview_perfil_sobrenome.text = it.sobrenome
+            textview_perfil_email.text = it.email
+            Picasso.get().load(Uri.parse(it.foto)).placeholder(R.mipmap.ic_person).into(circularimageview_perfil)
+        }
 
     }
 

@@ -1,7 +1,5 @@
 package com.manasomali.timelinelist.activities
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.os.Bundle
@@ -11,29 +9,17 @@ import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.observe
-import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
-import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import com.manasomali.timelinelist.Constants
 import com.manasomali.timelinelist.R
-import com.manasomali.timelinelist.UserSetup
 import com.manasomali.timelinelist.viewmodels.AuthViewModel
 import kotlinx.android.synthetic.main.activity_cadastro.*
 import kotlinx.android.synthetic.main.activity_login.*
@@ -142,7 +128,6 @@ class LoginActivity : AppCompatActivity() {
         viewModel.stateGoogleLogin.observe(this) {
             if(!it) {
                 Toast.makeText(this, "Login com Google falhou.", Toast.LENGTH_SHORT).show()
-
             }
         }
 
