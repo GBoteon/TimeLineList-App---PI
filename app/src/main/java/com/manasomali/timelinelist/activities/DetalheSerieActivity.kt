@@ -71,21 +71,21 @@ class DetalheSerieActivity : AppCompatActivity() {
             }
         }
         textview_nomeserie.setOnClickListener {
-            cardview_detalheposter_serie.visibility = View.VISIBLE
+            cardview_detalheposter_serie.visibility = VISIBLE
             cardview_detalheposter_serie.background.alpha = 150
         }
         cardview_detalheposter_serie.setOnClickListener {
-            cardview_detalheposter_serie.visibility = View.INVISIBLE
+            cardview_detalheposter_serie.visibility = INVISIBLE
         }
         edittext_nota_serie.setOnClickListener {
-            cardview_rating_serie.visibility = View.VISIBLE
-            cardview_detalheposter_serie.background.alpha = 150
+            cardview_rating_serie.visibility = VISIBLE
+            cardview_rating_serie.background.alpha = 150
         }
         ratingbar_nota_serie.setOnTouchListener(object : OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 when (event?.action) {
                     MotionEvent.ACTION_MOVE -> {
-                        textview_notaselecionada_filme.text = ratingbar_nota_filme.rating.toString()
+                        textview_notaselecionada_serie.text = ratingbar_nota_serie.rating.toString()
                     }
                 }
                 return v?.onTouchEvent(event) ?: true

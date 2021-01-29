@@ -85,7 +85,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
         }
         edittext_nota_filme.setOnClickListener {
             cardview_rating_filme.visibility = VISIBLE
-            cardview_detalheposter_filme.background.alpha = 150
+            cardview_rating_filme.background.alpha = 150
         }
         ratingbar_nota_filme.setOnTouchListener(object : OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
