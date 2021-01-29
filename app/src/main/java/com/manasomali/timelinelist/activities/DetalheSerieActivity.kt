@@ -8,8 +8,9 @@ import android.graphics.text.LineBreaker
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
-import android.view.View.GONE
+import android.view.View.*
 import android.view.animation.AnimationUtils
 import android.widget.RadioButton
 import android.widget.Toast
@@ -80,13 +81,20 @@ class DetalheSerieActivity : AppCompatActivity() {
             cardview_rating_serie.visibility = View.VISIBLE
             cardview_detalheposter_serie.background.alpha = 150
         }
-        ratingbar_nota_serie.setOnRatingBarChangeListener { _, rating, _ ->
-            textview_notaselecionada_serie.setText((rating * 2).toString())
-        }
+        ratingbar_nota_serie.setOnTouchListener(object : OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                when (event?.action) {
+                    MotionEvent.ACTION_MOVE -> {
+                        textview_notaselecionada_filme.text = ratingbar_nota_filme.rating.toString()
+                    }
+                }
+                return v?.onTouchEvent(event) ?: true
+            }
+        })
         button_ok_nota_serie.setOnClickListener {
             cardview_rating_serie.visibility = View.INVISIBLE
             var value = ratingbar_nota_serie.rating
-            edittext_nota_serie.setText((value * 2).toString())
+            edittext_nota_serie.setText((value).toString())
         }
         button_cancel_nota_serie.setOnClickListener {
             cardview_rating_serie.visibility = View.INVISIBLE

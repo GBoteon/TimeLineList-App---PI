@@ -12,6 +12,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import com.facebook.login.LoginManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -51,8 +53,17 @@ class EditPerfilActivity : AppCompatActivity() {
             Toast.makeText(this, "Dados Atualizados.", Toast.LENGTH_LONG).show()
             startActivity(Intent(this, PerfilActivity::class.java))
         }
+        var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        var mGoogleSignInClient = GoogleSignIn.getClient(getBaseContext(), gso);
+        mGoogleSignInClient.signOut().addOnCompleteListener{
+            FirebaseAuth.getInstance().signOut()
+        }
         imageview_exitfirebase.setOnClickListener {
             Firebase.auth.signOut()
+            mGoogleSignInClient.signOut()
             LoginManager.getInstance().logOut()
             startActivity(Intent(this, LoginActivity::class.java))
         }

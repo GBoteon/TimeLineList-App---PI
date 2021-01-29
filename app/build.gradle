@@ -112,6 +112,9 @@ dependencies {
 
     // spots-dialog
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
+    // ratingbar
+    implementation 'com.github.giswangsj:AndRatingBar:1.0.5'
+
 }
 allprojects {
     repositories {
