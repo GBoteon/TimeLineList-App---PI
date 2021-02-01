@@ -88,8 +88,8 @@ class CadastroActivity : AppCompatActivity() {
         edittext_cadastro_email.isFocusable = false
         edittext_cadastro_senha1.isFocusable = false
         edittext_cadastro_senha2.isFocusable = false
-        progressbar_loading_login.visibility = View.VISIBLE
-        progressbar_loading_login.background.alpha = 150
+        progressbar_loading_cadastro.visibility = View.VISIBLE
+        progressbar_loading_cadastro.background.alpha = 150
     }
     private fun endLoading() {
         button_cadastro_cadastrese.isClickable = true
@@ -97,6 +97,6 @@ class CadastroActivity : AppCompatActivity() {
         edittext_cadastro_email.isEnabled = true
         edittext_cadastro_senha1.isEnabled = true
         edittext_cadastro_senha2.isEnabled = true
-        progressbar_loading_login.visibility = View.GONE
+        progressbar_loading_cadastro.visibility = View.GONE
     }
 }

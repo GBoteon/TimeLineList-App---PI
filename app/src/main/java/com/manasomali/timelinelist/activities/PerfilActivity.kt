@@ -29,7 +29,6 @@ class PerfilActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
 
     val sharedPrefs by lazy {  getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
-    val db = FirebaseFirestore.getInstance()
     val firebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {

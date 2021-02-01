@@ -25,6 +25,7 @@ class AuthViewModel(): ViewModel() {
     var usuario: MutableLiveData<Usuario> = MutableLiveData()
     val db = FirebaseFirestore.getInstance()
     val firebaseAuth = FirebaseAuth.getInstance()
+    val firebaseStore = FirebaseStorage.getInstance()
     fun cadastroUsuarioFirebase(email: String, senha: String, nome: String, sobrenome: String) {
         loading.value = true
         firebaseAuth.createUserWithEmailAndPassword(email, senha)
@@ -113,27 +114,48 @@ class AuthViewModel(): ViewModel() {
                 var pic = foto
                 if (fotoUri.value.toString().contains("firebasestorage")) {
                     pic = fotoUri.value.toString()
+                    val user = hashMapOf<String, Any>(
+                        "nome" to nome,
+                        "sobrenome" to sobrenome,
+                        "email" to email,
+                        "foto" to pic,
+                        "uid" to uid)
+                    docRef.update(user)
+                        .addOnSuccessListener {
+                            Log.d("addUser", "Usuário adicionado com sucesso.")
+                            stateLogin.value = true
+                            loading.value = false
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w("addUser", "Erro ao adicionar usuário.", e)
+                            stateLogin.value = false
+                        }
+                        .addOnCompleteListener {
+                            loading.value = false
+                        }
+                } else {
+                    val user = hashMapOf<String, Any>(
+                        "nome" to nome,
+                        "sobrenome" to sobrenome,
+                        "email" to email,
+                        "foto" to pic,
+                        "uid" to uid)
+                    docRef.set(user)
+                        .addOnSuccessListener {
+                            Log.d("addUser", "Usuário adicionado com sucesso.")
+                            stateLogin.value = true
+                            stateRegister.value = true
+                            loading.value = false
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w("addUser", "Erro ao adicionar usuário.", e)
+                            stateLogin.value = false
+                            stateRegister.value = false
+                        }
+                        .addOnCompleteListener {
+                            loading.value = false
+                        }
                 }
-                val user = hashMapOf<String, Any>(
-                    "nome" to nome,
-                    "sobrenome" to sobrenome,
-                    "email" to email,
-                    "foto" to pic,
-                    "uid" to uid)
-                docRef.update(user)
-                    .addOnSuccessListener {
-                        Log.d("addUser", "Usuário adicionado com sucesso.")
-                        stateLogin.value = true
-                        loading.value = false
-                    }
-                    .addOnFailureListener { e ->
-                        Log.w("addUser", "Erro ao adicionar usuário.", e)
-                        stateLogin.value = false
-                    }
-                    .addOnCompleteListener {
-                        loading.value = false
-
-                    }
             }
     }
     fun getUser(uid: String) {
@@ -171,7 +193,7 @@ class AuthViewModel(): ViewModel() {
     }
     fun uploadFoto(data: Intent?) {
         loading.value = true
-        val storageReference = FirebaseStorage.getInstance().getReference(firebaseAuth.currentUser!!.uid + "/profilePicture/" + firebaseAuth.currentUser!!.email)
+        val storageReference = firebaseStore.getReference(firebaseAuth.currentUser!!.uid + "/profilePicture/" + firebaseAuth.currentUser!!.email)
         val uploadFile = storageReference.putFile(data!!.data!!)
         uploadFile.continueWithTask{ task ->
             if(task.isSuccessful)

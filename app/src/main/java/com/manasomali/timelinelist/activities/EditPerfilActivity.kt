@@ -31,7 +31,6 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class EditPerfilActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
-    lateinit var storageReference: StorageReference
     private val COD_IMG = 1000
     val firebaseAuth = FirebaseAuth.getInstance()
 
@@ -82,7 +81,6 @@ class EditPerfilActivity : AppCompatActivity() {
         initViewModel()
     }
     fun setImgFirebase() {
-        storageReference = FirebaseStorage.getInstance().getReference(firebaseAuth.currentUser!!.uid)
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
