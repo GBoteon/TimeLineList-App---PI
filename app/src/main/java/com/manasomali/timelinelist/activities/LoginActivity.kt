@@ -138,6 +138,9 @@ class LoginActivity : AppCompatActivity() {
                 endLoading()
             }
         }
+        viewModel.erromsg.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        }
     }
     private fun startLoading() {
         Toast.makeText(this, "Aguarde...", Toast.LENGTH_SHORT).show()

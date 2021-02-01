@@ -63,6 +63,9 @@ class CadastroActivity : AppCompatActivity() {
                 endLoading()
             }
         }
+        viewModel.erromsg.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        }
     }
     private fun validaCampos(nome: String, sobrenome:String, email: String, password1: String, password2: String): Boolean {
         return when {

@@ -1,6 +1,7 @@
 package com.manasomali.timelinelist.viewmodels
 
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,7 @@ import com.manasomali.timelinelist.helpers.Usuario
 
 
 class AuthViewModel(): ViewModel() {
+    var erromsg: MutableLiveData<String> = MutableLiveData()
     var loading: MutableLiveData<Boolean> = MutableLiveData()
     var stateRegister: MutableLiveData<Boolean> = MutableLiveData()
     var stateLogin: MutableLiveData<Boolean> = MutableLiveData()
@@ -25,7 +27,7 @@ class AuthViewModel(): ViewModel() {
     var usuario: MutableLiveData<Usuario> = MutableLiveData()
     val db = FirebaseFirestore.getInstance()
     val firebaseAuth = FirebaseAuth.getInstance()
-    val firebaseStore = FirebaseStorage.getInstance()
+    val storageReference = FirebaseStorage.getInstance().reference
     fun cadastroUsuarioFirebase(email: String, senha: String, nome: String, sobrenome: String) {
         loading.value = true
         firebaseAuth.createUserWithEmailAndPassword(email, senha)
@@ -36,6 +38,7 @@ class AuthViewModel(): ViewModel() {
                     }
                     else -> {
                         Log.e("cadastroUsuarioFirebase", task.exception?.message.toString())
+                        erromsg.value = task.exception?.message.toString()
                         stateRegister.value = false
                         loading.value = false
                     }
@@ -54,6 +57,7 @@ class AuthViewModel(): ViewModel() {
                     }
                     else -> {
                         Log.e("loginUsuarioFirebase", task.exception?.message.toString())
+                        erromsg.value = task.exception?.message.toString()
                         stateLogin.value = false
                         loading.value = false
                     }
@@ -75,6 +79,7 @@ class AuthViewModel(): ViewModel() {
                         user?.photoUrl.toString())
                 } else {
                     Log.e("handleGoogle", task.exception?.message.toString())
+                    erromsg.value = task.exception?.message.toString()
                     stateGoogleLogin.value = false
                     loading.value = false
                 }
@@ -96,6 +101,7 @@ class AuthViewModel(): ViewModel() {
                         user?.photoUrl.toString())
                 } else {
                     Log.e("handleFacebook", task.exception?.message.toString())
+                    erromsg.value = task.exception?.message.toString()
                     stateFaceLogin.value = false
                     loading.value = false
                 }
@@ -109,6 +115,7 @@ class AuthViewModel(): ViewModel() {
             }
             .addOnFailureListener { e ->
                 Log.w("getUser", "Erro ao receber foto usuário.", e)
+                erromsg.value = e.toString()
             }
             .addOnCompleteListener {
                 var pic = foto
@@ -149,6 +156,7 @@ class AuthViewModel(): ViewModel() {
                         }
                         .addOnFailureListener { e ->
                             Log.w("addUser", "Erro ao adicionar usuário.", e)
+                            erromsg.value = e.toString()
                             stateLogin.value = false
                             stateRegister.value = false
                         }
@@ -173,6 +181,7 @@ class AuthViewModel(): ViewModel() {
             }
             .addOnFailureListener { e ->
                 Log.w("getUser", "Erro ao receber usuário.", e)
+                erromsg.value = e.toString()
                 loading.value = false
             }
             .addOnCompleteListener {
@@ -182,35 +191,57 @@ class AuthViewModel(): ViewModel() {
     fun editDados(uid: String, nome: String, sobrenome: String) {
         val docRef = db.collection("users").document(uid)
         docRef.update("nome", nome)
-            .addOnSuccessListener { Log.d("editDados", "Nome do usuário editado com sucesso.") }
-            .addOnFailureListener { e -> Log.w("editDados", "Erro ao editar nome usuário.", e) }
+            .addOnSuccessListener {
+                Log.d("editDados", "Nome do usuário editado com sucesso.")
+            }
+            .addOnFailureListener { e ->
+                Log.w("editDados", "Erro ao editar nome usuário.", e)
+                erromsg.value = e.toString()
+            }
         docRef.update("sobrenome", sobrenome)
-            .addOnSuccessListener { Log.d("editDados", "Sobrenome do usuário editado com sucesso.") }
-            .addOnFailureListener { e -> Log.w("editDados", "Erro ao editar sobrenome usuário.", e) }
+            .addOnSuccessListener {
+                Log.d("editDados", "Sobrenome do usuário editado com sucesso.")
+            }
+            .addOnFailureListener { e ->
+                Log.w("editDados", "Erro ao editar sobrenome usuário.", e)
+                erromsg.value = e.toString()
+            }
         docRef.update("foto", fotoUri.value.toString())
-                .addOnSuccessListener { Log.d("editDados", "Foto do usuário editado com sucesso.") }
-                .addOnFailureListener { e -> Log.w("editDados", "Erro ao editar foto usuário.", e) }
+                .addOnSuccessListener {
+                    Log.d("editDados", "Foto do usuário editado com sucesso.")
+                }
+                .addOnFailureListener { e ->
+                    Log.w("editDados", "Erro ao editar foto usuário.", e)
+                    erromsg.value = e.toString()
+                }
     }
-    fun uploadFoto(data: Intent?) {
+    fun uploadFoto(filePath: Uri) {
         loading.value = true
-        val storageReference = firebaseStore.getReference(firebaseAuth.currentUser!!.uid + "/profilePicture/" + firebaseAuth.currentUser!!.email)
-        val uploadFile = storageReference.putFile(data!!.data!!)
-        uploadFile.continueWithTask{ task ->
-            if(task.isSuccessful)
-            {
-                Log.d("uploadFoto", "Imagem Carrregada com sucesso!")
-            }
-            storageReference.downloadUrl
-        }.addOnCompleteListener{ task ->
-            if(task.isSuccessful){
-                fotoUri.value = task.result.toString()
-            }
-            loading.value = false
-        }.addOnCanceledListener {
-            Log.d("uploadFoto", "Erro ao carrregar imagem!")
-            loading.value = false
+        println("-------------${usuario.value!!.uid}")
+        val ref = storageReference.child(usuario.value!!.uid + "/profilePicture/" + usuario.value!!.email)
+        val uploadTask = ref.putFile(filePath)
 
+        uploadTask.continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            ref.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                fotoUri.value = task.result.toString()
+            } else {
+                Log.e("uploadFoto", task.exception?.message.toString())
+                erromsg.value = task.exception?.message.toString()
+            }
+            loading.value = false
+        }.addOnFailureListener { e ->
+            Log.w("uploadFoto", "Erro ao carrregar imagem.", e)
+            erromsg.value = e.toString()
+            loading.value = false
         }
+
     }
 
 }

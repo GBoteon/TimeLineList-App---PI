@@ -29,7 +29,6 @@ class PerfilActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
 
     val sharedPrefs by lazy {  getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
-    val firebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +45,8 @@ class PerfilActivity : AppCompatActivity() {
 
         button_estatisticas.setOnClickListener { startActivity(Intent(this,
             EstatisticasActivity::class.java)) }
-        viewModel.getUser(firebaseAuth.currentUser!!.uid)
+
+        viewModel.getUser(FirebaseAuth.getInstance().currentUser!!.uid)
         viewModel.usuario.observe(this) {
             textview_perfil_nome.text = it.nome
             textview_perfil_sobrenome.text = it.sobrenome

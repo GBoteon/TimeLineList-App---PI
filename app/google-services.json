@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "313009394887-dp024htrsdun8o98h5c33sjp6iejgn9u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.manasomali.timelinelist",
+            "certificate_hash": "f02124df743348a52167a736bf886af3c12b4af2"
+          }
+        },
+        {
           "client_id": "313009394887-mjpoq9258jo72eit8sgpikh35lqtdga7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
