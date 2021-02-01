@@ -12,32 +12,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.manasomali.timelinelist.R
-import com.manasomali.timelinelist.RepositoryFilmes
-import com.manasomali.timelinelist.RepositoryImplementationFilmes
 import com.manasomali.timelinelist.activities.DetalheFilmeActivity
 import com.manasomali.timelinelist.adapters.ListaFilmesAdapter
-import com.manasomali.timelinelist.database.BaseDadosFilmes
 import com.manasomali.timelinelist.helpers.EssencialFilme
-import com.manasomali.timelinelist.viewmodels.FilmesFragmentViewModel
+import com.manasomali.timelinelist.viewmodels.FirestoreViewModel
 import kotlinx.android.synthetic.main.fragment_filmes.view.*
 
 class FilmesFragment : Fragment(), ListaFilmesAdapter.OnFilmeClickListener {
 
-    private val viewModel: FilmesFragmentViewModel by viewModels()
+    private val viewModel: FirestoreViewModel by viewModels()
+    var uid = FirebaseAuth.getInstance().currentUser!!.uid
 
-    internal var context: Context? = null
-    lateinit var repositoryFilmes: RepositoryFilmes
-    lateinit var dbFilmes: BaseDadosFilmes
-
-    override fun onAttach(context: Context) {
-        this.context = context
-        super.onAttach(context)
-    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,18 +34,9 @@ class FilmesFragment : Fragment(), ListaFilmesAdapter.OnFilmeClickListener {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_filmes, container, false)
 
-        dbFilmes = BaseDadosFilmes.invoke(context)
-        repositoryFilmes = RepositoryImplementationFilmes(dbFilmes.filmesDAO())
-        val viewModel by viewModels<FilmesFragmentViewModel> {
-            object : ViewModelProvider.Factory {
-                override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                    return FilmesFragmentViewModel(repositoryFilmes) as T
-                }
-            }
-        }
 
-        viewModel.getFilmes()
 
+        viewModel.getAllFilmes(uid)
         viewModel.listaFilme.observe(viewLifecycleOwner) {
             var adapter =  ListaFilmesAdapter(it, this)
             view.recyclerview_filmes.adapter = adapter

@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.manasomali.timelinelist.Constants
 import com.manasomali.timelinelist.R
@@ -17,7 +14,7 @@ import com.squareup.picasso.Picasso
 import kotlin.collections.ArrayList
 
 class ListaFilmesAdapter(
-    private val listFilmes: List<EssencialFilme>,
+    private val listFilmes: ArrayList<EssencialFilme>,
     val listener: OnFilmeClickListener
 ): RecyclerView.Adapter<ListaFilmesAdapter.ListaFilmeViewHolder>(), Filterable {
 
@@ -37,11 +34,11 @@ class ListaFilmesAdapter(
         holder.data_filme.text = filme.dataAssistidoPessoal
         holder.notapessoal_filme.text = "${filme.notaPessoal}/10"
 
-        if(filme.cinema==1) {holder.imageview_cinema.visibility = VISIBLE}
-        if(filme.dormiu==1) {holder.imageview_dormiu.visibility = VISIBLE}
-        if(filme.chorou==1) {holder.imageview_chorou.visibility = VISIBLE}
-        if(filme.favorito==1) {holder.imageview_favorito.visibility = VISIBLE}
-        if(filme.dataAssistidoPessoal=="") {holder.data_filme.visibility = INVISIBLE}
+        if(filme.cinema) {holder.imageview_cinema.visibility = VISIBLE}
+        if(filme.dormiu) {holder.imageview_dormiu.visibility = VISIBLE}
+        if(filme.chorou) {holder.imageview_chorou.visibility = VISIBLE}
+        if(filme.favorito) {holder.imageview_favorito.visibility = VISIBLE}
+        if(filme.dataAssistidoPessoal=="") {holder.data_filme.visibility = GONE}
         if(filme.notaPessoal=="") {holder.notapessoal_filme.visibility = GONE}
 
         Picasso.get().load(Uri.parse("${Constants.BASE_IMAGE_URL}${filme.backdropPath}")).placeholder(
@@ -58,6 +55,7 @@ class ListaFilmesAdapter(
         val imageview_chorou: ImageView = itemView.findViewById(R.id.imageview_chorou)
         val imageview_favorito: ImageView = itemView.findViewById(R.id.imageview_favorito)
         val backdrop_filme: ImageView = itemView.findViewById(R.id.imageview_backdrop_filme)
+        val linearlayout_filme_reacoes: LinearLayout = itemView.findViewById(R.id.linearlayout_filme_reacoes)
         init {
             itemView.setOnClickListener(this)
         }
@@ -73,7 +71,7 @@ class ListaFilmesAdapter(
 
     }
 
-    var filmesFilterList = listOf<EssencialFilme>()
+    var filmesFilterList = arrayListOf<EssencialFilme>()
 
     init {
         filmesFilterList = listFilmes

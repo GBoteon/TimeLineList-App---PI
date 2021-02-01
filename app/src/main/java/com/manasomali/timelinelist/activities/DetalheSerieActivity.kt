@@ -15,47 +15,37 @@ import android.view.animation.AnimationUtils
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.manasomali.timelinelist.*
-import com.manasomali.timelinelist.database.BaseDadosSeries
 import com.manasomali.timelinelist.helpers.BaseSerieDetalhe
 import com.manasomali.timelinelist.helpers.EssencialSerie
-import com.manasomali.timelinelist.viewmodels.SeriesFragmentViewModel
+import com.manasomali.timelinelist.viewmodels.FirestoreViewModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_detalhefilme.*
 import kotlinx.android.synthetic.main.activity_detalheserie.*
 import kotlinx.android.synthetic.main.activity_detalheserie.imageview_compartilhar
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
 class DetalheSerieActivity : AppCompatActivity() {
+    private val viewModel: FirestoreViewModel by viewModels()
 
     companion object {
         private const val MAX_LINES_COLLAPSED = 3
         private const val INITIAL_IS_COLLAPSED = true
     }
     private var isCollapsed = INITIAL_IS_COLLAPSED
+    var uid = FirebaseAuth.getInstance().currentUser!!.uid
 
-    lateinit var repositorySeries: RepositorySeries
-    lateinit var dbSeries: BaseDadosSeries
-
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalheserie)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
-
-        dbSeries = BaseDadosSeries.invoke(this)
-        repositorySeries = RepositoryImplementationSeries(dbSeries.seriesDAO())
-        val viewModel by viewModels<SeriesFragmentViewModel> {
-            object : ViewModelProvider.Factory {
-                override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                    return SeriesFragmentViewModel(repositorySeries) as T
-                }
-            }
-        }
 
         if(intent.getStringExtra("origem")=="Pesquisa") {
             button_delete_serie.visibility = GONE
@@ -94,7 +84,7 @@ class DetalheSerieActivity : AppCompatActivity() {
         button_ok_nota_serie.setOnClickListener {
             cardview_rating_serie.visibility = View.INVISIBLE
             var value = ratingbar_nota_serie.rating
-            edittext_nota_serie.setText((value).toString())
+            edittext_nota_serie.text = (value).toString()
         }
         button_cancel_nota_serie.setOnClickListener {
             cardview_rating_serie.visibility = View.INVISIBLE
@@ -124,7 +114,7 @@ class DetalheSerieActivity : AppCompatActivity() {
             ).show()
         }
         var serieAtual = intent.getSerializableExtra("serieClick") as BaseSerieDetalhe
-        var idunico = 0
+        var idunico = ""
         if (intent.getStringExtra("origem")=="ListaPessoal") {
             var serieDB = intent.getSerializableExtra("serieDB") as EssencialSerie
             idunico = serieDB.id!!
@@ -139,10 +129,11 @@ class DetalheSerieActivity : AppCompatActivity() {
         }
 
         button_salvareditar_serie.setOnClickListener {
+            var timestamp = DateTimeFormatter.ISO_INSTANT.format(Instant.now())
             if(intent.getStringExtra("origem")=="Pesquisa") {
-                viewModel.addSerie(EssencialSerie(
-                    null,
-                    serieAtual.id,
+                viewModel.addSerie(uid, EssencialSerie(
+                    timestamp,
+                    serieAtual.id.toString(),
                     serieAtual.name,
                     serieAtual.backdropPath,
                     edittext_dataassistido_serie.text.toString(),
@@ -152,22 +143,22 @@ class DetalheSerieActivity : AppCompatActivity() {
                 Toast.makeText(this, "Serie Adicionado", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, ListaActivity::class.java))
             } else {
-                viewModel.updateSerie(EssencialSerie(
+                viewModel.editaSerie(uid, EssencialSerie(
                     idunico,
-                    serieAtual.id,
+                    serieAtual.id.toString(),
                     serieAtual.name,
                     serieAtual.backdropPath,
                     edittext_dataassistido_serie.text.toString(),
                     getSelectedRadioButton(),
                     edittext_nota_serie.text.toString()
                 ))
-                Toast.makeText(this, "Serie Atualizado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Serie Atualizada", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, ListaActivity::class.java))
             }
         }
         button_delete_serie.setOnClickListener {
             if(intent.getStringExtra("origem")=="ListaPessoal") {
-                viewModel.deleteSerie(idunico)
+                viewModel.delSerie(uid, idunico)
                 Toast.makeText(this, "Serie Removida", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, ListaActivity::class.java))
             }
@@ -210,7 +201,7 @@ class DetalheSerieActivity : AppCompatActivity() {
     private fun updateLabel(myCalendar: Calendar) {
         val myFormat = "dd/MM/yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
-        edittext_dataassistido_serie.setText(sdf.format(myCalendar.getTime()))
+        edittext_dataassistido_serie.text = sdf.format(myCalendar.time)
     }
     private fun applyLayoutTransition() {
         val transition = LayoutTransition()

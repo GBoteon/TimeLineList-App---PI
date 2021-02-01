@@ -13,44 +13,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.manasomali.timelinelist.*
 import com.manasomali.timelinelist.activities.DetalheSerieActivity
 import com.manasomali.timelinelist.adapters.ListaSeriesAdapter
-import com.manasomali.timelinelist.database.BaseDadosSeries
 import com.manasomali.timelinelist.helpers.EssencialSerie
-import com.manasomali.timelinelist.viewmodels.SeriesFragmentViewModel
+import com.manasomali.timelinelist.viewmodels.FirestoreViewModel
 import kotlinx.android.synthetic.main.fragment_series.view.*
 
 class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {
+    private val viewModel: FirestoreViewModel by viewModels()
+    var uid = FirebaseAuth.getInstance().currentUser!!.uid
 
-    private val viewModel: SeriesFragmentViewModel by viewModels()
-
-    internal var context: Context? = null
-    lateinit var repositorySeries: RepositorySeries
-    lateinit var dbSeries: BaseDadosSeries
-
-    override fun onAttach(context: Context) {
-        this.context = context
-        super.onAttach(context)
-    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_series, container, false)
 
-        dbSeries = BaseDadosSeries.invoke(context)
-        repositorySeries = RepositoryImplementationSeries(dbSeries.seriesDAO())
-        val viewModel by viewModels<SeriesFragmentViewModel> {
-            object : ViewModelProvider.Factory {
-                override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                    return SeriesFragmentViewModel(repositorySeries) as T
-                }
-            }
-        }
-
-        viewModel.getSeries()
+        viewModel.getAllSeries(uid)
 
         viewModel.listaSerie.observe(viewLifecycleOwner) {
             var adapter =  ListaSeriesAdapter(it, this)

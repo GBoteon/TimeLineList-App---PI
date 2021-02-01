@@ -15,7 +15,7 @@ import com.manasomali.timelinelist.R
 import com.manasomali.timelinelist.helpers.EssencialSerie
 import com.squareup.picasso.Picasso
 
-class ListaSeriesAdapter(private val listSerie: List<EssencialSerie>, val listener: OnSerieClickListener): RecyclerView.Adapter<ListaSeriesAdapter.ListaSeriesViewHolder>(), Filterable {
+class ListaSeriesAdapter(private val listSerie: ArrayList<EssencialSerie>, val listener: OnSerieClickListener): RecyclerView.Adapter<ListaSeriesAdapter.ListaSeriesViewHolder>(), Filterable {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaSeriesViewHolder {
         var itemView = LayoutInflater.from(parent.context).inflate(R.layout.serie_item, parent, false)
@@ -28,12 +28,7 @@ class ListaSeriesAdapter(private val listSerie: List<EssencialSerie>, val listen
         var serie = seriesFilterList[position]
         holder.nome_serie.text = serie.name
 
-        for(position in Constants.STATUS_SERIE_PESSOAL)
-        {
-            if (serie.statusPessoal==position) {
-                holder.status_serie.text = position
-            }
-        }
+        holder.status_serie.text = serie.statusPessoal
         holder.data_serie.text = serie.dataAssistidoPessoal
         holder.notapessoal_serie.text = "${serie.notaPessoal}/10"
 
@@ -65,7 +60,7 @@ class ListaSeriesAdapter(private val listSerie: List<EssencialSerie>, val listen
         fun serieClick(position: Int)
     }
 
-    var seriesFilterList = listOf<EssencialSerie>()
+    var seriesFilterList = arrayListOf<EssencialSerie>()
 
     init {
         seriesFilterList = listSerie

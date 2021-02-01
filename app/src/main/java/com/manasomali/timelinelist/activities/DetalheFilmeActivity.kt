@@ -16,52 +16,39 @@ import android.view.View.*
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.manasomali.timelinelist.Constants.BASE_IMAGE_URL
 import com.manasomali.timelinelist.R
-import com.manasomali.timelinelist.RepositoryFilmes
-import com.manasomali.timelinelist.RepositoryImplementationFilmes
-import com.manasomali.timelinelist.database.BaseDadosFilmes
 import com.manasomali.timelinelist.helpers.BaseFilmeDetalhe
 import com.manasomali.timelinelist.helpers.EssencialFilme
-import com.manasomali.timelinelist.viewmodels.FilmesFragmentViewModel
+import com.manasomali.timelinelist.viewmodels.FirestoreViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detalhefilme.*
 import kotlinx.android.synthetic.main.activity_detalhefilme.imageview_compartilhar
-import kotlinx.android.synthetic.main.activity_detalheserie.*
-import kotlinx.android.synthetic.main.filme_item.*
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
 class DetalheFilmeActivity : AppCompatActivity() {
+    private val viewModel: FirestoreViewModel by viewModels()
 
     companion object {
         private const val MAX_LINES_COLLAPSED = 3
         private const val INITIAL_IS_COLLAPSED = true
     }
     private var isCollapsed = INITIAL_IS_COLLAPSED
+    var uid = FirebaseAuth.getInstance().currentUser!!.uid
 
-    lateinit var repositoryFilmes: RepositoryFilmes
-    lateinit var dbFilmes: BaseDadosFilmes
-
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalhefilme)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
-
-        dbFilmes = BaseDadosFilmes.invoke(this)
-        repositoryFilmes = RepositoryImplementationFilmes(dbFilmes.filmesDAO())
-        val viewModel by viewModels<FilmesFragmentViewModel> {
-            object : ViewModelProvider.Factory {
-                override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                    return FilmesFragmentViewModel(repositoryFilmes) as T
-                }
-            }
-        }
 
         if(intent.getStringExtra("origem")=="Pesquisa") {
             button_delete_filme.visibility = GONE
@@ -132,44 +119,45 @@ class DetalheFilmeActivity : AppCompatActivity() {
         }
 
         var filmeAtual = intent.getSerializableExtra("filmeClick") as BaseFilmeDetalhe
-        var idunico = 0
+        var idunico = ""
         if (intent.getStringExtra("origem")=="ListaPessoal") {
             var filmeDB = intent.getSerializableExtra("filmeDB") as EssencialFilme
             idunico = filmeDB.id!!
             edittext_dataassistido_filme.text = filmeDB.dataAssistidoPessoal
             edittext_nota_filme.text = filmeDB.notaPessoal
-            if (filmeDB.cinema==1) checkbox_cinema.isChecked = true
-            if (filmeDB.dormiu==1) checkbox_dormiu.isChecked = true
-            if (filmeDB.chorou==1) checkbox_chorou.isChecked = true
-            if (filmeDB.favorito==1) checkbox_favorito.isChecked = true
+            if (filmeDB.cinema) checkbox_cinema.isChecked = true
+            if (filmeDB.dormiu) checkbox_dormiu.isChecked = true
+            if (filmeDB.chorou) checkbox_chorou.isChecked = true
+            if (filmeDB.favorito) checkbox_favorito.isChecked = true
         }
         button_salvareditar_filme.setOnClickListener {
+            var timestamp = DateTimeFormatter.ISO_INSTANT.format(Instant.now())
             if(intent.getStringExtra("origem")=="Pesquisa") {
-                viewModel.addFilme(EssencialFilme(
-                    null,
-                    filmeAtual.id,
+                viewModel.addFilme(uid, EssencialFilme(
+                    timestamp,
+                    filmeAtual.id.toString(),
                     filmeAtual.title,
                     filmeAtual.backdropPath,
                     edittext_dataassistido_filme.text.toString(),
-                    getCheckboxCinema(),
-                    getCheckboxDormiu(),
-                    getCheckboxChorou(),
-                    getCheckboxFavorito(),
+                    checkbox_cinema.isChecked,
+                    checkbox_dormiu.isChecked,
+                    checkbox_chorou.isChecked,
+                    checkbox_favorito.isChecked,
                     edittext_nota_filme.text.toString()
                     ))
                 Toast.makeText(this, "Filme Adicionado", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this,ListaActivity::class.java))
             } else {
-                viewModel.updateFilme(EssencialFilme(
+                viewModel.editaFilme(uid, EssencialFilme(
                     idunico,
-                    filmeAtual.id,
+                    filmeAtual.id.toString(),
                     filmeAtual.title,
                     filmeAtual.backdropPath,
                     edittext_dataassistido_filme.text.toString(),
-                    getCheckboxCinema(),
-                    getCheckboxDormiu(),
-                    getCheckboxChorou(),
-                    getCheckboxFavorito(),
+                    checkbox_cinema.isChecked,
+                    checkbox_dormiu.isChecked,
+                    checkbox_chorou.isChecked,
+                    checkbox_favorito.isChecked,
                     edittext_nota_filme.text.toString()
                 ))
                 Toast.makeText(this, "Filme Atualizado", Toast.LENGTH_SHORT).show()
@@ -178,7 +166,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
         }
         button_delete_filme.setOnClickListener {
             if(intent.getStringExtra("origem")=="ListaPessoal") {
-                viewModel.deleteFilme(idunico)
+                viewModel.delFilme(uid, idunico)
                 Toast.makeText(this, "Filme Removido", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this,ListaActivity::class.java))
             }
@@ -222,7 +210,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
     private fun updateLabel(myCalendar: Calendar) {
         val myFormat = "dd/MM/yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
-        edittext_dataassistido_filme.setText(sdf.format(myCalendar.getTime()))
+        edittext_dataassistido_filme.text = sdf.format(myCalendar.time)
     }
 
     private fun applyLayoutTransition() {
@@ -230,17 +218,5 @@ class DetalheFilmeActivity : AppCompatActivity() {
         transition.setDuration(500)
         transition.enableTransitionType(LayoutTransition.CHANGING)
         root_descricaofilme.layoutTransition = transition
-    }
-    private fun getCheckboxCinema(): Int {
-        return if(checkbox_cinema.isChecked) {1} else {0}
-    }
-    private fun getCheckboxDormiu(): Int {
-        return if(checkbox_dormiu.isChecked) {1} else {0}
-    }
-    private fun getCheckboxChorou(): Int {
-        return if(checkbox_chorou.isChecked) {1} else {0}
-    }
-    private fun getCheckboxFavorito(): Int {
-        return if(checkbox_favorito.isChecked) {1} else {0}
     }
 }
