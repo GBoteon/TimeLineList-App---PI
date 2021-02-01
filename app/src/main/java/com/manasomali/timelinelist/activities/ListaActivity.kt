@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.res.Configuration
-import android.graphics.drawable.BitmapDrawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
@@ -21,10 +20,8 @@ import com.manasomali.timelinelist.fragments.SeriesFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.manasomali.timelinelist.viewmodels.AuthViewModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_editperfil.*
 import kotlinx.android.synthetic.main.activity_lista.*
 
 

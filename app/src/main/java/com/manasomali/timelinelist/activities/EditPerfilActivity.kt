@@ -1,13 +1,10 @@
 package com.manasomali.timelinelist.activities
 
 import android.app.Activity
-import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -19,21 +16,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.UploadTask
-import com.manasomali.timelinelist.Constants
 import com.manasomali.timelinelist.R
 import com.manasomali.timelinelist.viewmodels.AuthViewModel
 import com.squareup.picasso.Picasso
-import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_editperfil.*
-import kotlinx.android.synthetic.main.activity_lista.*
-import kotlinx.android.synthetic.main.activity_login.*
-import okhttp3.internal.concurrent.Task
-import java.io.IOException
-import kotlin.coroutines.Continuation
-
 
 class EditPerfilActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
@@ -58,12 +44,12 @@ class EditPerfilActivity : AppCompatActivity() {
             startActivity(Intent(this, PerfilActivity::class.java))
         }
 
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        val mGoogleSignInClient = GoogleSignIn.getClient(getBaseContext(), gso)
         imageview_exitfirebase.setOnClickListener {
-            var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
-            var mGoogleSignInClient = GoogleSignIn.getClient(getBaseContext(), gso)
             mGoogleSignInClient.signOut().addOnCompleteListener{
                 FirebaseAuth.getInstance().signOut()
             }
@@ -99,7 +85,6 @@ class EditPerfilActivity : AppCompatActivity() {
                 return
             }
             viewModel.uploadFoto(data.data!!)
-
         }
     }
     private fun initViewModel() {

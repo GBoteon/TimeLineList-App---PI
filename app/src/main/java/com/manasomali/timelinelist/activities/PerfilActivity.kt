@@ -6,13 +6,11 @@ import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.observe
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.manasomali.timelinelist.Constants.KEY_THEME
 import com.manasomali.timelinelist.Constants.PREFS_NAME
 import com.manasomali.timelinelist.Constants.THEME_DARK
@@ -21,7 +19,6 @@ import com.manasomali.timelinelist.Constants.THEME_UNDEFINED
 import com.manasomali.timelinelist.R
 import com.manasomali.timelinelist.viewmodels.AuthViewModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_editperfil.*
 import kotlinx.android.synthetic.main.activity_perfil.*
 
 

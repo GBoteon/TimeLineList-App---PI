@@ -1,6 +1,5 @@
 package com.manasomali.timelinelist.viewmodels
 
-import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -217,7 +216,6 @@ class AuthViewModel(): ViewModel() {
     }
     fun uploadFoto(filePath: Uri) {
         loading.value = true
-        println("-------------${usuario.value!!.uid}")
         val ref = storageReference.child(usuario.value!!.uid + "/profilePicture/" + usuario.value!!.email)
         val uploadTask = ref.putFile(filePath)
 
@@ -241,7 +239,5 @@ class AuthViewModel(): ViewModel() {
             erromsg.value = e.toString()
             loading.value = false
         }
-
     }
-
 }
