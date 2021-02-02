@@ -103,3 +103,6 @@ class CadastroActivity : AppCompatActivity() {
         progressbar_loading_cadastro.visibility = View.GONE
     }
 }
+
+
+//COnflito
