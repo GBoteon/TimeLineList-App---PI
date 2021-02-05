@@ -106,8 +106,8 @@
         style="@style/TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:drawableStart="@drawable/ic_lamp"
         android:drawablePadding="16dp"
@@ -118,34 +118,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_perfil_email" />
 
-    <RadioGroup
-        android:id="@+id/themeGroup"
+
+    <CheckBox
+        android:id="@+id/themeDark"
+        style="@style/SecondaryText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchcompat_tema">
+        android:buttonTint="@color/colorRed"
+        android:text="Escuro"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:textSize="8pt"
+        app:layout_constraintTop_toBottomOf="@+id/themeLight" />
 
-        <RadioButton
-            android:id="@+id/themeDark"
-            style="@style/SecondaryText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorRed"
-            android:text="Escuro"
-            android:textSize="8pt"/>
-
-        <RadioButton
-            android:id="@+id/themeLight"
-            style="@style/SecondaryText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorRed"
-            android:text="Claro"
-            android:textSize="8pt" />
-
-    </RadioGroup>
+    <CheckBox
+        android:id="@+id/themeLight"
+        style="@style/SecondaryText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/colorRed"
+        android:text="Claro"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:textSize="8pt"
+        app:layout_constraintTop_toBottomOf="@+id/switchcompat_tema" />
 
     <Button
         android:id="@+id/button_estatisticas"
@@ -166,7 +162,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/themeGroup"
+        app:layout_constraintTop_toBottomOf="@+id/themeLight"
         app:layout_constraintVertical_bias="0.78" />
 
 

@@ -9,6 +9,7 @@ import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.View.GONE
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -38,6 +39,10 @@ class ListaActivity : AppCompatActivity() {
         setupViewPager()
         setupColorIcones()
 
+        if(!isOnline(this)) {
+            floatingactionbutton.visibility = GONE
+            Toast.makeText(applicationContext, "Sem conexão com internet", Toast.LENGTH_LONG).show()
+        }
         tablayout_tabs.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 tab.icon?.setTint(resources.getColor(R.color.colorRed))
@@ -63,11 +68,7 @@ class ListaActivity : AppCompatActivity() {
             )
         ) }
         floatingactionbutton.setOnClickListener {
-            if(!isOnline(this)) {
-                Toast.makeText(applicationContext, "Sem conexão com internet", Toast.LENGTH_LONG).show()
-            } else {
-                startActivity(Intent(this, PesquisaActivity::class.java))
-            }
+            startActivity(Intent(this, PesquisaActivity::class.java))
         }
         viewModel.getUser(firebaseAuth.currentUser!!.uid)
         viewModel.usuario.observe(this) {
@@ -126,5 +127,5 @@ class ListaActivity : AppCompatActivity() {
         }
     }
 
-
+    override fun onBackPressed() {}
 }

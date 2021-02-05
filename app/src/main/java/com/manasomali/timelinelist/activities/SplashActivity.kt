@@ -13,6 +13,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.manasomali.timelinelist.Constants.KEY_THEME
 import com.manasomali.timelinelist.Constants.PREFS_NAME
+import com.manasomali.timelinelist.Constants.THEME_DARK
+import com.manasomali.timelinelist.Constants.THEME_LIGHT
 import com.manasomali.timelinelist.Constants.THEME_UNDEFINED
 import com.manasomali.timelinelist.R
 import kotlinx.coroutines.*
@@ -31,10 +33,15 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
 
-        when (sharedPrefs.getInt(KEY_THEME, THEME_UNDEFINED)) {
-            0 -> setTema(AppCompatDelegate.MODE_NIGHT_NO)
-            1 -> setTema(AppCompatDelegate.MODE_NIGHT_YES)
-            -1 -> setTema(AppCompatDelegate.MODE_NIGHT_NO)
+        val temaAtual = sharedPrefs.getInt(KEY_THEME, THEME_UNDEFINED)
+        if(temaAtual==1) {
+            setTema(AppCompatDelegate.MODE_NIGHT_NO, THEME_LIGHT)
+        }
+        if(temaAtual==0) {
+            setTema(AppCompatDelegate.MODE_NIGHT_YES, THEME_DARK)
+        }
+        if(temaAtual==-1) {
+            setTema(AppCompatDelegate.MODE_NIGHT_NO, THEME_LIGHT)
         }
 
         var intent = Intent(this, LoginActivity::class.java)
@@ -64,9 +71,11 @@ class SplashActivity : AppCompatActivity() {
         scope.cancel()
         super.onPause()
     }
-    private fun setTema(themeMode: Int) {
+    private fun setTema(themeMode: Int, prefsMode: Int) {
         AppCompatDelegate.setDefaultNightMode(themeMode)
+        saveTheme(prefsMode)
     }
+    private fun saveTheme(theme: Int) = sharedPrefs.edit().putInt(KEY_THEME, theme).apply()
 
 
 }

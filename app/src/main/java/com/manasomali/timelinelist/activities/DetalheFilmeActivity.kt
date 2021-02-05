@@ -219,4 +219,14 @@ class DetalheFilmeActivity : AppCompatActivity() {
         transition.enableTransitionType(LayoutTransition.CHANGING)
         root_descricaofilme.layoutTransition = transition
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Toast.makeText(this, "Voltando", Toast.LENGTH_SHORT).show()
+        if(intent.getStringExtra("origem")=="ListaPessoal") {
+            startActivity(Intent(this,ListaActivity::class.java))
+        } else {
+            startActivity(Intent(this,PesquisaActivity::class.java))
+        }
+    }
 }

@@ -214,4 +214,13 @@ class DetalheSerieActivity : AppCompatActivity() {
         var radioButton = findViewById<View>(selectedId) as RadioButton
         return radioButton.text.toString()
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if(intent.getStringExtra("origem")=="ListaPessoal") {
+            startActivity(Intent(this,ListaActivity::class.java))
+        } else {
+            startActivity(Intent(this,PesquisaActivity::class.java))
+        }
+    }
 }

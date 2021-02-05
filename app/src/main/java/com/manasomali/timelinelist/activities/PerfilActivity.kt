@@ -6,7 +6,12 @@ import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
 import android.view.View.GONE
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -34,8 +39,8 @@ class PerfilActivity : AppCompatActivity() {
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
         button_estatisticas.visibility = GONE
 
-        initThemeListener()
         initTheme()
+        initThemeListener()
 
         imageview_voltar_pefiltolista.setOnClickListener { startActivity(Intent(this,
             ListaActivity::class.java)) }
@@ -51,16 +56,35 @@ class PerfilActivity : AppCompatActivity() {
             textview_perfil_email.text = it.email
             Picasso.get().load(Uri.parse(it.foto)).placeholder(R.mipmap.ic_person).into(circularimageview_perfil)
         }
-
     }
 
     private fun initThemeListener(){
-        themeGroup.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.themeLight -> setTheme(AppCompatDelegate.MODE_NIGHT_NO, THEME_LIGHT)
-                R.id.themeDark -> setTheme(AppCompatDelegate.MODE_NIGHT_YES, THEME_DARK)
+        themeDark.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                when (event?.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        themeLight.isChecked = false
+                        themeDark.isChecked = true
+                        Toast.makeText(applicationContext,"Tema alterado: Escuro", Toast.LENGTH_SHORT).show()
+                        setTheme(AppCompatDelegate.MODE_NIGHT_YES, THEME_DARK)
+                    }
+                }
+                return v?.onTouchEvent(event) ?: true
             }
-        }
+        })
+        themeLight.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                when (event?.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        themeDark.isChecked = false
+                        themeLight.isChecked = true
+                        Toast.makeText(applicationContext,"Tema alterado: Claro", Toast.LENGTH_SHORT).show()
+                        setTheme(AppCompatDelegate.MODE_NIGHT_NO, THEME_LIGHT)
+                    }
+                }
+                return v?.onTouchEvent(event) ?: true
+            }
+        })
     }
 
     private fun setTheme(themeMode: Int, prefsMode: Int) {
@@ -69,20 +93,22 @@ class PerfilActivity : AppCompatActivity() {
     }
 
     private fun initTheme() {
-        when (getSavedTheme()) {
-            THEME_LIGHT -> themeLight.isChecked = true
-            THEME_DARK -> themeDark.isChecked = true
-            THEME_UNDEFINED -> {
-                when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
-                    Configuration.UI_MODE_NIGHT_NO -> themeLight.isChecked = true
-                    Configuration.UI_MODE_NIGHT_YES -> themeDark.isChecked = true
-                    Configuration.UI_MODE_NIGHT_UNDEFINED -> themeLight.isChecked = true
-                }
+        when (sharedPrefs.getInt(KEY_THEME, THEME_UNDEFINED)) {
+            0 -> {
+                themeDark.isChecked = true
+                themeLight.isChecked = false
+            }
+            1 -> {
+                themeLight.isChecked = true
+                themeDark.isChecked = false
+            }
+            -1 -> {
+                themeLight.isChecked = true
+                themeDark.isChecked = false
             }
         }
     }
 
     private fun saveTheme(theme: Int) = sharedPrefs.edit().putInt(KEY_THEME, theme).apply()
-    private fun getSavedTheme() = sharedPrefs.getInt(KEY_THEME, THEME_UNDEFINED)
 
 }
