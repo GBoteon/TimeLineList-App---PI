@@ -15,11 +15,35 @@
       },
       "oauth_client": [
         {
+          "client_id": "313009394887-2dlvgijr42b8muno9md3f4024i29tov8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.manasomali.timelinelist",
+            "certificate_hash": "dae1fdb62a3b4677f1c1780c1f891a7b645be5af"
+          }
+        },
+        {
           "client_id": "313009394887-dp024htrsdun8o98h5c33sjp6iejgn9u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.manasomali.timelinelist",
             "certificate_hash": "f02124df743348a52167a736bf886af3c12b4af2"
+          }
+        },
+        {
+          "client_id": "313009394887-h5ifomklgddauc7rbkb1qhorvjt9pgnu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.manasomali.timelinelist",
+            "certificate_hash": "6bd676145171fa56b16a94bdfcd42bcc2642d660"
+          }
+        },
+        {
+          "client_id": "313009394887-m4s3mvhukk0m632bif7ub0ra3kqtj8oo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.manasomali.timelinelist",
+            "certificate_hash": "c9e806a9d8d45d0175713c7125748d7eaa74a20b"
           }
         },
         {

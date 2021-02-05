@@ -39,14 +39,13 @@ class ListaFilmePesquisaAdapter(
         var obra = listObra.results[position]
         holder.textview_nomeobra.text = obra.title
 
-        var data = ""
+
         val formatter = SimpleDateFormat("yyyy")
         val dateFormat = SimpleDateFormat("yyyy-mm-dd")
-        if (obra.releaseDate!="") {
+        if ((obra.releaseDate!="")&&(obra.releaseDate!=null)) {
             @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-            data = formatter.format(dateFormat.parse(obra.releaseDate))
+            holder.textview_dateobra.text = formatter.format(dateFormat.parse(obra.releaseDate))
         }
-        holder.textview_dateobra.text = data
 
         var ids= arrayListOf<String>()
         for (id in obra.genreIds) {

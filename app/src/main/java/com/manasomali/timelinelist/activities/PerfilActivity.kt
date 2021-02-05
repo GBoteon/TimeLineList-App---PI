@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.view.View.GONE
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -39,7 +40,7 @@ class PerfilActivity : AppCompatActivity() {
             ListaActivity::class.java)) }
         imageview_editperfil.setOnClickListener { startActivity(Intent(this,
             EditPerfilActivity::class.java)) }
-
+        button_estatisticas.visibility = GONE
         button_estatisticas.setOnClickListener { startActivity(Intent(this,
             EstatisticasActivity::class.java)) }
 

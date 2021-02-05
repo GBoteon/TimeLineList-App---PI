@@ -54,7 +54,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.9"
-                android:text="Nome Filme"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -84,8 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="16sp"
-                android:text="Duração"/>
+                android:textSize="16sp"/>
             <TextView
                 style="@style/DetalheTextView"
                 android:layout_width="0dp"
@@ -104,8 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="16sp"
-                android:text="Status"/>
+                android:textSize="16sp"/>
             <TextView
                 style="@style/DetalheTextView"
                 android:layout_width="0dp"
@@ -124,8 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="16sp"
-                android:text="Lançamento"/>
+                android:textSize="16sp"/>
             <TextView
                 style="@style/DetalheTextView"
                 android:layout_width="0dp"
@@ -144,8 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="16sp"
-                android:text="x,x/5"/>
+                android:textSize="16sp"/>
         </LinearLayout>
         <androidx.cardview.widget.CardView
             app:cardCornerRadius="20dp"
@@ -186,8 +181,7 @@
                     android:layout_marginTop="3dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:gravity="fill_horizontal"
-                    android:text="blablablablablablabla"/>
+                    android:gravity="fill_horizontal"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView

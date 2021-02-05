@@ -32,7 +32,6 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginBottom="50dp"
-        android:text="Nome"
         android:textSize="20dp"
         android:textColor="@color/colorWhite"
         android:backgroundTint="@color/colorTransparent"
@@ -53,8 +52,7 @@
         android:gravity="center"
         android:textSize="16dp"
         android:layout_gravity="bottom"
-        android:textColor="@color/colorWhite"
-        android:text="Date"/>
+        android:textColor="@color/colorWhite"/>
 
     <TextView
         android:id="@+id/textview_notaobra"
@@ -70,7 +68,6 @@
         android:shadowDx="1.5"
         android:shadowDy="1.3"
         android:shadowRadius="1.6"
-        android:text="Nota"
         android:textColor="@color/colorWhite"
         android:textSize="16dp"
         android:textStyle="bold" />
@@ -90,6 +87,5 @@
         android:layout_marginBottom="30dp"
         android:layout_gravity="bottom"
         android:textSize="16dp"
-        android:textColor="@color/colorWhite"
-        android:text="Gêneros"/>
+        android:textColor="@color/colorWhite"/>
 </androidx.cardview.widget.CardView>

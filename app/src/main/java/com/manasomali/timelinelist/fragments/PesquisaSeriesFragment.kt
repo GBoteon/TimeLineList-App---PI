@@ -32,7 +32,6 @@ class PesquisaSeriesFragment : Fragment(), ListaSeriePesquisaAdapter.OnObraSerie
         view.recyclerview_series_pesquisa.layoutManager = LinearLayoutManager(context)
         view.recyclerview_series_pesquisa.setHasFixedSize(true)
         viewModel.listaSeries.observe(viewLifecycleOwner) {
-            println(it.toString())
             var adapter =  ListaSeriePesquisaAdapter(it, this)
             view.recyclerview_series_pesquisa.adapter = adapter
             view.progressbar_loading_series.visibility = INVISIBLE
