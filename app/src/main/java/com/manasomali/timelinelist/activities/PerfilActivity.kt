@@ -32,6 +32,7 @@ class PerfilActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
+        button_estatisticas.visibility = GONE
 
         initThemeListener()
         initTheme()
@@ -39,8 +40,7 @@ class PerfilActivity : AppCompatActivity() {
         imageview_voltar_pefiltolista.setOnClickListener { startActivity(Intent(this,
             ListaActivity::class.java)) }
         imageview_editperfil.setOnClickListener { startActivity(Intent(this,
-            EditPerfilActivity::class.java)) }
-        button_estatisticas.visibility = GONE
+                    EditPerfilActivity::class.java)) }
         button_estatisticas.setOnClickListener { startActivity(Intent(this,
             EstatisticasActivity::class.java)) }
 
