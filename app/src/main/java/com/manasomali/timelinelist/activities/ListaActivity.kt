@@ -9,18 +9,20 @@ import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.google.firebase.auth.FirebaseAuth
 import com.manasomali.timelinelist.*
 import com.manasomali.timelinelist.adapters.ViewPagerAdapter
 import com.manasomali.timelinelist.fragments.FilmesFragment
 import com.manasomali.timelinelist.fragments.SeriesFragment
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import com.google.firebase.auth.FirebaseAuth
 import com.manasomali.timelinelist.viewmodels.AuthViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_lista.*
@@ -35,7 +37,22 @@ class ListaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_lista)
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
         val firebaseAuth = FirebaseAuth.getInstance()
-
+        toolbar_button_left.setOnClickListener {
+            cardview_creditos.visibility = VISIBLE
+            cardview_creditos.background.alpha = 150
+        }
+        cardview_creditos.setOnClickListener {
+            cardview_creditos.visibility = GONE
+        }
+        imageview_icologo.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                val intent = Intent()
+                intent.action = Intent.ACTION_VIEW
+                intent.addCategory(Intent.CATEGORY_BROWSABLE)
+                intent.data = Uri.parse("https://www.themoviedb.org")
+                startActivity(intent)
+            }
+        })
         setupViewPager()
         setupColorIcones()
 
@@ -72,7 +89,8 @@ class ListaActivity : AppCompatActivity() {
         }
         viewModel.getUser(firebaseAuth.currentUser!!.uid)
         viewModel.usuario.observe(this) {
-            Picasso.get().load(Uri.parse(it.foto)).placeholder(R.mipmap.ic_person).into(toolbar_button_right)
+            Picasso.get().load(Uri.parse(it.foto)).placeholder(R.mipmap.ic_person).into(
+                toolbar_button_right)
         }
     }
 

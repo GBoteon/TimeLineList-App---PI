@@ -40,14 +40,16 @@ interface MovieAPI {
     suspend fun getFilmes(
         @Query("api_key") api: String,
         @Query("language") language: String,
-        @Query("query") query: String
+        @Query("query") query: String,
+        @Query("include_adult") include_adult: Boolean
     ): BaseFilmeBusca
 
     @GET("search/tv")
     suspend fun getSeries(
         @Query("api_key") api: String,
         @Query("language") language: String,
-        @Query("query") query: String
+        @Query("query") query: String,
+        @Query("include_adult") include_adult: Boolean
     ): BaseSerieBusca
 
     @GET("genre/{tipo}/list")

@@ -20,12 +20,12 @@ class PesquisaViewModel(application: Application): AndroidViewModel(application)
 
     fun getSeriesFromApi(query: String) {
         viewModelScope.launch {
-            listaSeries.setValue(repository.getSeries(API_KEY,LANG,query))
+            listaSeries.setValue(repository.getSeries(API_KEY,LANG,query,false))
         }
     }
     fun getFilmesFromApi(query: String) {
         viewModelScope.launch {
-            listaFilmes.setValue(repository.getFilmes(API_KEY,LANG,query))
+            listaFilmes.setValue(repository.getFilmes(API_KEY,LANG,query,false))
         }
     }
     fun getPopularFilmes() {
