@@ -38,6 +38,7 @@ class ListaFilmesAdapter(
         if(filme.dormiu) {holder.imageview_dormiu.visibility = VISIBLE}
         if(filme.chorou) {holder.imageview_chorou.visibility = VISIBLE}
         if(filme.favorito) {holder.imageview_favorito.visibility = VISIBLE}
+        if(filme.dislike) {holder.imageview_dislike.visibility = VISIBLE}
         if(filme.dataAssistidoPessoal=="") {holder.data_filme.visibility = GONE}
         if(filme.notaPessoal=="") {holder.notapessoal_filme.visibility = GONE}
 
@@ -54,8 +55,8 @@ class ListaFilmesAdapter(
         val imageview_dormiu: ImageView = itemView.findViewById(R.id.imageview_dormiu)
         val imageview_chorou: ImageView = itemView.findViewById(R.id.imageview_chorou)
         val imageview_favorito: ImageView = itemView.findViewById(R.id.imageview_favorito)
+        val imageview_dislike: ImageView = itemView.findViewById(R.id.imageview_dislike)
         val backdrop_filme: ImageView = itemView.findViewById(R.id.imageview_backdrop_filme)
-        val linearlayout_filme_reacoes: LinearLayout = itemView.findViewById(R.id.linearlayout_filme_reacoes)
         init {
             itemView.setOnClickListener(this)
         }

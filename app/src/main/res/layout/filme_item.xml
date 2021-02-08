@@ -93,6 +93,13 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:src="@drawable/favorite_ico" />
+                    <ImageView
+                        android:id="@+id/imageview_dislike"
+                        android:visibility="gone"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/dislike_ico" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

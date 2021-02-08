@@ -12,5 +12,6 @@ data class EssencialFilme(
     var dormiu: Boolean,
     var chorou: Boolean,
     var favorito: Boolean,
+    var dislike: Boolean,
     var notaPessoal: String
 ): Serializable

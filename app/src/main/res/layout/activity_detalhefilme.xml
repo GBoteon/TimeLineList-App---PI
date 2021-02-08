@@ -246,6 +246,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="-5dp"/>
+                    <CheckBox
+                        style="@style/DetalheTextView"
+                        android:id="@+id/checkbox_dislike"
+                        android:text="Ruim?"
+                        android:textSize="16sp"
+                        android:layoutDirection="rtl"
+                        android:buttonTint="@color/colorRed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-5dp"/>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

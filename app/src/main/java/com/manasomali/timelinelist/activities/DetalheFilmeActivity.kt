@@ -129,6 +129,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
             if (filmeDB.dormiu) checkbox_dormiu.isChecked = true
             if (filmeDB.chorou) checkbox_chorou.isChecked = true
             if (filmeDB.favorito) checkbox_favorito.isChecked = true
+            if (filmeDB.dislike) checkbox_dislike.isChecked = true
         }
         button_salvareditar_filme.setOnClickListener {
             var timestamp = DateTimeFormatter.ISO_INSTANT.format(Instant.now())
@@ -143,6 +144,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
                     checkbox_dormiu.isChecked,
                     checkbox_chorou.isChecked,
                     checkbox_favorito.isChecked,
+                    checkbox_dislike.isChecked,
                     edittext_nota_filme.text.toString()
                     ))
                 Toast.makeText(this, "Filme Adicionado", Toast.LENGTH_SHORT).show()
@@ -158,6 +160,7 @@ class DetalheFilmeActivity : AppCompatActivity() {
                     checkbox_dormiu.isChecked,
                     checkbox_chorou.isChecked,
                     checkbox_favorito.isChecked,
+                    checkbox_dislike.isChecked,
                     edittext_nota_filme.text.toString()
                 ))
                 Toast.makeText(this, "Filme Atualizado", Toast.LENGTH_SHORT).show()
@@ -222,7 +225,6 @@ class DetalheFilmeActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        Toast.makeText(this, "Voltando", Toast.LENGTH_SHORT).show()
         if(intent.getStringExtra("origem")=="ListaPessoal") {
             startActivity(Intent(this,ListaActivity::class.java))
         } else {

@@ -40,7 +40,6 @@ class FirestoreViewModel(application: Application): AndroidViewModel(application
     var stateGetSeries: MutableLiveData<Boolean> = MutableLiveData()
 
     val db = FirebaseFirestore.getInstance()
-    val firebaseAuth = FirebaseAuth.getInstance()
 
     fun getFilmesFromId(id: String) {
         viewModelScope.launch {
@@ -74,6 +73,7 @@ class FirestoreViewModel(application: Application): AndroidViewModel(application
                         document.get("dormiu") as Boolean,
                         document.get("chorou") as Boolean,
                         document.get("favorito") as Boolean,
+                        document.get("dislike") as Boolean,
                         document.get("notaPessoal").toString()
                     )
                     listFilmes.add(filme)
