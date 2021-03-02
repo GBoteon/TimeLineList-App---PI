@@ -20,6 +20,8 @@ import com.manasomali.timelinelist.activities.DetalheFilmeActivity
 import com.manasomali.timelinelist.adapters.ListaFilmesAdapter
 import com.manasomali.timelinelist.helpers.EssencialFilme
 import com.manasomali.timelinelist.viewmodels.FirestoreViewModel
+import kotlinx.android.synthetic.main.activity_lista.*
+import kotlinx.android.synthetic.main.fragment_filmes.*
 import kotlinx.android.synthetic.main.fragment_filmes.view.*
 
 class FilmesFragment : Fragment(), ListaFilmesAdapter.OnFilmeClickListener {
@@ -53,6 +55,13 @@ class FilmesFragment : Fragment(), ListaFilmesAdapter.OnFilmeClickListener {
                     return false
                 }
             })
+        }
+        viewModel.loading.observe(viewLifecycleOwner) {
+            if(it) {
+                startLoading()
+            } else {
+                endLoading()
+            }
         }
 
         return view
@@ -101,5 +110,12 @@ class FilmesFragment : Fragment(), ListaFilmesAdapter.OnFilmeClickListener {
             }
         }
         return result
+    }
+    private fun startLoading() {
+        progressbar_loading_fragfilmes.visibility = View.VISIBLE
+        progressbar_loading_fragfilmes.background.alpha = 150
+    }
+    private fun endLoading() {
+        progressbar_loading_fragfilmes.visibility = View.GONE
     }
 }

@@ -96,4 +96,8 @@ class PesquisaActivity : AppCompatActivity() {
             }
         }
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this,ListaActivity::class.java))
+    }
 }

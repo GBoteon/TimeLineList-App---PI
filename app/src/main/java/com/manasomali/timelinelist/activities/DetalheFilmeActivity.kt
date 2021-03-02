@@ -4,12 +4,16 @@ import android.animation.LayoutTransition
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.graphics.text.LineBreaker
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.*
@@ -25,8 +29,11 @@ import com.manasomali.timelinelist.helpers.BaseFilmeDetalhe
 import com.manasomali.timelinelist.helpers.EssencialFilme
 import com.manasomali.timelinelist.viewmodels.FirestoreViewModel
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.Picasso.LoadedFrom
 import kotlinx.android.synthetic.main.activity_detalhefilme.*
-import kotlinx.android.synthetic.main.activity_detalhefilme.imageview_compartilhar
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.format.DateTimeFormatter
@@ -35,7 +42,6 @@ import java.util.*
 
 class DetalheFilmeActivity : AppCompatActivity() {
     private val viewModel: FirestoreViewModel by viewModels()
-
     companion object {
         private const val MAX_LINES_COLLAPSED = 3
         private const val INITIAL_IS_COLLAPSED = true
@@ -58,9 +64,9 @@ class DetalheFilmeActivity : AppCompatActivity() {
         }
         imageview_voltar_filmetolista.setOnClickListener {
             if(intent.getStringExtra("origem")=="ListaPessoal") {
-                startActivity(Intent(this,ListaActivity::class.java))
+                startActivity(Intent(this, ListaActivity::class.java))
             } else {
-                startActivity(Intent(this,PesquisaActivity::class.java))
+                startActivity(Intent(this, PesquisaActivity::class.java))
             }
         }
         textview_nomefilme.setOnClickListener {
@@ -92,15 +98,6 @@ class DetalheFilmeActivity : AppCompatActivity() {
         }
         button_cancel_nota_filme.setOnClickListener {
             cardview_rating_filme.visibility = INVISIBLE
-        }
-        imageview_compartilhar.setOnClickListener {
-            val sendIntent: Intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, textview_nomefilme.text)
-                type = "text/plain"
-            }
-            val shareIntent = Intent.createChooser(sendIntent, null)
-            startActivity(shareIntent)
         }
         val myCalendar: Calendar = Calendar.getInstance()
         val date =
@@ -146,9 +143,9 @@ class DetalheFilmeActivity : AppCompatActivity() {
                     checkbox_favorito.isChecked,
                     checkbox_dislike.isChecked,
                     edittext_nota_filme.text.toString()
-                    ))
+                ))
                 Toast.makeText(this, "Filme Adicionado", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this,ListaActivity::class.java))
+                startActivity(Intent(this, ListaActivity::class.java))
             } else {
                 viewModel.editaFilme(uid, EssencialFilme(
                     idunico,
@@ -164,14 +161,14 @@ class DetalheFilmeActivity : AppCompatActivity() {
                     edittext_nota_filme.text.toString()
                 ))
                 Toast.makeText(this, "Filme Atualizado", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this,ListaActivity::class.java))
+                startActivity(Intent(this, ListaActivity::class.java))
             }
         }
         button_delete_filme.setOnClickListener {
             if(intent.getStringExtra("origem")=="ListaPessoal") {
                 viewModel.delFilme(uid, idunico)
                 Toast.makeText(this, "Filme Removido", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this,ListaActivity::class.java))
+                startActivity(Intent(this, ListaActivity::class.java))
             }
         }
 
@@ -206,6 +203,19 @@ class DetalheFilmeActivity : AppCompatActivity() {
         Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(
             imageview_detalheposter_filme)
 
+        val builder: StrictMode.VmPolicy.Builder = StrictMode.VmPolicy.Builder()
+        StrictMode.setVmPolicy(builder.build())
+        imageview_compartilhar.setOnClickListener {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT,
+                    "Filme ${textview_nomefilme.text} (${textview_lancamentofilme.text}) no TimeLineList $poster")
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
+
         imageview_filme.startAnimation(animSlide)
         applyLayoutTransition()
 
@@ -225,10 +235,10 @@ class DetalheFilmeActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if(intent.getStringExtra("origem")=="ListaPessoal") {
-            startActivity(Intent(this,ListaActivity::class.java))
+        if (intent.getStringExtra("origem") == "ListaPessoal") {
+            startActivity(Intent(this, ListaActivity::class.java))
         } else {
-            startActivity(Intent(this,PesquisaActivity::class.java))
+            startActivity(Intent(this, PesquisaActivity::class.java))
         }
     }
 }

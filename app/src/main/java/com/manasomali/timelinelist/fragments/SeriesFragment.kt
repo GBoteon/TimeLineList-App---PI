@@ -21,6 +21,8 @@ import com.manasomali.timelinelist.activities.DetalheSerieActivity
 import com.manasomali.timelinelist.adapters.ListaSeriesAdapter
 import com.manasomali.timelinelist.helpers.EssencialSerie
 import com.manasomali.timelinelist.viewmodels.FirestoreViewModel
+import kotlinx.android.synthetic.main.fragment_filmes.*
+import kotlinx.android.synthetic.main.fragment_series.*
 import kotlinx.android.synthetic.main.fragment_series.view.*
 
 class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {
@@ -47,7 +49,13 @@ class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {
                 }
             })
         }
-
+        viewModel.loading.observe(viewLifecycleOwner) {
+            if(it) {
+                startLoading()
+            } else {
+                endLoading()
+            }
+        }
 
         return view
     }
@@ -94,5 +102,12 @@ class SeriesFragment : Fragment(), ListaSeriesAdapter.OnSerieClickListener {
             }
         }
         return result
+    }
+    private fun startLoading() {
+        progressbar_loading_fragseries.visibility = View.VISIBLE
+        progressbar_loading_fragseries.background.alpha = 150
+    }
+    private fun endLoading() {
+        progressbar_loading_fragseries.visibility = View.GONE
     }
 }

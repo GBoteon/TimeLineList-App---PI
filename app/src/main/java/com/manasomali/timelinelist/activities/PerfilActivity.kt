@@ -25,6 +25,7 @@ import com.manasomali.timelinelist.Constants.THEME_UNDEFINED
 import com.manasomali.timelinelist.R
 import com.manasomali.timelinelist.viewmodels.AuthViewModel
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_lista.*
 import kotlinx.android.synthetic.main.activity_perfil.*
 
 
@@ -55,6 +56,13 @@ class PerfilActivity : AppCompatActivity() {
             textview_perfil_sobrenome.text = it.sobrenome
             textview_perfil_email.text = it.email
             Picasso.get().load(Uri.parse(it.foto)).placeholder(R.mipmap.ic_person).into(circularimageview_perfil)
+        }
+        viewModel.loading.observe(this) {
+            if(it) {
+                startLoading()
+            } else {
+                endLoading()
+            }
         }
     }
 
@@ -110,5 +118,11 @@ class PerfilActivity : AppCompatActivity() {
     }
 
     private fun saveTheme(theme: Int) = sharedPrefs.edit().putInt(KEY_THEME, theme).apply()
-
+    private fun startLoading() {
+        progressbar_loading_perfil.visibility = View.VISIBLE
+        progressbar_loading_perfil.background.alpha = 150
+    }
+    private fun endLoading() {
+        progressbar_loading_perfil.visibility = GONE
+    }
 }

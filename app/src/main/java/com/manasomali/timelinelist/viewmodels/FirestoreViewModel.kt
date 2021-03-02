@@ -32,8 +32,6 @@ class FirestoreViewModel(application: Application): AndroidViewModel(application
     var listaSerie = MutableLiveData<ArrayList<EssencialSerie>>()
     var serieDetalhe = MutableLiveData<BaseSerieDetalhe>()
 
-    var usuario: MutableLiveData<Usuario> = MutableLiveData()
-
     var erromsg: MutableLiveData<String> = MutableLiveData()
     var loading: MutableLiveData<Boolean> = MutableLiveData()
     var stateGetFilmes: MutableLiveData<Boolean> = MutableLiveData()

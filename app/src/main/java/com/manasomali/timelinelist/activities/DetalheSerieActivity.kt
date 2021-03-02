@@ -23,6 +23,7 @@ import com.manasomali.timelinelist.helpers.BaseSerieDetalhe
 import com.manasomali.timelinelist.helpers.EssencialSerie
 import com.manasomali.timelinelist.viewmodels.FirestoreViewModel
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_detalhefilme.*
 import kotlinx.android.synthetic.main.activity_detalheserie.*
 import kotlinx.android.synthetic.main.activity_detalheserie.imageview_compartilhar
 import java.text.SimpleDateFormat
@@ -89,15 +90,7 @@ class DetalheSerieActivity : AppCompatActivity() {
         button_cancel_nota_serie.setOnClickListener {
             cardview_rating_serie.visibility = View.INVISIBLE
         }
-        imageview_compartilhar.setOnClickListener {
-            val sendIntent: Intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, textview_nomeserie.text)
-                type = "text/plain"
-            }
-            val shareIntent = Intent.createChooser(sendIntent, null)
-            startActivity(shareIntent)
-        }
+
         val myCalendar: Calendar = Calendar.getInstance()
         val date =
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
@@ -194,6 +187,16 @@ class DetalheSerieActivity : AppCompatActivity() {
         Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(imageview_serie)
         Picasso.get().load(Uri.parse(poster)).placeholder(R.drawable.ic_logo).into(
             imageview_detalheposter_serie)
+
+        imageview_compartilhar.setOnClickListener {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT,"Serie ${textview_nomeserie.text} (${textview_lancamentoserie.text}) no TimeLineList $poster")
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
 
         imageview_serie.startAnimation(animSlide)
         applyLayoutTransition()

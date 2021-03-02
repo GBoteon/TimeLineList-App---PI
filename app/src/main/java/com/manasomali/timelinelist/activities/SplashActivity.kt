@@ -47,18 +47,6 @@ class SplashActivity : AppCompatActivity() {
         var intent = Intent(this, LoginActivity::class.java)
         val user = Firebase.auth.currentUser
         if (user != null) {
-            for (user in FirebaseAuth.getInstance().currentUser!!.providerData) {
-                if (user.providerId == "password") {
-                    Toast.makeText(this, "Sign In usando email e password", Toast.LENGTH_SHORT).show()
-                }
-                if (user.providerId == "facebook.com") {
-                    Toast.makeText(this, "Sign In usando Facebook", Toast.LENGTH_SHORT).show()
-                }
-                if (user.providerId == "google.com") {
-                    Toast.makeText(this, "Sign In usando Google", Toast.LENGTH_SHORT).show()
-
-                }
-            }
             intent = Intent(this, ListaActivity::class.java)
         }
         scope.launch {
@@ -76,6 +64,6 @@ class SplashActivity : AppCompatActivity() {
         saveTheme(prefsMode)
     }
     private fun saveTheme(theme: Int) = sharedPrefs.edit().putInt(KEY_THEME, theme).apply()
-
+    override fun onBackPressed() {}
 
 }

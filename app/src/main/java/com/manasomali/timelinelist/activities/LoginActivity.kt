@@ -176,4 +176,5 @@ class LoginActivity : AppCompatActivity() {
             else -> true
         }
     }
+    override fun onBackPressed() {}
 }

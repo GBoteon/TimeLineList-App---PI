@@ -26,6 +26,7 @@ import com.manasomali.timelinelist.fragments.SeriesFragment
 import com.manasomali.timelinelist.viewmodels.AuthViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_lista.*
+import kotlinx.android.synthetic.main.activity_login.*
 
 
 @Suppress("DEPRECATION")
@@ -92,6 +93,7 @@ class ListaActivity : AppCompatActivity() {
             Picasso.get().load(Uri.parse(it.foto)).placeholder(R.mipmap.ic_person).into(
                 toolbar_button_right)
         }
+
     }
 
     private fun setupViewPager() {
@@ -146,4 +148,6 @@ class ListaActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {}
+
+
 }
